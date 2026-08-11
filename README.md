@@ -69,11 +69,8 @@ same three questions a bank asks of any risk number:
 ---
 
 ## Design principles (mapped to banking risk-data governance)
-- **EUC governance at materiality** → keep the workflow, govern the risk surface (control-uplift, not blunt removal that breeds shadow IT; records kept migration-ready).
-- **Contract at every boundary** → schema-contract onboarding (aligns with BCBS 239 P2, data architecture).
-- **Provenance on every output** → reconstruct & defend any number (aligns with BCBS 239 P7, reconcile-to-source).
-- **Cell-level change & context control** → the model edits only the targeted cell and sees only selected cells as context, bounding both change and exposure.
-- **Append-only, attributed records** → subledger discipline, applied to AI output. (Cryptographic integrity — hashing, then signing — is a noted next control, not yet built.)
+
+_TBD — under review._
 
 ## Security
 Curated snapshot with **no credentials, no real PII, and no production data** (sample

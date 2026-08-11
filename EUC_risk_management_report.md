@@ -4,7 +4,7 @@
 **Date:** July 30, 2026
 **Subject:** Governance self-review of the `doc-micro-access-ctr` proof-of-concept (EUC control-uplift)
 
-> *Illustrative draft. This is a self-review of a personal proof-of-concept. The controls were originally built from engineering instinct (immutability, provenance, bounded change). The matrix below is an AI-generated review drafted **after** the build to evaluate how the architecture aligns with BCBS 239 readiness and to identify governance gaps. It is not an official second-line audit.*
+> *Illustrative draft. This is a self-review of a personal proof-of-concept. The controls were originally built from engineering instinct (immutability, provenance, bounded change). Any BCBS 239 readiness mapping is an AI-generated draft made **after** the build and is currently **under review** (temporarily removed from this document). It is not an official second-line audit.*
 
 ---
 
@@ -12,30 +12,9 @@
 
 The `doc-micro-access-ctr` proof-of-concept lets financial users delegate tasks from Google Sheets to a governed microservice backend, with **human-in-the-loop execution — the human authors the prompt and selects context, and model output is confined to the target cell (no autonomous side-effects)**. It is a **control-uplift** approach to EUC risk: keep the familiar grid, move the risk surface behind a governed gateway, and keep the records migration-ready.
 
-The table below maps the design's readiness against the **14 BCBS 239 principles**, showing what is built versus the risk-management challenges still to address.
-
 ### BCBS 239 readiness & challenge matrix
 
-| # | BCBS 239 Principle | Readiness (what's built) | Challenge (to address) |
-|---|---|---|---|
-| **I.** | **Governance and Infrastructure** | | |
-| 1 | **Governance** | API gateway centrally logs all interactions and approvals. | Defining clear data ownership between business users and IT. |
-| 2 | **Data Architecture & IT** | Cloud Run microservices behind the sheet (backend, not a replacement for it). | Reducing shadow IT and manual workarounds over time. |
-| **II.** | **Risk Data Aggregation** | | |
-| 3 | **Accuracy & Integrity** | Typed validation at the AI service boundary. | Keeping key data elements consistent across systems. |
-| 4 | **Completeness** | Mandatory fields enforced before task execution. | Identifying and capturing all critical off-system data sources. |
-| 5 | **Timeliness** | Real-time API execution with write-back to Sheets. | Maintaining SLAs and stability during peak processing. |
-| 6 | **Adaptability** | Modular microservices allow rapid deployment of new rules. | Adapting quickly to ad-hoc, urgent regulatory queries. |
-| **III.**| **Risk Reporting** | | |
-| 7 | **Accuracy** | Provenance chain (`request_id → run_id → attempt`) makes any output reconstructable. | Reconciling system outputs with the golden source. |
-| 8 | **Comprehensiveness** | Consolidates inputs from multiple streams via the gateway. | Ensuring all material risks are represented in the UI. |
-| 9 | **Clarity & Usefulness** | Presents AI outputs in the familiar Google Sheets UI. | Designing views tailored to senior-management needs. |
-| 10 | **Frequency** | On-demand generation and task execution. | Enforcing schedules for routine compliance reporting. |
-| 11 | **Distribution** | PII-egress controls at the gateway (regex, structured identifiers). | Free-text PII and confidential data across geographies (needs DLP/NER). |
-| **IV.** | **Supervisory Review** | | |
-| 12 | **Review** | Append-only, attributed audit records; data lineage available. | Cryptographic integrity (hashing/signing) not yet built; preparing full evidence for audits. |
-| 13 | **Remedial Actions** | Standardized error-key handling (`error_key` specification). | Tracking exceptions to full closure. |
-| 14 | **Home/Host Cooperation** | Cloud deployment, geographically agnostic. | Aligning APAC standards with global Head Office policies. |
+_TBD — under review. A 14-principle BCBS 239 readiness mapping (AI-generated draft) has been temporarily removed pending validation. The work-in-progress draft is preserved on the `draft/bcbs239-review` branch and in tag `v1.0.1`._
 
 ---
 
