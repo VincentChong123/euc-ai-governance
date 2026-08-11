@@ -11,6 +11,8 @@
 📋 **[EUC governance self-review](EUC_risk_management_report.md)** — an illustrative
 self-assessment mapping the design to the 14 BCBS 239 principles (readiness vs. gaps).
 
+📌 **Release:** [v1.0.1](https://github.com/VincentChong123/euc-ai-governance/releases/tag/v1.0.1)
+
 ---
 
 ## The EUC problem this addresses
@@ -24,7 +26,7 @@ This project takes the other path — **control at the point of materiality**:
 - Users stay in the **familiar Google Sheet grid**.
 - The material risk surface — data leaving to an LLM, PII, provenance, system-of-record
   — moves **behind a governed gateway**.
-- Outputs become **append-only, attributed, hashed records** outside the EUC.
+- Outputs become **append-only, attributed records** outside the EUC.
 
 That is EUC control-uplift aligned to how a bank governs risk data, not spreadsheet removal.
 
@@ -37,7 +39,7 @@ same three questions a bank asks of any risk number:
 
 1. **Data Schema** — every boundary is a typed, versioned contract with a single source of truth.
 2. **Data Lineage & Provenance** — `request_id → run_id → attempt` on every material output.
-3. **Data Governance & Controls** — PII egress control, human-in-the-loop gate, guardrails, error-key governance.
+3. **Data Governance & Controls** — PII egress control, human-in-the-loop execution, guardrails, error-key governance.
 
 ### 1 · Data Schema (contract-first)
 | File | What it shows |
@@ -61,7 +63,7 @@ same three questions a bank asks of any risk number:
 | [`specs/ba_pii_rules_spec.csv`](specs/ba_pii_rules_spec.csv) | **PII classification → action mapping**. A governance table in one file. |
 | [`apps/api_gateway/middleware/egressPiiGuardrail.mjs`](apps/api_gateway/middleware/egressPiiGuardrail.mjs) | **PII egress control** (regex, structured identifiers) — governs data *leaving the EUC* to the LLM (the material risk surface). First-line control; free-text PII would need DLP/NER. |
 | [`specs/guardrail.yaml`](specs/guardrail.yaml) · [`apps/ai_service/app/guardrails.py`](apps/ai_service/app/guardrails.py) | Guardrail definitions + enforcement. |
-| [`apps/google-sheets-ui/plugin_hitl_ai.js`](apps/google-sheets-ui/plugin_hitl_ai.js) | **Human-in-the-loop gate** — no autonomous model side-effects. |
+| [`apps/google-sheets-ui/plugin_hitl_ai.js`](apps/google-sheets-ui/plugin_hitl_ai.js) | **Human-in-the-loop execution** — the human authors the prompt and selects context; model output is confined to the target cell (no autonomous side-effects). |
 | [`specs/error_codes.yaml`](specs/error_codes.yaml) · [`specs/validate_error_codes.py`](specs/validate_error_codes.py) | Error-**key** governance (`__ERROR_*__`), validated — never a raw status number. |
 
 ---
@@ -71,7 +73,7 @@ same three questions a bank asks of any risk number:
 - **Contract at every boundary** → schema-contract onboarding (aligns with BCBS 239 P2, data architecture).
 - **Provenance on every output** → reconstruct & defend any number (aligns with BCBS 239 P7, reconcile-to-source).
 - **Cell-level change & context control** → the model edits only the targeted cell and sees only selected cells as context, bounding both change and exposure.
-- **Append-only, hashed records** → subledger discipline (tamper-evidence, not signing), applied to AI output.
+- **Append-only, attributed records** → subledger discipline, applied to AI output. (Cryptographic integrity — hashing, then signing — is a noted next control, not yet built.)
 
 ## Security
 Curated snapshot with **no credentials, no real PII, and no production data** (sample

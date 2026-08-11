@@ -10,7 +10,7 @@
 
 ## Executive Summary (1-Minute Read)
 
-The `doc-micro-access-ctr` proof-of-concept lets financial users delegate tasks from Google Sheets to a governed microservice backend, with a **human-in-the-loop gate on every material action (no autonomous side-effects)**. It is a **control-uplift** approach to EUC risk: keep the familiar grid, move the risk surface behind a governed gateway, and keep the records migration-ready.
+The `doc-micro-access-ctr` proof-of-concept lets financial users delegate tasks from Google Sheets to a governed microservice backend, with **human-in-the-loop execution — the human authors the prompt and selects context, and model output is confined to the target cell (no autonomous side-effects)**. It is a **control-uplift** approach to EUC risk: keep the familiar grid, move the risk surface behind a governed gateway, and keep the records migration-ready.
 
 The table below maps the design's readiness against the **14 BCBS 239 principles**, showing what is built versus the risk-management challenges still to address.
 
@@ -33,7 +33,7 @@ The table below maps the design's readiness against the **14 BCBS 239 principles
 | 10 | **Frequency** | On-demand generation and task execution. | Enforcing schedules for routine compliance reporting. |
 | 11 | **Distribution** | PII-egress controls at the gateway (regex, structured identifiers). | Free-text PII and confidential data across geographies (needs DLP/NER). |
 | **IV.** | **Supervisory Review** | | |
-| 12 | **Review** | Append-only, hashed audit records; data lineage available. | Preparing full evidence for internal/external audits. |
+| 12 | **Review** | Append-only, attributed audit records; data lineage available. | Cryptographic integrity (hashing/signing) not yet built; preparing full evidence for audits. |
 | 13 | **Remedial Actions** | Standardized error-key handling (`error_key` specification). | Tracking exceptions to full closure. |
 | 14 | **Home/Host Cooperation** | Cloud deployment, geographically agnostic. | Aligning APAC standards with global Head Office policies. |
 
