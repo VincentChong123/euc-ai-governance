@@ -1,0 +1,22 @@
+# Secrets & environment (must never be committed)
+.env
+.env.*
+!.env.example
+!.env.template
+**/.env
+keys/
+credentials.json
+*.pem
+*.key
+
+# Python / Node
+.venv/
+venv/
+**/.venv
+__pycache__/
+*.pyc
+node_modules/
+
+# OS / editor
+.DS_Store
+.vscode/

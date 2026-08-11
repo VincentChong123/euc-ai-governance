@@ -1,0 +1,451 @@
+openapi: 3.1.0
+info:
+  title: Google Sheets UI to API Gateway Contract
+  version: 2026-06-24
+  summary: Contract for synchronous Google Apps Script requests into the API gateway.
+  description: >
+    Defines the request and response envelopes exchanged between
+    apps/google-sheets-ui and apps/api_gateway.
+    The contract separates business payloads from telemetry metadata and uses
+    W3C Trace Context-compatible headers for distributed tracing.
+
+servers:
+  - url: https://api-gateway.example.invalid
+    description: Placeholder production gateway URL
+
+tags:
+  - name: AI
+    description: AI inference and drafting endpoints used by Google Sheets formulas and sidebar flows
+  - name: Workflow
+    description: Approval workflow endpoints used by checkbox-driven submission flows
+
+paths:
+  /api/ai/v1/sheet-chat:
+    post:
+      tags: [AI]
+      summary: Submit a sheet-originated AI request
+      description: >
+        Accepts a Google Sheets UI request envelope and forwards it to the AI service.
+        Payload text may already be masked by the Google Apps Script privacy engine.
+      operationId: postSheetChat
+      parameters:
+        - $ref: '#/components/parameters/TraceParentHeader'
+        - $ref: '#/components/parameters/TraceStateHeader'
+        - $ref: '#/components/parameters/XRequestIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SheetAiRequest'
+            examples:
+              maskedPrompt:
+                summary: Masked AI request from Google Sheets
+                value:
+                  meta:
+                    request_id: req-20260624-0001
+                    idempotency_key: sheet-chat-112AyzxaocEF92fXNDSEu26hcv4EzEePeyrBWIHNjbFA-Draft-B2-0001
+                    client: google-sheets-ui
+                    client_version: 2026-06-24
+                    user_email: analyst@example.com
+                    spreadsheet_id: 112AyzxaocEF92fXNDSEu26hcv4EzEePeyrBWIHNjbFA
+                    sheet_name: Draft
+                    source_range: B2
+                    run_at: '2026-06-24T08:10:00Z'
+                  payload:
+                    prompt: Summarize the following draft note.
+                    context: '[EMAIL_1] requested the updated proposal by Friday.'
+                    instruction: Keep it concise and suitable for management review.
+                    masking:
+                      enabled: true
+                      tokens_present: true
+      responses:
+        '200':
+          description: Successful AI response
+          headers:
+            x-request-id:
+              $ref: '#/components/headers/XRequestIdHeader'
+            traceparent:
+              $ref: '#/components/headers/TraceParentHeader'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SheetAiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '502':
+          $ref: '#/components/responses/UpstreamFailure'
+        '504':
+          $ref: '#/components/responses/UpstreamTimeout'
+
+  /api/workflow/approve:
+    post:
+      tags: [Workflow]
+      summary: Submit a spreadsheet approval workflow request
+      description: >
+        Accepts a Google Sheets UI workflow envelope and forwards it to the
+        document/workflow backend for approval processing.
+      operationId: postWorkflowApproval
+      parameters:
+        - $ref: '#/components/parameters/TraceParentHeader'
+        - $ref: '#/components/parameters/TraceStateHeader'
+        - $ref: '#/components/parameters/XRequestIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowApprovalRequest'
+            examples:
+              ringishoSubmission:
+                summary: Approval submission from Ringisho sheet
+                value:
+                  meta:
+                    request_id: req-20260624-0107
+                    idempotency_key: workflow-112AyzxaocEF92fXNDSEu26hcv4EzEePeyrBWIHNjbFA-Ringisho-A1F30-0107
+                    client: google-sheets-ui
+                    client_version: 2026-06-24
+                    user_email: analyst@example.com
+                    spreadsheet_id: 112AyzxaocEF92fXNDSEu26hcv4EzEePeyrBWIHNjbFA
+                    sheet_name: Ringisho
+                    source_range: A1:F30
+                    run_at: '2026-06-24T08:18:00Z'
+                  payload:
+                    action: submit_for_approval
+                    document:
+                      title: Ringisho Draft 2026-06-24
+                      range: A1:F30
+                    rows:
+                      - ["Header", "Value"]
+                      - ["Requester", "analyst@example.com"]
+      responses:
+        '200':
+          description: Workflow submission accepted
+          headers:
+            x-request-id:
+              $ref: '#/components/headers/XRequestIdHeader'
+            traceparent:
+              $ref: '#/components/headers/TraceParentHeader'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowApprovalResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '502':
+          $ref: '#/components/responses/UpstreamFailure'
+        '504':
+          $ref: '#/components/responses/UpstreamTimeout'
+
+components:
+  parameters:
+    XRequestIdHeader:
+      name: x-request-id
+      in: header
+      required: false
+      description: >
+        Optional caller-provided correlation ID. If omitted, the gateway should generate one.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 128
+    TraceParentHeader:
+      name: traceparent
+      in: header
+      required: false
+      description: W3C Trace Context traceparent header for distributed tracing
+      schema:
+        type: string
+    TraceStateHeader:
+      name: tracestate
+      in: header
+      required: false
+      description: W3C Trace Context tracestate header for distributed tracing
+      schema:
+        type: string
+
+  headers:
+    XRequestIdHeader:
+      description: Correlation ID used across Sheets, gateway, and downstream logs
+      schema:
+        type: string
+    TraceParentHeader:
+      description: W3C Trace Context traceparent propagated by the gateway
+      schema:
+        type: string
+
+  responses:
+    BadRequest:
+      description: Request failed validation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    UpstreamFailure:
+      description: Upstream service returned or caused a gateway failure
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    UpstreamTimeout:
+      description: Upstream dependency timed out
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+
+  schemas:
+    RequestMeta:
+      type: object
+      additionalProperties: false
+      required:
+        - request_id
+        - idempotency_key
+        - client
+        - client_version
+        - user_email
+        - spreadsheet_id
+        - sheet_name
+        - run_at
+      properties:
+        request_id:
+          type: string
+          description: Application correlation ID created by the client or gateway
+          minLength: 1
+          maxLength: 128
+        idempotency_key:
+          type: string
+          description: Stable client-generated key used to safely deduplicate retried submissions
+          minLength: 1
+          maxLength: 256
+        client:
+          type: string
+          const: google-sheets-ui
+        client_version:
+          type: string
+          description: Version string of the deployed Apps Script bundle
+        user_email:
+          type: string
+          format: email
+          description: Authenticated user identity for audit and billing
+        spreadsheet_id:
+          type: string
+          description: Google Sheets spreadsheet identifier
+        sheet_name:
+          type: string
+          description: Active worksheet name initiating the request
+        source_range:
+          type: string
+          description: A1 notation of the originating cell or range when applicable
+        run_at:
+          type: string
+          format: date-time
+        trace_id:
+          type: string
+          description: Optional trace identifier mirrored into the body for easier log correlation
+        span_id:
+          type: string
+          description: Optional span identifier mirrored into the body for easier log correlation
+
+    ResponseMeta:
+      type: object
+      additionalProperties: false
+      required:
+        - request_id
+        - service
+      properties:
+        request_id:
+          type: string
+        run_id:
+          type: string
+          description: Gateway or upstream execution identifier
+        service:
+          type: string
+          description: Service returning the response, typically api-gateway
+        upstream_service:
+          type: string
+          description: Downstream service that fulfilled the request
+        latency_ms:
+          type: integer
+          minimum: 0
+        model_invoked:
+          type: string
+          description: AI model identifier when applicable
+        trace_id:
+          type: string
+        span_id:
+          type: string
+
+    MaskingMeta:
+      type: object
+      additionalProperties: false
+      required:
+        - enabled
+        - tokens_present
+      properties:
+        enabled:
+          type: boolean
+        tokens_present:
+          type: boolean
+
+    SheetAiPayload:
+      type: object
+      additionalProperties: false
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          minLength: 1
+        context:
+          type: string
+          description: Context text or serialized context provided by the spreadsheet client
+        instruction:
+          type: string
+          description: Optional system-style instruction from spreadsheet plugins
+        masking:
+          $ref: '#/components/schemas/MaskingMeta'
+
+    SheetAiRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - meta
+        - payload
+      properties:
+        meta:
+          $ref: '#/components/schemas/RequestMeta'
+        payload:
+          $ref: '#/components/schemas/SheetAiPayload'
+
+    SheetAiResult:
+      type: object
+      additionalProperties: false
+      required:
+        - text
+      properties:
+        text:
+          type: string
+
+    WorkflowDocument:
+      type: object
+      additionalProperties: false
+      properties:
+        title:
+          type: string
+        range:
+          type: string
+          description: A1 notation of the document range submitted for approval
+
+    WorkflowApprovalPayload:
+      type: object
+      additionalProperties: false
+      required:
+        - action
+      properties:
+        action:
+          type: string
+          enum: [submit_for_approval]
+        document:
+          $ref: '#/components/schemas/WorkflowDocument'
+        rows:
+          type: array
+          description: 2D spreadsheet values sent for workflow processing
+          items:
+            type: array
+            items:
+              oneOf:
+                - type: string
+                - type: number
+                - type: boolean
+                - type: 'null'
+
+    WorkflowApprovalRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - meta
+        - payload
+      properties:
+        meta:
+          $ref: '#/components/schemas/RequestMeta'
+        payload:
+          $ref: '#/components/schemas/WorkflowApprovalPayload'
+
+    WorkflowApprovalResult:
+      type: object
+      additionalProperties: false
+      properties:
+        workflow_id:
+          type: string
+        status:
+          type: string
+          enum: [submitted, queued, accepted]
+
+    ErrorBody:
+      type: object
+      additionalProperties: false
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          examples: [BAD_REQUEST, UPSTREAM_TIMEOUT, UPSTREAM_FAILURE]
+        message:
+          type: string
+        details:
+          type: object
+          additionalProperties: true
+
+    SheetAiResponse:
+      type: object
+      additionalProperties: false
+      required:
+        - ok
+        - meta
+      properties:
+        ok:
+          type: boolean
+          const: true
+        result:
+          $ref: '#/components/schemas/SheetAiResult'
+        error:
+          type: 'null'
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+
+    WorkflowApprovalResponse:
+      type: object
+      additionalProperties: false
+      required:
+        - ok
+        - meta
+      properties:
+        ok:
+          type: boolean
+          const: true
+        result:
+          $ref: '#/components/schemas/WorkflowApprovalResult'
+        error:
+          type: 'null'
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+
+    ErrorEnvelope:
+      type: object
+      additionalProperties: false
+      required:
+        - ok
+        - error
+        - meta
+      properties:
+        ok:
+          type: boolean
+          const: false
+        result:
+          type: 'null'
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
