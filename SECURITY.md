@@ -1,6 +1,6 @@
 # Security & Data Hygiene
 
-This portfolio repo is a **curated, secret-free snapshot** of a larger private system.
+This portfolio repo is a **curated, secret-free snapshot** of the working codebase.
 It is published to demonstrate data-governance design, and the publishing process itself
 follows the same controls the project is about.
 

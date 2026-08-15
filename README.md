@@ -1,15 +1,16 @@
 # euc-ai-governance
 
-> **EUC governance done right: AI output governed like risk data.**
+> **EUC governance by design: AI output governed like risk data.**
 > A proof-of-concept: keep users in the spreadsheet grid they won't give up, but move
 > the risk surface (PII egress, provenance, system-of-record) behind a governed gateway.
-> Curated subset of a larger private system (Google Sheets UI → API gateway → AI /
-> document microservices). This repo is a guided tour of the **data-governance** design.
+> A curated, secret-free slice of the codebase (Google Sheets UI → API gateway → AI /
+> document services). This repo is a guided tour of the **data-governance** design.
 
-🔗 **Guided tour (GitHub Pages):** enable Pages on `main` / `/docs` → served from `docs/index.html`.
+📖 **[Guided tour](docs/index.md)** — a readable walk-through of the schema · lineage · governance design.
 
 📋 **[EUC governance self-review](EUC_risk_management_report.md)** — an illustrative
-self-assessment mapping the design to the 14 BCBS 239 principles (readiness vs. gaps).
+self-assessment of the EUC control-pattern design, with limitations owned explicitly.
+(A 14-principle BCBS 239 readiness mapping is an AI-generated draft, currently under review.)
 
 📌 **Release:** [v1.0.1](https://github.com/VincentChong123/euc-ai-governance/releases/tag/v1.0.1)
 
@@ -17,7 +18,7 @@ self-assessment mapping the design to the 14 BCBS 239 principles (readiness vs. 
 
 ## The EUC problem this addresses
 
-The biggest off-book risk in a bank is the **End-User Computing (EUC)** layer —
+One of the most under-governed off-book layers in a bank is **End-User Computing (EUC)** —
 spreadsheets doing critical work with no version control, no lineage, no attribution.
 The blunt fix (ban spreadsheets, force everything into slow IT) fails: users revolt and
 build shadow IT, which *increases* risk.
@@ -28,7 +29,7 @@ This project takes the other path — **control at the point of materiality**:
   — moves **behind a governed gateway**.
 - Outputs become **append-only, attributed records** outside the EUC.
 
-That is EUC control-uplift aligned to how a bank governs risk data, not spreadsheet removal.
+That is EUC control-pattern uplift aligned to how a bank governs risk data, not spreadsheet removal.
 
 ---
 
@@ -37,9 +38,9 @@ That is EUC control-uplift aligned to how a bank governs risk data, not spreadsh
 An AI output is just another data element with poor lineage by default. It's held to the
 same three questions a bank asks of any risk number:
 
-1. **Data Schema** — every boundary is a typed, versioned contract with a single source of truth.
-2. **Data Lineage & Provenance** — `request_id → run_id → attempt` on every material output.
-3. **Data Governance & Controls** — PII egress control, human-in-the-loop execution, guardrails, error-key governance.
+1. **Data Schema** — key boundaries are typed, versioned contracts with a single source of truth.
+2. **Data Lineage & Provenance** — `request_id → run_id → attempt` on material outputs.
+3. **Data Governance & Controls** — PII egress control, guardrails, error-key governance.
 
 ### 1 · Data Schema (contract-first)
 | File | What it shows |
@@ -53,17 +54,17 @@ same three questions a bank asks of any risk number:
 ### 2 · Data Lineage & Provenance
 | File | What it shows |
 |---|---|
-| [`apps/ai_service/app/request_context.py`](apps/ai_service/app/request_context.py) | The **`request_id → run_id → attempt`** provenance chain — every output traceable end to end. |
+| [`apps/ai_service/app/request_context.py`](apps/ai_service/app/request_context.py) | The **`request_id → run_id → attempt`** provenance chain — material outputs traceable through the run chain. |
 | [`specs/prompt-records-schema.yaml`](specs/prompt-records-schema.yaml) | **Append-only** audit trail of AI interactions — reconstructable after the fact. |
 | [`specs/program-sequence.md`](specs/program-sequence.md) | End-to-end flow / lineage of a request across services. |
 
 ### 3 · Data Governance & Controls
 | File | What it shows |
 |---|---|
-| [`specs/ba_pii_rules_spec.csv`](specs/ba_pii_rules_spec.csv) | **PII classification → action mapping**. A governance table in one file. |
-| [`apps/api_gateway/middleware/egressPiiGuardrail.mjs`](apps/api_gateway/middleware/egressPiiGuardrail.mjs) | **PII egress control** (regex, structured identifiers) — governs data *leaving the EUC* to the LLM (the material risk surface). First-line control; free-text PII would need DLP/NER. |
+| [`specs/ba_pii_rules_spec.csv`](specs/ba_pii_rules_spec.csv) | **Target** PII classification → action mapping (design intent: tokenize / partial-mask / hard-stop). The **implemented** gateway control is uniform first-line regex redaction — see `egressPiiGuardrail.mjs`; the tiered actions are not yet built. |
+| [`apps/api_gateway/middleware/egressPiiGuardrail.mjs`](apps/api_gateway/middleware/egressPiiGuardrail.mjs) | **PII egress control** (regex, structured identifiers) — governs data *leaving the EUC* to the LLM (the material risk surface). First-line control: it **redacts** matches (does not block/tokenize) and **fails open on a parse error**; free-text PII would need DLP/NER. |
 | [`specs/guardrail.yaml`](specs/guardrail.yaml) · [`apps/ai_service/app/guardrails.py`](apps/ai_service/app/guardrails.py) | Guardrail definitions + enforcement. |
-| [`apps/google-sheets-ui/plugin_hitl_ai.js`](apps/google-sheets-ui/plugin_hitl_ai.js) | **Human-in-the-loop execution** — the human authors the prompt and selects context; model output is confined to the target cell (no autonomous side-effects). |
+| [`apps/google-sheets-ui/plugin_hitl_ai.js`](apps/google-sheets-ui/plugin_hitl_ai.js) | Prompt authored in the cell note → LLM call → result and audit record written back to the sheet. |
 | [`specs/error_codes.yaml`](specs/error_codes.yaml) · [`specs/validate_error_codes.py`](specs/validate_error_codes.py) | Error-**key** governance (`__ERROR_*__`), validated — never a raw status number. |
 
 ---
@@ -81,4 +82,4 @@ with gitleaks & TruffleHog before publishing — see [`SECURITY.md`](SECURITY.md
 
 ---
 
-*Author: Vincent Chong*
+**Contact:** ws.chong.sg@gmail.com
