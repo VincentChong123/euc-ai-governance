@@ -1,0 +1,47 @@
+{
+  "info": {
+    "title": "Google Sheets UI to API Gateway Contract",
+    "version": "2026-06-24"
+  },
+  "headers": {
+    "requestId": "x-request-id",
+    "traceParent": "traceparent",
+    "traceState": "tracestate"
+  },
+  "paths": {
+    "sheetAi": {
+      "publicPath": "/api/ai/v1/sheet-chat",
+      "requestSchema": "SheetAiRequest",
+      "requiredMetaFields": [
+        "request_id",
+        "idempotency_key",
+        "client",
+        "client_version",
+        "user_email",
+        "spreadsheet_id",
+        "sheet_name",
+        "run_at"
+      ],
+      "requiredPayloadFields": [
+        "prompt"
+      ]
+    },
+    "workflowApproval": {
+      "publicPath": "/api/workflow/approve",
+      "requestSchema": "WorkflowApprovalRequest",
+      "requiredMetaFields": [
+        "request_id",
+        "idempotency_key",
+        "client",
+        "client_version",
+        "user_email",
+        "spreadsheet_id",
+        "sheet_name",
+        "run_at"
+      ],
+      "requiredPayloadFields": [
+        "action"
+      ]
+    }
+  }
+}

@@ -5,11 +5,8 @@ It is published to demonstrate data-governance design, and the publishing proces
 follows the same controls the project is about.
 
 ## What is guaranteed here
-- **No credentials** — no `.env`, no keys, no service-account files, no tokens.
-- **No real data / PII** — sample values in the spec CSVs (e.g. `abc@gmail.com`,
-  `123-45-6789`, `auth1234`) are synthetic and used only to illustrate rules.
-- **No shared git history** — this repo was created fresh (no history from the private
-  working repo), so no historical secret can be recovered from it.
+- **No credentials**: no `.env`, no keys, no service-account files, no tokens.
+- **No secrets in git history**: no historical secret can be recovered from any commit.
 
 ## How secrets are handled in the full system
 - Configuration and secrets via **environment variables / secret-manager**, never in code.

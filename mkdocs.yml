@@ -1,0 +1,62 @@
+site_name: EUC Spreadsheet Uplift Docs
+site_description: Documentation for EUC Spreadsheet Uplift
+site_author: Vincent Chong
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - content.code.copy
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.inlinehilite
+  - admonition
+  - pymdownx.details
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Architecture:
+    - Component Interfaces: Architecture/component-interfaces.md
+    - API Gateway: Architecture/api-gateway.md
+    - AI Service: Architecture/ai-service.md
+    - Google Sheets UI: Architecture/google-sheets-ui.md
+    - Egress LLM: Architecture/egress-llm.md
+    - End-to-End Sequence: Architecture/end-to-end-sequence.md
+  - Governance:
+    - Security & Auditability: Governance/security-auditability.md
+  - Lineage:
+    - End-to-End Tracing: Lineage/end-to-end-tracing.md
+    - Promotion and Provenance: Lineage/promotion-and-provenance.md
