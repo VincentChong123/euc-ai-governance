@@ -9,6 +9,36 @@ default; this project holds it to the same questions a bank asks of any critical
 > A readable guided tour of the design. Source repo:
 > [VincentChong123/euc-spreadsheet-uplift](https://github.com/VincentChong123/euc-spreadsheet-uplift).
 
+## Architecture Overview
+
+```mermaid
+flowchart TD
+    subgraph EUC["EUC (End-User Computing)"]
+        UI["Google Sheets UI<br/>(User Grid)"]
+    end
+
+    subgraph Governance["Governance Boundary"]
+        Gateway["API Gateway<br/>(Node.js / Egress Guardrails)"]
+        AI_Service["AI Microservice<br/>(Python / Context & Schema)"]
+    end
+
+    subgraph External["External Services"]
+        LLM["LLM / Document Services"]
+    end
+
+    UI -- "1. Structured Payload" --> Gateway
+    Gateway -- "2. PII Redaction & Auth" --> AI_Service
+    AI_Service -- "3. Governed Prompt" --> LLM
+    LLM -- "4. Raw Response" --> AI_Service
+    AI_Service -- "5. Validated Schema + Run ID" --> Gateway
+    Gateway -- "6. Governed Result" --> UI
+
+    %% Styling
+    style EUC fill:#f9f9f9,stroke:#333,stroke-dasharray: 5 5
+    style Governance fill:#e6f3ff,stroke:#0066cc,stroke-width:2px
+    style External fill:#fff0e6,stroke:#ff9900,stroke-dasharray: 5 5
+```
+
 ## 1 · Data Schema: contract-first
 
 Key boundaries are typed, versioned contracts with a single source of truth.

@@ -14,6 +14,47 @@
 
 ---
 
+## System Architecture
+
+```mermaid
+flowchart TD
+    subgraph EUC["EUC (End-User Computing)"]
+        UI["Google Sheets UI<br/>(User Grid)"]
+    end
+
+    subgraph Governance["Governance Boundary"]
+        Gateway["API Gateway<br/>(Node.js / Egress Guardrails)"]
+        AI_Service["AI Microservice<br/>(Python / Context & Schema)"]
+    end
+
+    subgraph External["External Services"]
+        LLM["LLM / Document Services"]
+    end
+
+    UI -- "1. Structured Payload" --> Gateway
+    Gateway -- "2. PII Redaction & Auth" --> AI_Service
+    AI_Service -- "3. Governed Prompt" --> LLM
+    LLM -- "4. Raw Response" --> AI_Service
+    AI_Service -- "5. Validated Schema + Run ID" --> Gateway
+    Gateway -- "6. Governed Result" --> UI
+
+    %% Styling
+    style EUC fill:#f9f9f9,stroke:#333,stroke-dasharray: 5 5
+    style Governance fill:#e6f3ff,stroke:#0066cc,stroke-width:2px
+    style External fill:#fff0e6,stroke:#ff9900,stroke-dasharray: 5 5
+```
+
+## Why this matters (Before vs. After)
+
+| Feature | ❌ Status Quo (Shadow IT) | ✅ This Architecture (Governed) |
+| :--- | :--- | :--- |
+| **User Experience** | Users build fragile, undocumented macros. | Users stay in their familiar Google Sheets grid. |
+| **Data Privacy (PII)** | High risk of PII leaking directly to public LLMs. | **API Gateway** intercepts and redacts PII before egress. |
+| **Schema & Contracts** | Unstructured inputs; everything breaks when formats change. | **Strict YAML contracts** enforce data schema at the boundary. |
+| **Audit & Lineage** | No provenance. "The AI said so." | **Append-only records** with `request_id → run_id` tracking. |
+
+---
+
 ## The EUC problem this addresses
 
 One of the most under-governed off-book layers in a bank is **End-User Computing (EUC)**:
