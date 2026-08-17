@@ -1,0 +1,105 @@
+# error_codes.yaml — Single source of truth for all error keys.
+#
+# All services MUST derive their error registry from this file.
+# To add or change an error: edit here, then run:
+#
+#   python specs/validate_error_codes.py
+#
+# Fields per entry:
+#   status      HTTP status code
+#   retryable   whether the caller should retry
+#   description human-readable intent (one line)
+
+errors:
+  # -- Client errors (4xx) --
+  __ERROR_BAD_REQUEST__:
+    status: 400
+    retryable: false
+    description: Malformed request or envelope mismatch
+
+  __ERROR_UNAUTHENTICATED__:
+    status: 401
+    retryable: false
+    description: Missing or invalid credentials
+
+  __ERROR_FORBIDDEN__:
+    status: 403
+    retryable: false
+    description: Authenticated but not permitted
+
+  __ERROR_NOT_FOUND__:
+    status: 404
+    retryable: false
+    description: Route or resource does not exist
+
+  __ERROR_PAYLOAD_TOO_LARGE__:
+    status: 413
+    retryable: false
+    description: Body exceeds the configured size limit
+
+  __ERROR_VALIDATION__:
+    status: 422
+    retryable: false
+    description: Well-formed but semantically invalid
+
+  __ERROR_RATE_LIMIT__:
+    status: 429
+    retryable: true
+    description: Too many requests
+
+  # -- MFA / step-up --
+  __ERROR_OTP_REQUIRED__:
+    status: 401
+    retryable: false
+    description: "Sensitive action needs a second factor; none supplied"
+
+  __ERROR_OTP_INVALID__:
+    status: 401
+    retryable: false
+    description: Submitted TOTP code is wrong
+
+  __ERROR_OTP_EXPIRED__:
+    status: 401
+    retryable: false
+    description: TOTP code outside the accepted time window
+
+  __ERROR_OTP_NOT_ENROLLED__:
+    status: 403
+    retryable: false
+    description: User has no confirmed TOTP secret
+
+  # -- Server / gateway errors (5xx) --
+  __ERROR_INTERNAL__:
+    status: 500
+    retryable: false
+    description: Unhandled gateway error
+
+  __ERROR_NOT_IMPLEMENTED__:
+    status: 501
+    retryable: false
+    description: Endpoint not implemented
+
+  __ERROR_UPSTREAM_FAILURE__:
+    status: 502
+    retryable: true
+    description: "Upstream unreachable or returned an error"
+
+  __ERROR_UPSTREAM_INVALID_RESPONSE__:
+    status: 502
+    retryable: false
+    description: "Upstream returned non-JSON / unparseable body"
+
+  __ERROR_AUTH_UNAVAILABLE__:
+    status: 502
+    retryable: true
+    description: Could not mint an upstream credential
+
+  __ERROR_SERVICE_UNAVAILABLE__:
+    status: 503
+    retryable: true
+    description: Not ready / a dependency is down
+
+  __ERROR_UPSTREAM_TIMEOUT__:
+    status: 504
+    retryable: true
+    description: Upstream did not respond within the timeout

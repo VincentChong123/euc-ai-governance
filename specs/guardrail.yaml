@@ -1,0 +1,176 @@
+# guardrail.yaml — parameterized input/output guardrail rules
+#
+# Loaded at gateway startup (api_gateway/middleware/guardrails.mjs).
+# Edit this file to add or tune rules without touching code.
+# After editing, restart the gateway (or redeploy) — rules are loaded once at startup.
+#
+# Rule schema:
+#   name:        human-readable label (used in audit logs)
+#   pattern:     JavaScript-compatible regex string
+#   action:      "reject" | "redact"
+#                  reject — return __ERROR_VALIDATION__ (422) immediately
+#                  redact — replace match with [REDACTED:<name>] and continue
+#   fields:      which request fields to scan — list of dot-paths into the body
+#                  e.g. "payload.prompt", "payload.context"
+#   output:      optional bool, default true. When false, the rule is NOT applied
+#                  to the LLM→Sheets return path (scanText). Set false for
+#                  ambiguous numeric/date patterns that false-positive on
+#                  financial answers (rates, dates). Inbound scanning already
+#                  strips that PII before it reaches the model, so it cannot be
+#                  echoed back — output scanning would only mangle valid answers.
+#   note:        optional explanation
+
+# ==============================================================================
+# PROMPT INJECTION — action: reject
+# Patterns that attempt to override or escape the system instruction.
+# ==============================================================================
+injection_patterns:
+  - name: ignore_instructions
+    pattern: "ignore\\s+(previous|prior|all|above)\\s+instructions?"
+    action: reject
+    fields: [payload.prompt, payload.context]
+
+  - name: you_are_now
+    pattern: "you\\s+are\\s+now\\s+(a|an|the)\\b"
+    action: reject
+    fields: [payload.prompt, payload.context]
+
+  - name: forget_instructions
+    pattern: "forget\\s+(your|all|previous|prior)\\s+(instructions?|rules?|guidelines?|training)"
+    action: reject
+    fields: [payload.prompt, payload.context]
+
+  - name: jailbreak_dan
+    pattern: "\\bDAN\\b|do\\s+anything\\s+now|jailbreak"
+    action: reject
+    fields: [payload.prompt, payload.context]
+
+  - name: system_prompt_override
+    pattern: "\\[SYSTEM\\]|<system>|###\\s*system"
+    action: reject
+    fields: [payload.prompt, payload.context]
+
+# ==============================================================================
+# PII / SENSITIVE DATA — action: redact
+# Patterns matched against prompt + context before forwarding to ai_service.
+# Matches are replaced with [REDACTED:<name>] and the original is logged
+# (with request_id) to the audit log.
+# ==============================================================================
+pii_patterns:
+
+  # Singapore NRIC / FIN — S/T (citizen/PR) or F/G (foreigner)
+  - name: sg_nric
+    pattern: "\\b[STFG]\\d{7}[A-Z]\\b"
+    action: redact
+    fields: [payload.prompt, payload.context]
+    note: "Singapore NRIC / FIN — MAS Notice 655 restricted identifier"
+
+  # Partially masked NRIC — e.g. S768901*A, S7689XXXa, S******2A
+  # [\d*Xx] matches digit, asterisk, or X/x (common manual masking chars).
+  # Must appear after sg_nric so full NRICs are caught by the stricter rule first.
+  - name: sg_nric_partial
+    pattern: "\\b[STFGstfg][\\d*Xx]{6,7}[A-Za-z]\\b"
+    action: redact
+    fields: [payload.prompt, payload.context]
+    note: "Partially user-masked NRIC — 6 of 8 chars still re-identifiable; safer to redact"
+
+  # Singapore Passport — letter prefix + 7–8 digits + letter check digit (e.g. K1234567B)
+  - name: sg_passport
+    pattern: "\\b[EK]\\d{7,8}[A-Z]\\b"
+    action: redact
+    fields: [payload.prompt, payload.context]
+    note: "Singapore passport: letter + 7-8 digits + letter check digit"
+
+  # Partially masked passport — e.g. E12345*7B, K123****B
+  - name: sg_passport_partial
+    pattern: "\\b[EKek][\\d*Xx]{6,7}[A-Za-z]\\b"
+    action: redact
+    fields: [payload.prompt, payload.context]
+    note: "Partially user-masked SG passport number"
+
+  # Credit / debit card number — 13–19 digits, optionally spaced or dashed
+  - name: payment_card
+    pattern: "\\b(?:\\d[ -]?){13,18}\\d\\b"
+    action: redact
+    fields: [payload.prompt, payload.context]
+    note: "PCI-DSS: card numbers must not leave the trust boundary"
+
+  # Partially masked card — e.g. 4111 **** **** 1111, 4111-xxxx-xxxx-1111
+  # Requires at least one masking char (*,X,x) amid digit-separator groups.
+  - name: payment_card_partial
+    pattern: "\\b(?:[\\d*Xx]{4}[ -]?){3}[\\d*Xx]{4}\\b"
+    action: redact
+    fields: [payload.prompt, payload.context]
+    note: "Partially user-masked 16-digit card (4-4-4-4 groups with * or X placeholders)"
+
+  # Bank account — Singapore formats: 10-digit DBS/POSB, OCBC, UOB
+  - name: sg_bank_account
+    pattern: "\\b\\d{3}-\\d{5,6}-\\d{1}\\b|\\b\\d{10}\\b"
+    action: redact
+    fields: [payload.prompt, payload.context]
+    output: false
+    note: "Common SG bank account formats. Inbound only — the bare 10-digit branch over-matches numeric output."
+
+  # Full name masking — surname + given name typical SG format (2–4 words, all caps or title case)
+  # Conservative: only triggers on ALL-CAPS sequences ≥2 words (common in banking forms)
+  - name: full_name_allcaps
+    pattern: "\\b[A-Z]{2,}(?:\\s+[A-Z]{2,}){1,3}\\b"
+    action: redact
+    fields: [payload.prompt, payload.context]
+    output: false
+    note: "All-caps full name as appears in NRIC / banking documents. Inbound only — on output it over-matches currency-code pairs like 'USD SGD'."
+
+  # Date of birth — intentionally NOT redacted.
+  # A standalone date is a weak quasi-identifier: it identifies no one without a
+  # name/NRIC alongside it, and those are redacted by sg_nric / full_name_allcaps.
+  # Redacting bare dates broke every legitimate date query (e.g. "USD rate on
+  # 2024-11-29") for negligible privacy gain. Re-add a cue-gated or linkage-aware
+  # rule if a DPO risk assessment later requires it. See 06-conventions.md.
+
+  # Singapore residential address — block + street name pattern
+  - name: sg_address
+    pattern: "(?:Blk|Block|No\\.?)\\s*\\d+[A-Z]?\\s+[A-Za-z\\s]+(Street|St|Road|Rd|Avenue|Ave|Drive|Dr|Lane|Ln|Crescent|Cres|Close|Cl|Place|Pl|Way|Walk|Terrace|Ter)\\b"
+    action: redact
+    fields: [payload.prompt, payload.context]
+    note: "Singapore residential address block+street pattern"
+
+  # Singapore postal code
+  - name: sg_postal_code
+    pattern: "(?:Singapore\\s+)?\\b[0-9]{6}\\b"
+    action: redact
+    fields: [payload.prompt, payload.context]
+    output: false
+    note: "SG 6-digit postal code. Inbound only — over-matches any standalone 6-digit number in output."
+
+  # Email address
+  - name: email
+    pattern: "\\b[A-Za-z0-9._%+\\-]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]{2,}\\b"
+    action: redact
+    fields: [payload.prompt, payload.context]
+
+  # Phone number — SG mobile (+65 8/9-prefix, 8 digits) OR international with a
+  # leading +. The intl branch REQUIRES the '+' so bare dates (2024-11-29) and
+  # decimals (1.2905) no longer match. Trade-off: a '+'-less intl number is
+  # missed; SG local mobiles (the common case) still match via the first branch.
+  - name: phone_number
+    pattern: "(?:\\+65[\\s-]?)?[89]\\d{3}[\\s-]?\\d{4}\\b|\\+[1-9]\\d{0,2}[\\s.-]?\\(?\\d{2,4}\\)?[\\s.-]?\\d{3,4}[\\s.-]?\\d{3,4}\\b"
+    action: redact
+    fields: [payload.prompt, payload.context]
+    note: "SG mobile (8/9-prefix) or international with leading +. Tightened so exchange rates and ISO dates are not mistaken for phone numbers."
+
+# ==============================================================================
+# OUTPUT CHECKS — applied by ai_service post-generation
+# Loaded by ai_service/app/guardrails.py (same file, Python regex).
+# ==============================================================================
+output_checks:
+
+  # Model refusal patterns — surface as UPSTREAM_FAILURE rather than writing to Sheet
+  refusal_patterns:
+    - "I(?:'m| am) unable to"
+    - "I cannot (?:and will not|assist|help|provide)"
+    - "As an AI(?:,| language model)"
+    - "I don't have (?:the ability|access|information)"
+    - "(?:I'm|I am) not able to"
+
+  # Maximum output length in characters before the result is rejected
+  max_output_chars: 10000

@@ -1,0 +1,159 @@
+# specs/prompt-records-schema.yaml
+#
+# Authoritative definition of the AImate traceability audit schema.
+# Governs:
+#   - Column structure of __Prompt_records_v{N} sheets (one sheet per version)
+#   - __metadata sheet keys and valid dropdown values
+#   - Lifecycle status of each schema version
+#
+# Rules:
+#   - Column sequence here = column sequence in the sheet. Do NOT reorder.
+#   - Once a version is 'current' or 'legacy', its columns are FROZEN.
+#   - To change columns, create a new version block and a new sheet.
+#   - A version is added to the __metadata dropdown ONLY when status = current | legacy.
+#   - logToPromptRecords() in plugin_hitl_ai.js MUST match this column order exactly.
+#   - Source references map to schemas in google-sheets-api-gateway-contract.yaml.
+#
+# Naming convention: __Prompt_records_v{N}  (e.g. __Prompt_records_v2)
+
+info:
+  title: AImate Prompt Records Traceability Schema
+  updated: 2026-06-26
+  description: >
+    Defines the versioned column structure of __Prompt_records_v{N} audit sheets,
+    the __metadata sheet configuration, and the lifecycle of each schema version.
+    This file is documentation only — it is NOT parsed at runtime by Apps Script.
+    Runtime routing is driven by the schema_version key in the __metadata sheet.
+
+# ---------------------------------------------------------------------------
+# __metadata sheet definition
+# ---------------------------------------------------------------------------
+# Sheet name : __metadata
+# Protection : admin-only edit (editor protection in Google Sheets)
+# Purpose    : Per-spreadsheet configuration registry. The schema_version field
+#              drives which __Prompt_records_v{N} sheet receives new audit rows.
+#
+# Column layout (A = key, B = value):
+#
+#   key                  | value
+#   ---------------------|--------------------------------
+#   schema_version       | v2         ← dropdown, admin-controlled
+#   department           | Finance    ← free text label
+#
+# Dropdown rule for schema_version:
+#   Only versions with status = 'current' or 'legacy' in this file may appear
+#   in the dropdown. Never add a 'draft' version to the dropdown.
+
+metadata_sheet:
+  sheet_name: __metadata
+  protection: admin-only
+  columns:
+    A: key
+    B: value
+  fields:
+    schema_version:
+      control: dropdown
+      description: >
+        Routes new audit rows to __Prompt_records_v{N}.
+        Must match a version with status = current or legacy.
+    department:
+      control: free-text
+      description: Audit label appended to every record row for multi-department traceability.
+
+# ---------------------------------------------------------------------------
+# Version definitions
+# ---------------------------------------------------------------------------
+versions:
+
+  v1:
+    status: legacy                         # still valid; keep in __metadata dropdown for rollback
+    prompt_records_sheet: __Prompt_records_v1
+    introduced: 2026-01-15
+    note: >
+      Original implicit schema. No schema_version column or field in notes.
+      v1 notes are identified by the ABSENCE of a 'schema:' key.
+      All caps field keys (STATUS, CONTEXT, MEMO, PROMPT, PROMPT_REF).
+    columns:
+      A: { name: Timestamp,             type: ISO8601,  source: runtime,                          required: true  }
+      B: { name: Userid,                type: string,   source: UserProperties.AI_BILLING_EMAIL,  required: true  }
+      C: { name: Mode,                  type: string,   source: runtime,                          required: true  }
+      D: { name: Memo,                  type: string,   source: cell_note.MEMO,                   required: false }
+      E: { name: Target_Cell,           type: a1_range, source: runtime.cellAddress,              required: true  }
+      F: { name: Prompt,                type: text,     source: cell_note.PROMPT,                 required: true  }
+      G: { name: Output,                type: text,     source: SheetAiResult.text,               required: true  }
+      H: { name: Resolved_Context_JSON, type: json,     source: runtime.resolvedContextList,      required: false }
+
+  v2:
+    status: current                        # default for all new spreadsheet deployments
+    prompt_records_sheet: __Prompt_records_v2
+    introduced: 2026-06-26
+    changes_from_v1:
+      - Added schema_version column (A) — identifies which version wrote this row
+      - Added request_id (C) from RequestMeta — cross-service correlation ID
+      - Added idempotency_key (D) from RequestMeta — deduplication key
+      - Added department (F) from __metadata — multi-department audit label
+      - Added spreadsheet_id (G) from RequestMeta — identifies which workbook
+      - Added sheet_name (H) from RequestMeta — which tab originated the request
+      - Added instruction (N) from SheetAiPayload — system instruction if used
+      - Added run_id (O) from ResponseMeta — AI execution identifier
+      - Added model_invoked (P) from ResponseMeta — which AI model ran
+      - Added latency_ms (Q) from ResponseMeta — end-to-end request latency
+      - Added full_prompt_record (S) — self-referencing formula for cell note backlink
+      - Renamed Userid → user_email, Target_Cell → source_range, Resolved_Context_JSON → context_json
+      - Note format changes: lowercase keys, --- separator, schema/status/run_at/record system block
+    columns:
+      A: { name: schema_version,    type: string,   source: __metadata.schema_version,           required: true,  example: v2             }
+      B: { name: run_at,            type: ISO8601,  source: RequestMeta.run_at,                  required: true,  example: 2026-06-26T10:15:22Z }
+      C: { name: request_id,        type: string,   source: RequestMeta.request_id,              required: false, example: req-20260626-0001 }
+      D: { name: idempotency_key,   type: string,   source: RequestMeta.idempotency_key,         required: false, example: sheet-chat-...  }
+      E: { name: user_email,        type: email,    source: UserProperties.AI_BILLING_EMAIL,     required: true,  example: user@company.com }
+      F: { name: department,        type: string,   source: __metadata.department,               required: false, example: Finance         }
+      G: { name: spreadsheet_id,    type: string,   source: RequestMeta.spreadsheet_id,         required: true                            }
+      H: { name: sheet_name,        type: string,   source: RequestMeta.sheet_name,             required: true,  example: Ringisho        }
+      I: { name: source_range,      type: formula,  source: runtime.cellAddress,                required: true,  example: '=HYPERLINK("#gid=123&range=B2", "Ringisho!B2")' }
+      J: { name: mode,              type: string,   source: runtime,                            required: true,  values: [Single, Batch, Orchestrator] }
+      K: { name: memo,              type: string,   source: cell_note.memo,                     required: false                           }
+      L: { name: prompt,            type: text,     source: SheetAiPayload.prompt,              required: true                            }
+      M: { name: context_json,      type: json,     source: SheetAiPayload.context,             required: false, example: '["Sheet1!A1:B2"]' }
+      N: { name: instruction,       type: text,     source: SheetAiPayload.instruction,         required: false                           }
+      O: { name: run_id,            type: string,   source: ResponseMeta.run_id,                required: false, example: run-xyz789      }
+      P: { name: model_invoked,     type: string,   source: ResponseMeta.model_invoked,         required: false, example: gemini-2.5-pro  }
+      Q: { name: latency_ms,        type: integer,  source: ResponseMeta.latency_ms,            required: false, example: 1842            }
+      R: { name: output,            type: text,     source: SheetAiResult.text,                 required: true                            }
+      S:
+        name: full_prompt_record
+        type: formula
+        source: self-referencing
+        required: true
+        formula: '="__Prompt_records_v2!A"&ROW()'
+        description: >
+          Self-referencing formula. Written as a Sheets formula so the sheet
+          self-populates without requiring a second script write. This value
+          is also written back into the cell note as 'record:' after execution,
+          creating a bidirectional link between the cell note and the audit row.
+
+# ---------------------------------------------------------------------------
+# Cell note format (informational — not machine-parsed by this file)
+# ---------------------------------------------------------------------------
+# The cell note is a display artifact written by Apps Script after each run.
+# It is NOT the source of truth — __Prompt_records_v{N} is.
+#
+# v1 note format (legacy — all caps, no separator):
+#   STATUS: LOCKED
+#   CONTEXT: ["Sheet1!A1:B2"]
+#   MEMO: Q3 review
+#   PROMPT: Summarize this table.
+#
+# v2 note format (current — lowercase, --- separator):
+#   schema: v2
+#   status: LOCKED
+#   run_at: 2026-06-26T10:15:22Z
+#   full_prompt_record: __Prompt_records_v2!A42
+#   ---
+#   prompt: Summarize this table.
+#   context: ["Sheet1!A1:B2"]
+#   memo: Q3 review
+#
+# Status values:
+#   LOCKED  — cell was processed; skip in next bulk run
+#   READY   — cell is active; include in next bulk run (replaces v1 'UPDATE')
