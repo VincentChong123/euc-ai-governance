@@ -2,77 +2,28 @@
 
 **Portfolio · Data Governance**
 
-Governing AI output the way a bank governs critical data: **schema**, **lineage**, and
-**governance controls**. An AI output is just another data element with poor lineage by
-default; this project holds it to the same questions a bank asks of any critical data element.
+This project applies critical data governance principles—**schema**, **lineage**, and **controls**—to AI-generated outputs. By treating AI output as a standard data element, it ensures appropriate oversight and traceability.
 
-> A readable guided tour of the design. Source repo:
-> [VincentChong123/euc-spreadsheet-uplift](https://github.com/VincentChong123/euc-spreadsheet-uplift).
+> A guided tour of the design. [Source]((https://github.com/VincentChong123/euc-spreadsheet-uplift))
 
 ## Architecture Overview
+Refer to the architecture [diagram](../README.md).
 
-```mermaid
-flowchart TD
-    subgraph EUC["EUC (End-User Computing)"]
-        UI["Google Sheets UI<br/>(User Grid)"]
-    end
+## Core Governance Pillars
 
-    subgraph Governance["Governance Boundary"]
-        Gateway["API Gateway<br/>(Node.js / Egress Guardrails)"]
-        AI_Service["AI Microservice<br/>(Python / Context & Schema)"]
-    end
+1. **Data Schema (Contract-First)**: Key integration points use typed, versioned contracts.
+2. **Data Lineage & Traceability**: Structured tracking (`request_id → run_id → attempt`) for material outputs.
+3. **Data Governance & Controls**: Controls are implemented at the point of materiality, encompassing PII egress, guardrails, and error management.
 
-    subgraph External["External Services"]
-        LLM["LLM / Document Services"]
-    end
+📖 **Deep Dive:** For a detailed map of the spec files, schemas, and how they are consumed across the codebase, please see the **[Consumption map](specs/README.md)**.
 
-    UI -- "1. Structured Payload" --> Gateway
-    Gateway -- "2. PII Redaction & Auth" --> AI_Service
-    AI_Service -- "3. Governed Prompt" --> LLM
-    LLM -- "4. Raw Response" --> AI_Service
-    AI_Service -- "5. Validated Schema + Run ID" --> Gateway
-    Gateway -- "6. Governed Result" --> UI
+## Design Principles
 
-    %% Styling
-    style EUC fill:#f9f9f9,stroke:#333,stroke-dasharray: 5 5
-    style Governance fill:#e6f3ff,stroke:#0066cc,stroke-width:2px
-    style External fill:#fff0e6,stroke:#ff9900,stroke-dasharray: 5 5
-```
-
-## 1 · Data Schema: contract-first
-
-Key boundaries are typed, versioned contracts with a single source of truth.
-
-- [`specs/google-sheets-api-gateway-contract.yaml`](../specs/google-sheets-api-gateway-contract.yaml): the schema contract between UI and gateway; the boundary is a defined interface, not an assumption.
-- [`specs/ba_business_schema.csv`](../specs/ba_business_schema.csv): business schema with versioned evolution (v1→v2→v3) and per-field constraints.
-- [`apps/ai_service/app/models/schemas.py`](../apps/ai_service/app/models/schemas.py): schema enforced in code; typed validation at runtime.
-- [`apps/google-sheets-ui/sync_spec_yaml_note_schema.py`](../apps/google-sheets-ui/sync_spec_yaml_note_schema.py): keeps schema in sync from a single source of truth; no drift between spec and code.
-
-## 2 · Data Lineage & Traceability
-
-`request_id → run_id → attempt` on material outputs.
-
-- [`apps/ai_service/app/request_context.py`](../apps/ai_service/app/request_context.py): the provenance chain; material outputs traceable through the run chain.
-- [`specs/prompt-records-schema.yaml`](../specs/prompt-records-schema.yaml): append-only, structured audit trail of AI interactions; reconstructable after the fact.
-- [`specs/program-sequence.md`](../specs/program-sequence.md): end-to-end flow / lineage of a request across services.
-
-## 3 · Data Governance & Controls
-
-Control at the point of materiality: PII egress, guardrails, error-key governance.
-
-- [`specs/ba_pii_rules_spec.csv`](../specs/ba_pii_rules_spec.csv): **target** PII classification → action mapping (design intent: tokenize / partial-mask / hard-stop). The implemented control is uniform first-line redaction (below); the tiered actions are not yet built.
-- [`apps/api_gateway/middleware/egressPiiGuardrail.mjs`](../apps/api_gateway/middleware/egressPiiGuardrail.mjs): PII egress control; governs data leaving to the LLM, the material risk surface. First-line control: it **redacts** structured identifiers (does not block/tokenize) and **fails open on a parse error**; free-text PII would need DLP/NER.
-- [`apps/google-sheets-ui/plugin_hitl_ai.js`](../apps/google-sheets-ui/plugin_hitl_ai.js): prompt authored in the cell note → LLM call → result and audit record written back to the sheet.
-- [`specs/error_codes.yaml`](../specs/error_codes.yaml): error-key governance (`__ERROR_*__`), validated; never a raw status number.
-
-## Design principles: mapped to banking critical data governance
-
-- **Contract at key boundaries** → schema-contract onboarding.
-- **Provenance on material outputs** → reconstruct and defend any record.
-- **Control at the point of materiality** → PII egress control where the risk is, not everywhere.
-- **Append-only, attributed records** → subledger discipline, applied to AI output.
+- **Contract at key boundaries**: Ensures strict interface definitions.
+- **Provenance on material outputs**: Supports record reconstruction and auditing.
+- **Control at the point of materiality**: Focuses PII egress controls on the external risk surface.
+- **Append-only, attributed records**: Applies structured auditing to AI outputs.
 
 ---
 
-**Security:** curated snapshot: no credentials, no real PII, no production data. Verified
-with gitleaks & TruffleHog before publishing.
+**Security:** This repository is a curated snapshot containing no credentials, real PII, or production data. It has been verified with security scanning tools (gitleaks & TruffleHog) prior to publishing.

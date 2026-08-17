@@ -60,3 +60,5 @@ nav:
   - Lineage:
     - End-to-End Tracing: Lineage/end-to-end-tracing.md
     - Promotion and Provenance: Lineage/promotion-and-provenance.md
+  - Specs:
+    - Consumption Map: specs/README.md
