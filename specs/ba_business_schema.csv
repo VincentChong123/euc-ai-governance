@@ -1,0 +1,6 @@
+Master_ID,Description,Constraints_and_Rules,v1_name,v1_sample,v2_name,v2_sample,v3_name,v3_sample
+business_justification,The reason provided by the user for the request,"v1: Optional, any string. v2: Mandatory, min 10 chars.",Memo,Q3 review,memo,"This is required for the Q3 financial audit.",memo,"This is required for the Q3 financial audit."
+ai_instruction,The system prompt/policy selected by the user,"v1: Not supported. v2: Not supported. v3: Must be selected from approved dropdown (Corporate, Creative, Strict).",,,,,instruction,Corporate Banking Policy
+user_prompt,The actual text prompt sent to the AI,"v1: Max 500 chars. v2: Max 2000 chars, no PII allowed.",Prompt,Summarize this,prompt,Please summarize the Q3 revenue trends.,prompt,Please summarize the Q3 revenue trends.
+target_data_range,The spreadsheet range the AI is analyzing,"v1: Single cell only. v2: Array of ranges.",Target_Cell,Sheet1!A1,source_range,["Sheet1!A1:B10"],source_range,["Sheet1!A1:B10"]
+financial_approval_code,A mock business field for demonstration,"v1: 8 chars. v3: >= 12 chars, mixed case, alphanumeric.",ApprovalCode,auth1234,approval_code,auth1234,approval_code,Auth-9876-XyZ1

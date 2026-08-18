@@ -25,6 +25,7 @@ This architecture explores **control at the point of materiality**. By moving th
 
 ## System Architecture
 
+--8<-- [start:arch_diagram]
 ```mermaid
 flowchart LR
     subgraph EUC["EUC (End-User Computing)"]
@@ -32,8 +33,8 @@ flowchart LR
     end
 
     subgraph Governance["Governance Boundary"]
-        Gateway["API Gateway<br/>(Node.js / Egress Guardrails)"]
-        AI_Service["AI Microservice<br/>(Python / Context & Schema)"]
+        Gateway["API Gateway<br/>(Node.js / Guardrails + Egress Proxy)"]
+        AI_Service["AI Microservice<br/>(Python / Context & Schema — key-less)"]
     end
 
     subgraph External["External Services"]
@@ -41,17 +42,20 @@ flowchart LR
     end
 
     UI -- "1. Structured Payload" --> Gateway
-    Gateway -- "2. PII Redaction & Auth" --> AI_Service
-    AI_Service -- "3. Governed Prompt" --> LLM
-    LLM -- "4. Raw Response" --> AI_Service
-    AI_Service -- "5. Validated Schema + Run ID" --> Gateway
-    Gateway -- "6. Governed Result" --> UI
+    Gateway -- "2. Guardrails (PII / injection)" --> AI_Service
+    AI_Service -- "3. Egress (key-less)" --> Gateway
+    Gateway -- "4. Provider Call + Key" --> LLM
+    LLM -- "5. Raw Response" --> Gateway
+    Gateway -- "6. Response" --> AI_Service
+    AI_Service -- "7. Validated Schema + Run ID" --> Gateway
+    Gateway -- "8. Governed Result" --> UI
 
     %% Styling
     style EUC fill:#f9f9f9,stroke:#333,stroke-dasharray: 5 5
     style Governance fill:#e6f3ff,stroke:#0066cc,stroke-width:2px
     style External fill:#fff0e6,stroke:#ff9900,stroke-dasharray: 5 5
 ```
+--8<-- [end:arch_diagram]
 
 📖 [Details](docs/index.md)
 

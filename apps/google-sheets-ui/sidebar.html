@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      body { font-family: Arial, sans-serif; padding: 10px; }
+
+      /* --- Field Labels: hidden in minimalist mode --- */
+      .field-label { font-weight: bold; margin-top: 10px; display: block; font-size: 12px; color: #444; }
+      body.minimalist .field-label { display: none; }
+
+      /* When labels are hidden, tighten vertical spacing */
+      body.minimalist .field-wrap { margin-top: 6px; }
+
+      textarea, input[type="text"] { width: 100%; box-sizing: border-box; margin-top: 4px; padding: 5px; border: 1px solid #ccc; border-radius: 4px; }
+      textarea { height: 100px; resize: vertical; }
+
+      /* ── PII Warning Banner ── */
+      #piiWarning { display: none; background: #fff3cd; border: 1px solid #ffc107; border-radius: 6px; padding: 10px 12px; margin-top: 8px; font-size: 12px; }
+      #piiWarning .pii-title { font-weight: bold; color: #856404; margin-bottom: 5px; }
+      #piiWarning .pii-list { color: #533f03; margin: 4px 0 8px 0; padding-left: 16px; }
+      #piiWarning .pii-list li { margin-bottom: 2px; }
+      #piiWarning .pii-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+      #piiWarning .pii-actions button { font-size: 11px; padding: 4px 8px; font-weight: normal; }
+
+      .button-group { margin-top: 15px; display: flex; flex-direction: column; gap: 10px; }
+      button { padding: 8px; cursor: pointer; border: none; border-radius: 4px; font-weight: bold; transition: background-color 0.2s; }
+      button:hover { opacity: 0.9; }
+      .btn-primary   { background-color: #1a73e8; color: white; }
+      .btn-secondary { background-color: #f1f3f4; color: #3c4043; border: 1px solid #dadce0; }
+      .btn-danger    { background-color: #ea4335; color: white; }
+      .btn-success   { background-color: #34a853; color: white; }
+
+      .status { font-size: 12px; color: #555; margin-top: 10px; text-align: center; height: 15px; }
+
+      /* ── Thinking / Status Panel ── */
+      #thinkingPanel { margin-top: 10px; }
+      #thinkingPanel > summary { list-style: none; cursor: pointer; font-size: 12px; color: #555; user-select: none; display: flex; align-items: center; gap: 5px; padding: 4px 0; }
+      #thinkingPanel > summary::-webkit-details-marker { display: none; }
+      #thinkingLog { margin-top: 4px; font-size: 11px; color: #333; background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 4px; padding: 6px 8px; max-height: 160px; overflow-y: auto; font-family: monospace; }
+      .t-step { display: flex; gap: 6px; padding: 2px 0; animation: tFadeIn 0.25s ease; }
+      @keyframes tFadeIn { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: translateY(0); } }
+      .t-step-icon { flex-shrink: 0; }
+      .t-spinning { display: inline-block; animation: tSpin 1s linear infinite; }
+      @keyframes tSpin { to { transform: rotate(360deg); } }
+
+      details > summary { list-style: none; }
+      details > summary::-webkit-details-marker { display: none; }
+
+      /* View mode toggle pill inside settings panel */
+      .view-toggle { display: flex; border: 1px solid #dadce0; border-radius: 4px; overflow: hidden; margin-bottom: 10px; }
+      .view-toggle button {
+        flex: 1; padding: 5px 4px; font-size: 12px; border: none; border-radius: 0;
+        background: #f1f3f4; color: #3c4043; font-weight: normal; cursor: pointer;
+      }
+      .view-toggle button.active { background: #1a73e8; color: white; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+
+    <!-- ── Top-right Settings Gear ── -->
+    <div style="position: relative; width: 100%;">
+      <details id="settingsDropdown" style="position: absolute; top: 0; right: 0; cursor: pointer; user-select: none;">
+        <summary style="font-size: 18px; margin: 0; padding: 0;" title="Settings">
+          ⚙️
+        </summary>
+        <div style="position: absolute; right: 0; top: 25px; background: white; border: 1px solid #ccc; border-radius: 4px; padding: 10px; width: 220px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 100;">
+
+          <!-- View Mode Toggle -->
+          <div style="font-size: 11px; color: #888; margin-bottom: 5px;">View Mode</div>
+          <div class="view-toggle" style="margin-bottom: 12px;">
+            <button id="btnDefault"     onclick="setViewMode('default')">Default</button>
+            <button id="btnMinimalist"  onclick="setViewMode('minimalist')">Minimalist</button>
+          </div>
+
+          <label style="font-weight: normal; margin-top: 0; margin-bottom: 8px; display: flex; align-items: center; gap: 5px; font-size: 13px;">
+            <input type="checkbox" id="lockCheckbox" checked> Locked (Skip in batch updates)
+          </label>
+          <label style="font-weight: normal; margin-bottom: 0; display: flex; align-items: center; gap: 5px; font-size: 13px; color: #1a73e8;">
+            <input type="checkbox" id="runAiCheckbox" checked onchange="toggleButtonText()"> Run AI when saved
+          </label>
+        </div>
+      </details>
+    </div>
+
+    <!-- ── Ask or Instruct (Prompt) ── -->
+    <div class="field-wrap" style="margin-top: 25px;">
+      <label class="field-label" for="promptInput">Ask or Instruct</label>
+      <textarea id="promptInput" placeholder='Ask or instruct... (e.g. "Summarize this table into 3 bullet points")'></textarea>
+    </div>
+
+    <!-- ── PII Warning Banner ── -->
+    <div id="piiWarning">
+      <div class="pii-title">⚠️ Sensitive data detected</div>
+      <ul class="pii-list" id="piiList"></ul>
+      <div class="pii-actions">
+        <button class="btn-danger" onclick="applyAutoRedact()">🛡️ Auto-redact &amp; Submit</button>
+        <button class="btn-secondary" onclick="dismissPiiWarning()">✏️ Edit manually</button>
+      </div>
+    </div>
+
+    <!-- ── Pin Cells (Ad-hoc range) ── -->
+    <div class="field-wrap">
+      <label class="field-label" for="contextInput">📍 Pin Cells <span style="font-weight:normal;color:#888;">(quick selection)</span></label>
+      <div style="display: flex; gap: 5px;">
+        <input type="text" id="contextInput" placeholder="Select cells & click 📍" readonly>
+        <button class="btn-secondary" onclick="fetchSelectedRange('contextInput')" title="Pin selected range">📍</button>
+        <button class="btn-secondary" onclick="clearInput('contextInput')" title="Clear">❌</button>
+      </div>
+    </div>
+
+    <!-- ── Cell List (Pointer range from AI_context sheet) ── -->
+    <div class="field-wrap">
+      <label class="field-label" for="pointerInput">📋 Cell List <span style="font-weight:normal;color:#888;">(select pre-defined list range)</span></label>
+      <div style="display: flex; gap: 5px;">
+        <input type="text" id="pointerInput" placeholder="Select list range & click 📍" readonly>
+        <button class="btn-secondary" onclick="fetchSelectedRange('pointerInput')" title="Pin list range">📍</button>
+        <button class="btn-secondary" onclick="clearInput('pointerInput')" title="Clear">❌</button>
+      </div>
+    </div>
+
+    <!-- ── Audit Memo ── -->
+    <div class="field-wrap">
+      <label class="field-label" for="memoInput">Audit Memo <span style="font-weight:normal;color:#888;">(optional)</span></label>
+      <input type="text" id="memoInput" placeholder="Reason for this run..." style="margin-bottom: 15px;">
+    </div>
+
+    <!-- ── Actions ── -->
+    <div class="button-group">
+      <div style="display:flex; gap:6px; align-items:center;">
+        <button id="submitBtn" class="btn-success" style="flex:1" onclick="handleSaveAction()">🚀 Submit</button>
+        <span id="guardrailStatus" title="PII guardrails using built-in fallback patterns" style="font-size:16px; cursor:default;">🛡️⚠️</span>
+      </div>
+      <hr style="width:100%; border:0; border-top: 1px solid #eee;">
+      <button class="btn-secondary" onclick="loadFromNote()">📥 Load from Active Cell</button>
+
+      <!-- ── Full Prompt Record Link ── -->
+      <div class="field-wrap" id="recordLinkWrap" style="display:none; margin-top: 15px; text-align: left;">
+        <label class="field-label" style="font-size: 11px;">Full Prompt Record</label>
+        <a id="recordLink" href="#" onclick="jumpToRecord(this.innerText); return false;" style="color: #1a73e8; text-decoration: none; font-size: 12px; font-family: monospace; display: block; padding: 4px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 4px;"></a>
+      </div>
+    </div>
+
+    <div id="statusMsg" class="status"></div>
+
+    <!-- ── Thinking / Status Panel ── -->
+    <details id="thinkingPanel">
+      <summary>
+        <span id="thinkingIcon">💭</span>
+        <span id="thinkingTitle">Status &amp; Thinking</span>
+      </summary>
+      <div id="thinkingLog"></div>
+    </details>
+
+    <script>
+      // ── Thinking Panel ────────────────────────────────────────────────────
+      function clearThinkingLog() {
+        document.getElementById('thinkingLog').innerHTML = '';
+        document.getElementById('thinkingTitle').innerText = 'Status & Thinking';
+        document.getElementById('thinkingIcon').innerText = '💭';
+      }
+
+      function addThinkingStep(icon, text) {
+        const log = document.getElementById('thinkingLog');
+        document.getElementById('thinkingPanel').open = true;
+        const el = document.createElement('div');
+        el.className = 't-step';
+        el.innerHTML = '<span class="t-step-icon">' + icon + '</span><span>' + text + '</span>';
+        log.appendChild(el);
+        log.scrollTop = log.scrollHeight;
+      }
+
+      function renderThinkingSteps(steps) {
+        steps.forEach(function(s, i) {
+          setTimeout(function() { addThinkingStep(s.icon || '•', s.text); }, i * 100);
+        });
+      }
+
+      // ── View Mode (persisted in localStorage) ──────────────────────────────
+      const VIEW_MODE_KEY = 'AImate_viewMode';
+
+      function applyViewMode(mode) {
+        document.body.classList.toggle('minimalist', mode === 'minimalist');
+        document.getElementById('btnDefault').classList.toggle('active',    mode === 'default');
+        document.getElementById('btnMinimalist').classList.toggle('active', mode === 'minimalist');
+      }
+
+      function setViewMode(mode) {
+        localStorage.setItem(VIEW_MODE_KEY, mode);
+        applyViewMode(mode);
+      }
+
+      // Apply on load
+      applyViewMode(localStorage.getItem(VIEW_MODE_KEY) || 'default');
+
+      // Fetch guardrail patterns from gateway on sidebar open (runs once)
+      google.script.run.withSuccessHandler(initGuardrails).getGuardrailPatterns();
+
+      // ── Auto-hide settings dropdown when clicking outside ─────────────────
+      document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('settingsDropdown');
+        if (dropdown && dropdown.hasAttribute('open') && !dropdown.contains(event.target)) {
+          dropdown.removeAttribute('open');
+        }
+      });
+
+      // ── UI helpers ────────────────────────────────────────────────────────
+      function toggleButtonText() {
+        const runAi = document.getElementById('runAiCheckbox').checked;
+        document.getElementById('submitBtn').innerHTML = runAi ? '🚀 Submit' : '💾 Save Draft';
+      }
+
+      function setStatus(msg) {
+        document.getElementById('statusMsg').innerText = msg;
+        setTimeout(() => { document.getElementById('statusMsg').innerText = ''; }, 3000);
+      }
+
+      function fetchSelectedRange(inputId) {
+        setStatus("Fetching range...");
+        google.script.run.withSuccessHandler(function(rangeNotation) {
+          document.getElementById(inputId).value = rangeNotation;
+          setStatus("Range loaded!");
+        }).getMouseSelectionA1();
+      }
+
+      function jumpToRecord(rangeA1) {
+        setStatus("Jumping to " + rangeA1 + "...");
+        google.script.run.withSuccessHandler(function() {
+          setStatus("Jumped to record.");
+        }).jumpToRange(rangeA1);
+      }
+
+      function clearInput(inputId) {
+        document.getElementById(inputId).value = "";
+        setStatus("Cleared");
+      }
+
+      // ── Load from Note ────────────────────────────────────────────────────
+      function populateForm(data) {
+        document.getElementById('promptInput').value = data.prompt || "";
+        const loadedContextStr = data.context === "None" ? "" : (data.context || "");
+
+        document.getElementById('contextInput').value = "";
+        document.getElementById('pointerInput').value = "";
+
+        if (loadedContextStr.startsWith("[")) {
+          try {
+            const parsedList = JSON.parse(loadedContextStr);
+            if (parsedList.length > 0) document.getElementById('contextInput').value = parsedList[0] || "";
+            if (parsedList.length > 1) document.getElementById('pointerInput').value = parsedList[1] || "";
+          } catch(e) {
+            document.getElementById('contextInput').value = loadedContextStr;
+          }
+        } else {
+          document.getElementById('contextInput').value = loadedContextStr;
+        }
+
+        document.getElementById('memoInput').value = data.memo || "";
+        document.getElementById('lockCheckbox').checked = (data.status === "LOCKED");
+
+        if (data.fullPromptRecord) {
+          document.getElementById('recordLinkWrap').style.display = 'block';
+          document.getElementById('recordLink').innerText = data.fullPromptRecord;
+        } else {
+          document.getElementById('recordLinkWrap').style.display = 'none';
+        }
+      }
+
+      function loadFromNote() {
+        const promptText  = document.getElementById('promptInput').value.trim();
+        const contextText = document.getElementById('contextInput').value.trim();
+        const memoText    = document.getElementById('memoInput').value.trim();
+
+        if (promptText !== "" || contextText !== "" || memoText !== "") {
+          const confirmOverwrite = window.confirm("You have unsaved text in your draft.\n\nAre you sure you want to overwrite it with the active cell's note?");
+          if (!confirmOverwrite) return;
+        }
+
+        setStatus("Loading from cell...");
+        google.script.run.withSuccessHandler(function(data) {
+          if (data) {
+            populateForm(data);
+            setStatus("Loaded from note!");
+          } else {
+            setStatus("No valid AI note found.");
+            document.getElementById('recordLinkWrap').style.display = 'none';
+          }
+        }).getActiveCellData();
+      }
+
+      // ── Guardrail / PII detection ─────────────────────────────────────────
+      // Fallback patterns embedded in the sidebar — active immediately on load,
+      // before the async gateway fetch completes or if the gateway is unreachable.
+      // Gateway patterns override these when available (same rule names win on merge).
+      var FALLBACK_PII = [
+        { name: 'sg_nric',           pattern: '\\b[STFG]\\d{7}[A-Z]\\b' },
+        { name: 'sg_nric_partial',   pattern: '\\b[STFGstfg][\\d*Xx]{6,7}[A-Za-z]\\b' },
+        { name: 'sg_passport',       pattern: '\\b[EK]\\d{7,8}[A-Z]\\b' },
+        { name: 'sg_passport_partial', pattern: '\\b[EKek][\\d*Xx]{6,7}[A-Za-z]\\b' },
+        { name: 'payment_card',      pattern: '\\b(?:\\d[ -]?){13,18}\\d\\b' },
+        { name: 'payment_card_partial', pattern: '\\b(?:[\\d*Xx]{4}[ -]?){3}[\\d*Xx]{4}\\b' },
+        { name: 'sg_bank_account',   pattern: '\\b\\d{3}-\\d{5,6}-\\d{1}\\b' },
+        { name: 'email',             pattern: '\\b[A-Za-z0-9._%+\\-]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]{2,}\\b' },
+      ];
+      var FALLBACK_INJECTION = [
+        { name: 'ignore_instructions', pattern: 'ignore\\s+(previous|prior|all|above)\\s+instructions?' },
+        { name: 'you_are_now',         pattern: 'you\\s+are\\s+now\\s+(a|an|the)\\b' },
+        { name: 'jailbreak_dan',       pattern: '\\bDAN\\b|do\\s+anything\\s+now|jailbreak' },
+      ];
+
+      function compilePatterns(piiList, injectionList) {
+        return {
+          pii: piiList.map(function(r) {
+            return { name: r.name, re: new RegExp(r.pattern, 'g') };
+          }),
+          injection: injectionList.map(function(r) {
+            return { name: r.name, re: new RegExp(r.pattern, 'gi') };
+          }),
+        };
+      }
+
+      // Start with fallback patterns immediately — no async wait needed
+      var _guardrailPatterns = compilePatterns(FALLBACK_PII, FALLBACK_INJECTION);
+      var _guardrailSource = 'fallback';
+      var _pendingRedactions = null;
+
+      function setGuardrailStatus(source) {
+        _guardrailSource = source;
+        var el = document.getElementById('guardrailStatus');
+        if (!el) return;
+        el.title = source === 'gateway'
+          ? 'PII guardrails loaded from gateway (live patterns)'
+          : 'PII guardrails using built-in fallback patterns (gateway unreachable)';
+        el.textContent = source === 'gateway' ? '🛡️' : '🛡️⚠️';
+      }
+
+      // Called when gateway fetch completes — merges gateway patterns over fallback
+      function initGuardrails(patterns) {
+        if (!patterns || (!patterns.pii && !patterns.injection)) {
+          setGuardrailStatus('fallback');
+          return;
+        }
+        _guardrailPatterns = compilePatterns(
+          patterns.pii       || FALLBACK_PII,
+          patterns.injection || FALLBACK_INJECTION
+        );
+        setGuardrailStatus('gateway');
+      }
+
+      // Scan a text value against all PII patterns; return list of hit rule names
+      function detectPii(text) {
+        if (!_guardrailPatterns || typeof text !== 'string') return [];
+        var hits = [];
+        _guardrailPatterns.pii.forEach(function(rule) {
+          rule.re.lastIndex = 0;
+          if (rule.re.test(text)) hits.push(rule.name);
+        });
+        return hits;
+      }
+
+      // Replace all PII matches in text with [REDACTED:<name>] tokens
+      function redactText(text) {
+        if (!_guardrailPatterns || typeof text !== 'string') return { text: text, log: [] };
+        var log = [];
+        _guardrailPatterns.pii.forEach(function(rule) {
+          rule.re.lastIndex = 0;
+          var matches = text.match(rule.re);
+          if (matches && matches.length > 0) {
+            text = text.replace(rule.re, '[REDACTED:' + rule.name + ']');
+            log.push({ rule: rule.name, count: matches.length });
+          }
+        });
+        return { text: text, log: log };
+      }
+
+      // Run pre-flight PII + injection scan on prompt and context fields.
+      // Returns null if clean; returns { hits, promptHits, contextHits } if PII found.
+      function preflightScan() {
+        var prompt  = document.getElementById('promptInput').value;
+        var context = document.getElementById('contextInput').value;
+
+        // Injection check (block immediately, no warning UI — same as gateway)
+        if (_guardrailPatterns) {
+          var injectionFound = _guardrailPatterns.injection.some(function(rule) {
+            rule.re.lastIndex = 0;
+            return rule.re.test(prompt) || rule.re.test(context);
+          });
+          if (injectionFound) {
+            setStatus('⛔ Disallowed content detected in prompt.');
+            addThinkingStep('⛔', 'Prompt injection pattern detected — submission blocked.');
+            return 'INJECTION_BLOCKED';
+          }
+        }
+
+        var promptHits  = detectPii(prompt);
+        var contextHits = detectPii(context);
+        var allHits = Array.from(new Set(promptHits.concat(contextHits)));
+
+        if (allHits.length === 0) return null;
+        return { allHits: allHits, promptHits: promptHits, contextHits: contextHits };
+      }
+
+      function showPiiWarning(scan) {
+        _pendingRedactions = scan;
+        var list = document.getElementById('piiList');
+        list.innerHTML = '';
+        var labels = {
+          sg_nric:         'Singapore NRIC / FIN',
+          sg_passport:     'Singapore Passport',
+          payment_card:    'Payment card number',
+          sg_bank_account: 'Bank account number',
+          full_name_allcaps: 'Full name (all-caps)',
+          date_of_birth:   'Date of birth',
+          sg_address:      'Residential address',
+          sg_postal_code:  'Postal code',
+          email:           'Email address',
+          phone_number:    'Phone number',
+        };
+        scan.allHits.forEach(function(name) {
+          var li = document.createElement('li');
+          li.textContent = labels[name] || name;
+          list.appendChild(li);
+        });
+        document.getElementById('piiWarning').style.display = 'block';
+        document.getElementById('promptInput').focus();
+      }
+
+      function dismissPiiWarning() {
+        document.getElementById('piiWarning').style.display = 'none';
+        _pendingRedactions = null;
+        document.getElementById('promptInput').focus();
+      }
+
+      // Auto-redact both fields and proceed with submission
+      function applyAutoRedact() {
+        var promptEl  = document.getElementById('promptInput');
+        var contextEl = document.getElementById('contextInput');
+
+        var pr = redactText(promptEl.value);
+        var cr = redactText(contextEl.value);
+        promptEl.value  = pr.text;
+        contextEl.value = cr.text;
+
+        var combinedLog = pr.log.concat(cr.log);
+        document.getElementById('piiWarning').style.display = 'none';
+
+        addThinkingStep('🛡️', 'PII auto-redacted: ' + combinedLog.map(function(e) { return e.rule + '×' + e.count; }).join(', '));
+        _pendingRedactions = null;
+
+        // Proceed with submission, carrying the redaction log for the audit record
+        doSubmit(combinedLog);
+      }
+
+      // ── Build payload ─────────────────────────────────────────────────────
+      function getFormData() {
+        const adhoc   = document.getElementById('contextInput').value.trim();
+        const pointer = document.getElementById('pointerInput').value.trim();
+
+        const finalContextArray = [];
+        if (adhoc)   finalContextArray.push(adhoc);
+        if (pointer) finalContextArray.push(pointer);
+
+        return {
+          prompt:  document.getElementById('promptInput').value,
+          context: finalContextArray.length > 0 ? JSON.stringify(finalContextArray) : "None",
+          memo:    document.getElementById('memoInput').value.trim() || "",
+          status:  document.getElementById('lockCheckbox').checked ? "LOCKED" : "READY"
+        };
+      }
+
+      // ── Submit / Save ─────────────────────────────────────────────────────
+
+      // Entry point — runs PII preflight before allowing submission
+      function handleSaveAction() {
+        document.getElementById('recordLinkWrap').style.display = 'none';
+        document.getElementById('recordLink').innerText = '';
+        clearThinkingLog();
+        document.getElementById('piiWarning').style.display = 'none';
+
+        var scan = preflightScan();
+        if (scan === 'INJECTION_BLOCKED') return;   // already messaged
+
+        if (scan) {
+          // PII found — show warning, let user choose
+          addThinkingStep('⚠️', 'Sensitive data detected in prompt / context — please review.');
+          showPiiWarning(scan);
+          return;
+        }
+
+        doSubmit([]);
+      }
+
+      // Performs the actual save/run after PII check passes (piiLog may be empty or populated)
+      function doSubmit(piiLog) {
+        var runAi = document.getElementById('runAiCheckbox').checked;
+        var data  = getFormData();
+        if (piiLog && piiLog.length > 0) data.piiRedactionLog = piiLog;
+
+        if (runAi) {
+          setStatus("Saving and running AI...");
+          data.status = "READY";
+          document.getElementById('lockCheckbox').checked = false;
+
+          addThinkingStep('💾', 'Saving note to cell...');
+          addThinkingStep('<span class="t-spinning">⏳</span>', 'Calling AI engine...');
+
+          google.script.run.withSuccessHandler(function(res) {
+            if (res && res.error) {
+              addThinkingStep('❌', 'Error: ' + res.error);
+              setStatus("Error: " + res.error);
+            } else {
+              if (res && res.steps && res.steps.length > 0) {
+                renderThinkingSteps(res.steps);
+              }
+              setStatus("AI Run Complete!");
+              // Reload the updated note (LOCKED + full_prompt_record pointer) back into the form
+              google.script.run.withSuccessHandler(function(noteData) {
+                if (noteData) populateForm(noteData);
+                else document.getElementById('lockCheckbox').checked = true;
+              }).getActiveCellData();
+            }
+          }).saveAndExecuteSingleCell(data);
+        } else {
+          setStatus("Saving note...");
+          addThinkingStep('💾', 'Saving draft note...');
+          google.script.run.withSuccessHandler(function() {
+            addThinkingStep('✅', 'Note saved.');
+            setStatus("Note saved!");
+          }).saveNoteToActiveCell(data);
+        }
+      }
+    </script>
+  </body>
+</html>

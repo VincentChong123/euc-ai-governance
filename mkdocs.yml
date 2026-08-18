@@ -40,11 +40,19 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - admonition
   - pymdownx.details
+  - pymdownx.snippets:
+      base_path: "."
   - toc:
       permalink: true
 
 plugins:
   - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [.]
+          options:
+            docstring_style: google
 
 nav:
   - Home: index.md
@@ -64,6 +72,10 @@ nav:
       - Consumption Map: specs/README.md
       - Program Sequence: specs/program-sequence.md
       - TODO: specs/TODO.md
-  - Reference:
+  - API Reference:
+      - Config API: 03_Reference/api_config.md
+      - Errors API: 03_Reference/api_errors.md
+      - Guardrails API: 03_Reference/api_guardrails.md
+      - Request Context API: 03_Reference/api_request_context.md
       - Error Code Spec: 03_Reference/error_code_spec.md
       - MAS API: 03_Reference/MAS_API.md
