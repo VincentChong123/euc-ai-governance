@@ -26,3 +26,6 @@ node_modules/
 
 # tmp
 /__tmp__
+
+# mkdoc
+/site

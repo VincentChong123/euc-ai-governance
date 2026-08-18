@@ -49,16 +49,21 @@ plugins:
 nav:
   - Home: index.md
   - Architecture:
-    - Component Interfaces: Architecture/component-interfaces.md
-    - API Gateway: Architecture/api-gateway.md
-    - AI Service: Architecture/ai-service.md
-    - Google Sheets UI: Architecture/google-sheets-ui.md
-    - Egress LLM: Architecture/egress-llm.md
-    - End-to-End Sequence: Architecture/end-to-end-sequence.md
+      - Component Interfaces: 01_Architecture/08-component-interfaces.md
+      - API Gateway: 01_Architecture/01-api-gateway.md
+      - AI Service: 01_Architecture/02-ai-service.md
+      - Google Sheets UI: 01_Architecture/04-google-sheets-ui.md
+      - Egress LLM: 01_Architecture/05-egress-llm.md
+      - End-to-End Sequence: 01_Architecture/09-end-to-end-sequence.md
   - Governance:
-    - Security & Auditability: Governance/security-auditability.md
+      - Security & Auditability: Governance/07-security-auditability.md
   - Lineage:
-    - End-to-End Tracing: Lineage/end-to-end-tracing.md
-    - Promotion and Provenance: Lineage/promotion-and-provenance.md
+      - End-to-End Tracing: Lineage/09-end-to-end-tracing.md
+      - Promotion and Provenance: Lineage/promotion-and-provenance.md
   - Specs:
-    - Consumption Map: specs/README.md
+      - Consumption Map: specs/README.md
+      - Program Sequence: specs/program-sequence.md
+      - TODO: specs/TODO.md
+  - Reference:
+      - Error Code Spec: 03_Reference/error_code_spec.md
+      - MAS API: 03_Reference/MAS_API.md

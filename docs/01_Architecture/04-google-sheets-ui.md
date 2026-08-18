@@ -59,7 +59,7 @@ the warning.
 
 Sheet ACL restricts *who opens the sheet*, but does **not** authenticate calls to
 the gateway URL. Ingress (inbound-call) auth is a separate, currently-deferred
-concern — see [01-api-gateway.md](01-api-gateway.md#known-gaps--decisions).
+concern — see [01-api-gateway.md](01-api-gateway.md#known-gaps-decisions).
 
 The sidebar PII scan is a UX layer only — the gateway enforces PII redaction at
 all four data crossings regardless of what the sidebar does. See

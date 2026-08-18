@@ -5,7 +5,7 @@
 This project applies critical data governance principles—**schema**, **lineage**, and **controls**—to AI-generated outputs. By treating AI output as a standard data element, it ensures appropriate oversight and traceability.
 
 ## Architecture Overview
-Refer to the architecture [diagram](../README.md).
+Refer to the architecture diagram.
 
 ## Core Governance Pillars
 

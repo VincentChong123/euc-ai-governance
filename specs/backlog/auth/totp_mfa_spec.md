@@ -2,7 +2,7 @@
 
 **Status:** design reference (not yet implemented) · **Applies to:**
 `api_gateway`, `google-sheets-ui` · **Depends on:** verified caller identity
-(see [../07-security-auditability.md](../../Governance/07-security-auditability.md))
+(see [../../../Governance/07-security-auditability.md](../../../Governance/07-security-auditability.md))
 
 A **free**, offline second factor for high-risk actions. The user scans a QR
 once into **Google Authenticator** (or any RFC 6238 TOTP app); thereafter the app

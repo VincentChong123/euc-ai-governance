@@ -2,7 +2,7 @@
 
 **Status:** implementation guide · **Applies to:** `api_gateway`, `google-sheets-ui`
 **Design spec:** [totp_mfa_spec.md](totp_mfa_spec.md) ·
-**Security context:** [../07-security-auditability.md](../07-security-auditability.md)
+**Security context:** [../../../Governance/07-security-auditability.md](../../../Governance/07-security-auditability.md)
 
 Free second factor (Google Authenticator / TOTP, RFC 6238) layered on top of the
 JWT identity, mimicking a bank-wide authenticator now and swappable to a federated
