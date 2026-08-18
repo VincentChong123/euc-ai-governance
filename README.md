@@ -1,13 +1,26 @@
 # EUC Spreadsheet Uplift
 
-> **Governed AI output for end-user computing: schema · lineage · controls.**
 > **EUC governance by design: AI output governed like risk data.**
-> A proof-of-concept: keep users in the spreadsheet grid they won't give up, but move
-> the risk surface (PII egress, provenance, system-of-record) behind a governed gateway.
-> A curated, secret-free slice of the codebase (Google Sheets UI → API gateway → AI /
-> document services). This repo is a guided tour of the **data-governance** design.
 
-📖 **[Guided tour](docs/index.md)**: a readable walk-through of the schema · lineage · governance design.
+A proof-of-concept demonstrating how to bring immediate governance to end-user computing (EUC) spreadsheets without disrupting workflows. This repository contains a curated slice of the codebase (Google Sheets UI → API Gateway → AI / Document Services).
+
+---
+
+## Motivation & Approach
+
+Enterprise **EUC spreadsheets** often handle critical operations but lack version control, lineage, and attribution. Forcing immediate migration to centralized IT systems disrupts workflows.
+
+This architecture explores **control at the point of materiality**. By moving the risk surface (PII, AI egress, provenance) behind a governed gateway, we achieve immediate, progressive governance without sacrificing the familiar user interface. It acts as a transitional bridge, allowing eventual EUC remediation once the backend fully supports Business As Usual (BAU).
+
+### Before vs. After
+
+| Feature | ❌ Ungoverned EUC | ✅ Governed Architecture |
+| :--- | :--- | :--- |
+| **User Experience** | Complex logic relies on local macros or scripts. | Users stay in their familiar Google Sheets grid. |
+| **Data Privacy** | Potential exposure of sensitive PII to external services. | **API Gateway** intercepts and redacts PII before egress. |
+| **Schema & Contracts**| Unstructured inputs cause brittleness when formats change. | **Strict YAML contracts** enforce data schema at the boundary. |
+| **Audit & Lineage** | Limited traceability and provenance. | **Append-only records** with `request_id → run_id` tracking. |
+
 ---
 
 ## System Architecture
@@ -40,53 +53,25 @@ flowchart LR
     style External fill:#fff0e6,stroke:#ff9900,stroke-dasharray: 5 5
 ```
 
-## Why this matters (Before vs. After)
-
-| Feature | ❌ Status Quo (Shadow IT) | ✅ This Architecture (Governed) |
-| :--- | :--- | :--- |
-| **User Experience** | Users build fragile, undocumented macros. | Users stay in their familiar Google Sheets grid. |
-| **Data Privacy (PII)** | High risk of PII leaking directly to public LLMs. | **API Gateway** intercepts and redacts PII before egress. |
-| **Schema & Contracts** | Unstructured inputs; everything breaks when formats change. | **Strict YAML contracts** enforce data schema at the boundary. |
-| **Audit & Lineage** | No provenance. "The AI said so." | **Append-only records** with `request_id → run_id` tracking. |
-
----
-
-## The EUC problem this addresses
-
-One of the most under-governed off-book layers in a bank is **End-User Computing (EUC)**:
-spreadsheets doing critical work with no version control, no lineage, no attribution.
-The blunt fix (ban spreadsheets, force everything into slow IT) fails: users revolt and
-build shadow IT, which *increases* risk.
-
-This project takes the other path of **control at the point of materiality**:
-- Users stay in the **familiar Google Sheet grid**.
-- The material risk surface (data leaving to an LLM, PII, provenance, system-of-record)
-  moves **behind a governed gateway**.
-- Outputs become **append-only, attributed records** outside the EUC.
-
-That is EUC control-pattern uplift aligned to how a bank governs critical data, not spreadsheet removal.
+📖 [Details](docs/index.md)
 
 ---
 
 ## What this repo demonstrates
 
-An AI output is just another data element with poor lineage by default. It's held to the
-same three questions a bank asks of any critical data element:
+An AI output is just another data element with poor lineage by default. It's held to the same three questions a bank asks of any critical data element:
 
-1. **Data Schema**: key boundaries are typed, versioned contracts with a single source of truth.
-2. **Data Lineage & Provenance**: `request_id → run_id → attempt` on material outputs.
+1. **Data Schema**: Key boundaries are typed, versioned contracts with a single source of truth.
+2. **Data Lineage & Provenance**: Tracking via `request_id → run_id → attempt` on material outputs.
 3. **Data Governance & Controls**: PII egress control, guardrails, error-key governance.
 
-📖 **Deep Dive:** For a detailed map of the spec files, schemas, and how they are consumed across the codebase, please see the **[Consumption map in `specs/README.md`](specs/README.md)**.
+📖 **Deep Dive:** For a detailed map of the spec files, schemas, and how they are consumed across the codebase, see the **[Consumption map in `specs/README.md`](specs/README.md)**.
 
 ---
 
 ## Security
-Curated snapshot with **no credentials, no real PII, and no production data** (sample
-values in the spec CSVs are synthetic). Secrets are handled via environment /
-secret-manager and never committed; a TruffleHog ruleset
-([`.trufflehog/rules.yaml`](.trufflehog/rules.yaml)) guards for key patterns. Verified
-with gitleaks & TruffleHog before publishing: see [`SECURITY.md`](SECURITY.md).
+
+Curated snapshot designed to exclude credentials, real PII, and production data (sample values in the spec CSVs are synthetic). Secrets are handled via environment / secret-manager and omitted from version control; a TruffleHog ruleset ([`.trufflehog/rules.yaml`](.trufflehog/rules.yaml)) guards for key patterns. Scanned with gitleaks & TruffleHog before publishing: see [`SECURITY.md`](SECURITY.md).
 
 ---
 

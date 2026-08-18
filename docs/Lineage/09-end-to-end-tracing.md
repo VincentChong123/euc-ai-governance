@@ -4,11 +4,6 @@ How a single Google-Sheets request is traced across the stack, how the IDs line
 up, and how to find a request in Uptrace. Read this when a request failed and you
 need to see *where* — or when a trace "cannot be found".
 
-Related: [../../01_Architecture/06-conventions.md](../../01_Architecture/06-conventions.md)
-(logging + request tracing conventions) ·
-[../../01_Architecture/07-security-auditability.md](../../01_Architecture/07-security-auditability.md)
-(audit trail) · [../../01_Architecture/09-end-to-end-sequence.md](../../01_Architecture/09-end-to-end-sequence.md)
-(request lifecycle).
 
 ---
 

@@ -94,7 +94,7 @@ are returned to the sidebar, which renders them in the thinking panel.
 A single **`x-request-id`** ties the whole chain: assigned/echoed at the gateway,
 forwarded to `ai_service`, returned in `meta`, and persisted in the audit row —
 so any delegation is reconstructable end-to-end
-([07-security-auditability.md](07-security-auditability.md) §3).
+([07-security-auditability.md](../Governance/07-security-auditability.md) §3).
 
 ### Three-tier correlation hierarchy
 
@@ -163,7 +163,7 @@ the Python service — so one query string matches every hop. The Express proper
 
 - The **future SSE/agentic path** (live `thinking` events, OIDC-verified ingress)
   — augments, not replaces, this sync flow; see
-  [08-component-interfaces.md](08-component-interfaces.md).
+  [08-component-interfaces.md](../01_Architecture/08-component-interfaces.md).
 
 ---
 

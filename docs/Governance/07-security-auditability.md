@@ -33,7 +33,7 @@ User ──(Google ACL)──▶ Sheet ──(HTTPS)──▶ api_gateway ──
 - LLM provider keys live **only** in the gateway env — dev via docker `env_file`,
   prod via Cloud Run secret→env, Vertex via the service account (no stored key).
 - Downstream services speak plain OpenAI format to `/egress/<provider>` and never
-  see a credential — see [05-egress-llm.md](05-egress-llm.md).
+  see a credential — see [05-egress-llm.md](../01_Architecture/05-egress-llm.md).
 - `.env` is gitignored; loggers **redact** `authorization`, `*key*`, `*secret*`,
   `*password*`. Never log a secret value; reference by prefix/length only.
 - Any credential that appears in a log, transcript, or shared channel must be
@@ -241,10 +241,10 @@ highest-risk failure mode in finance AI.
 
 - **Step-up MFA (TOTP / Google Authenticator):** free second factor on high-risk
   actions (approve/release), on top of the JWT identity — design in
-  [specs/totp_mfa_spec.md](specs/totp_mfa_spec.md).
+  [specs/totp_mfa_spec.md](../specs/backlog/auth/totp_mfa_spec.md).
 - **Data-residency / no-training:** for prod, use provider tiers that exclude
   prompts from training (avoid `:free` OpenRouter routes for bank data) — prefer
-  the Vertex enterprise path. See [05-egress-llm.md](05-egress-llm.md).
+  the Vertex enterprise path. See [05-egress-llm.md](../01_Architecture/05-egress-llm.md).
 
 ---
 
@@ -259,7 +259,7 @@ Every request should be reconstructable end-to-end from a single correlation id.
   the id rather than minting a fresh one per retry. Always propagate it; always
   log it. (`middleware/requestId.mjs`.)
 - **Nested correlation ids** — three tiers, kept separate on purpose (full table +
-  propagation walkthrough in [09-end-to-end-sequence.md](09-end-to-end-sequence.md)
+  propagation walkthrough in [09-end-to-end-sequence.md](../01_Architecture/09-end-to-end-sequence.md)
   §"Traceability thread"):
   - `request_id` — the whole transaction; stable across every hop **and** retry.
   - `run_id` — one agent run inside `ai_service` (returned in `meta`).
@@ -290,7 +290,7 @@ did, and what was committed* — the standard a bank's controls/records team exp
 ### In place
 
 - **Full-prompt records + `request_id`** are stored by the Sheets UI for
-  traceability (see [04-google-sheets-ui.md](04-google-sheets-ui.md)).
+  traceability (see [04-google-sheets-ui.md](../01_Architecture/04-google-sheets-ui.md)).
 - **Audit memo** field in the sidebar lets the user attach a business
   justification to a delegation.
 - **Human-in-the-loop flags** create a review checkpoint before commit.
@@ -330,7 +330,7 @@ audit memo · `model_invoked` · outcome (`error_key` or success) · human-revie
 > For agentic systems taking real actions, guardrails are the existential gate.
 
 > These are cross-cutting; when you implement one, update this page **and** the
-> affected component page (e.g. [01-api-gateway.md](01-api-gateway.md)).
+> affected component page (e.g. [01-api-gateway.md](../01_Architecture/01-api-gateway.md)).
 
 ---
 
@@ -377,7 +377,7 @@ sub-processor and requires a vendor risk assessment.
   prompt content.
 - Confirm no-training opt-out is in effect before sending non-public data.
 - Add Vertex as the mandatory `LLM_PROVIDER` for regulated workloads
-  (see [05-egress-llm.md](05-egress-llm.md)).
+  (see [05-egress-llm.md](../01_Architecture/05-egress-llm.md)).
 - Review sub-processor list quarterly.
 
 ---
@@ -400,7 +400,7 @@ What to do when something goes wrong.
 
 1. **Detect** — alert on sustained error rate or anomalous latency (Logfire / Cloud Run metrics).
 2. **Contain** — disable the affected service (set `IS_AI_SERVICE_ACTIVE=false` / `IS_DOC_SERVICE_ACTIVE=false`); the gateway returns `__ERROR_SERVICE_UNAVAILABLE__` without crashing.
-3. **Credential compromise** — rotate the affected key immediately; the impacted `LLM_PROVIDER` key is in Cloud Run secrets (prod) / `.env` (dev). Reference [05-egress-llm.md](05-egress-llm.md) for which env var to rotate.
+3. **Credential compromise** — rotate the affected key immediately; the impacted `LLM_PROVIDER` key is in Cloud Run secrets (prod) / `.env` (dev). Reference [05-egress-llm.md](../01_Architecture/05-egress-llm.md) for which env var to rotate.
 4. **Assess** — pull `request_id` range from logs; reconstruct the affected requests using the audit trail (§4).
 5. **Notify** — DPO and affected users if PII was involved; follow jurisdiction-specific breach notification timelines.
 6. **Post-mortem** — update guardrails and this page with lessons learned.

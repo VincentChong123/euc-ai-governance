@@ -1,0 +1,193 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "GLOBAL-BANK Ringisho Automation API",
+        "description": "API-First design specification for the Ringisho Approval Workflow, covering Tracking Ledger updates and Draft submissions.",
+        "version": "2026-06-06",
+        "contact": {
+            "name": "Enterprise Architecture Team",
+            "email": "architecture@global-bank.local"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://api.internal.global-bank.local/v1",
+            "description": "Production Server"
+        },
+        {
+            "url": "http://localhost:3000/api",
+            "description": "Local Development Server"
+        }
+    ],
+    "paths": {
+        "/webhook/appsheet": {
+            "post": {
+                "summary": "Receive Webhook from AppSheet",
+                "description": "Receives the tracking ledger updates when a Relationship Manager submits a Ringisho or a Manager approves it.",
+                "operationId": "processAppSheetWebhook",
+                "requestBody": {
+                    "description": "The Tracking Ledger row data sent by the AppSheet automation bot.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TrackingLedgerPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully received and logged to the central database."
+                    },
+                    "400": {
+                        "description": "Invalid payload schema."
+                    }
+                }
+            }
+        },
+        "/ringisho/draft": {
+            "post": {
+                "summary": "Submit a new Ringisho Draft",
+                "description": "Allows an LLM or an external system to programmatically submit a new Ringisho draft directly into the database/Google Sheet.",
+                "operationId": "submitRingishoDraft",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RingishoDraftPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Draft successfully created."
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "TrackingLedgerPayload": {
+                "type": "object",
+                "x-google-sheet-name": "Tracking_Ledger",
+                "required": [
+                    "case_ref_id",
+                    "Approval_Status"
+                ],
+                "properties": {
+                    "case_ref_id": {
+                        "type": "string",
+                        "x-google-sheet-column": "A",
+                        "pattern": "^GLOBAL-BANK-RNG-\\\\d{8}-\\\\d{3}$",
+                        "description": "The unique deterministic case ID."
+                    },
+                    "Draft_Owner_Email": {
+                        "type": "string",
+                        "x-google-sheet-column": "B",
+                        "format": "email"
+                    },
+                    "Receiver_Email": {
+                        "type": "string",
+                        "x-google-sheet-column": "C",
+                        "format": "email"
+                    },
+                    "Email_Memo": {
+                        "type": "string",
+                        "x-google-sheet-column": "D"
+                    },
+                    "Send_to_Checker": {
+                        "type": "boolean",
+                        "x-google-sheet-column": "E",
+                        "description": "Trigger flag for AppSheet to route the PDF."
+                    },
+                    "Draft_PDF_URL": {
+                        "type": "string",
+                        "x-google-sheet-column": "F",
+                        "format": "uri"
+                    },
+                    "Confirmed_Review": {
+                        "type": "boolean",
+                        "x-google-sheet-column": "G",
+                        "description": "True if the manager explicitly checked the compliance checkbox."
+                    },
+                    "Approval_Status": {
+                        "type": "string",
+                        "x-google-sheet-column": "H",
+                        "enum": [
+                            "Pending",
+                            "Awaiting Review",
+                            "Approved",
+                            "Rejected"
+                        ]
+                    }
+                }
+            },
+            "RingishoDraftPayload": {
+                "type": "object",
+                "x-google-sheet-name": "Ringisho",
+                "required": [
+                    "ringisho_id",
+                    "applicant_name"
+                ],
+                "properties": {
+                    "ringisho_id": {
+                        "type": "string",
+                        "x-google-sheet-column": "A",
+                        "x-local-label": "稟議書番号"
+                    },
+                    "draft_date": {
+                        "type": "string",
+                        "format": "date",
+                        "x-google-sheet-column": "B",
+                        "x-local-label": "起案日"
+                    },
+                    "department": {
+                        "type": "string",
+                        "x-google-sheet-column": "C",
+                        "x-local-label": "部署"
+                    },
+                    "subject": {
+                        "type": "string",
+                        "x-google-sheet-column": "D",
+                        "x-local-label": "件名"
+                    },
+                    "content": {
+                        "type": "string",
+                        "x-google-sheet-column": "E",
+                        "x-local-label": "内容"
+                    },
+                    "purpose": {
+                        "type": "string",
+                        "x-google-sheet-column": "F",
+                        "x-local-label": "目的"
+                    },
+                    "remarks": {
+                        "type": "string",
+                        "x-google-sheet-column": "G",
+                        "x-local-label": "備考"
+                    },
+                    "attached_materials": {
+                        "type": "string",
+                        "x-google-sheet-column": "H",
+                        "x-local-label": "添付資料"
+                    },
+                    "desired_settlement_date": {
+                        "type": "string",
+                        "format": "date",
+                        "x-google-sheet-column": "I",
+                        "x-local-label": "決済希望日"
+                    },
+                    "applicant_name": {
+                        "type": "string",
+                        "x-google-sheet-column": "J",
+                        "x-local-label": "氏名"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -37,7 +37,7 @@ routes are always mounted; switching is an env flip:
 
 **OpenRouter uses a `FallbackModel` chain in `ai_service`** (not in the gateway) —
 pydantic-ai rotates to the next model on 429/5xx before the request ever reaches
-the gateway egress a second time. See [02-ai-service.md](02-ai-service.md) for the chain definition.
+the gateway egress a second time. See [02-ai-service.md](../01_Architecture/02-ai-service.md) for the chain definition.
 
 For Groq and Vertex there is **no automatic runtime failover** — deliberate low-bug
 choice. Failover would require buffering + replay in the gateway.

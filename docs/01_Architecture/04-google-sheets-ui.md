@@ -63,4 +63,4 @@ concern — see [01-api-gateway.md](01-api-gateway.md#known-gaps--decisions).
 
 The sidebar PII scan is a UX layer only — the gateway enforces PII redaction at
 all four data crossings regardless of what the sidebar does. See
-[07-security-auditability.md](07-security-auditability.md).
+[07-security-auditability.md](../Governance/07-security-auditability.md).

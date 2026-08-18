@@ -4,8 +4,6 @@
 
 This project applies critical data governance principles—**schema**, **lineage**, and **controls**—to AI-generated outputs. By treating AI output as a standard data element, it ensures appropriate oversight and traceability.
 
-> A guided tour of the design. [Source]((https://github.com/VincentChong123/euc-spreadsheet-uplift))
-
 ## Architecture Overview
 Refer to the architecture [diagram](../README.md).
 

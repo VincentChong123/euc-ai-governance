@@ -30,13 +30,13 @@ Durably storing every AI draft server-side is a **liability**, not diligence:
 - permanently retains half-baked, speculative figures never meant to be
   authoritative;
 - draft context often carries PII/confidential cells → triggers data-residency /
-  DPA / retention obligations ([07-security-auditability.md](07-security-auditability.md) §6–7);
+  DPA / retention obligations ([07-security-auditability.md](../Governance/07-security-auditability.md) §6–7);
 - building tamper-evident audit infra for scratch is effort where there's no
   decision to defend.
 
 For unlocked drafts, the **local sheet record** (`__Prompt_records_v2` + cell
 notes, written client-side) is proportionate. See
-[07-security-auditability.md](07-security-auditability.md) §4 (qualified there).
+[07-security-auditability.md](../Governance/07-security-auditability.md) §4 (qualified there).
 
 ## 3. The lock mechanic — current vs. target
 
@@ -116,7 +116,7 @@ A promotion record keyed on the current **unsigned `meta.user` claim** is
 provenance theater — anyone can forge it. Promotion therefore **depends on
 ingress authentication** (Google-signed OIDC token minted by Apps Script,
 verified at the gateway) — the top gap in
-[07-security-auditability.md](07-security-auditability.md) §1. Ship promotion
+[07-security-auditability.md](../Governance/07-security-auditability.md) §1. Ship promotion
 *with* that auth, not before it.
 
 ## 6. Net design

@@ -59,7 +59,7 @@ no service inside or outside needs its own PII scanner.
 | ④ | LLM → gateway → Sheets (return) | `scanText()` in contract adapter after upstream response parsed | scans `result`; redacts before Sheets sees it |
 
 Rules are parameterized in **`specs/guardrail.yaml`** — edit patterns there, restart
-gateway, all four crossings update. See [07-security-auditability.md](07-security-auditability.md).
+gateway, all four crossings update. See [07-security-auditability.md](../Governance/07-security-auditability.md).
 
 ## Production hardening (in place)
 
