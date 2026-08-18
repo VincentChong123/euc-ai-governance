@@ -20,7 +20,8 @@ need to see *where* — or when a trace "cannot be found".
 
 ---
 
-## What emits what
+<!-- HARDENED ANCHOR: slug #traceability-coverage is linked from resume.draft.md (Operationalizing Data Lineage). Do NOT rename this header or the resume link 404s. -->
+## Traceability Coverage
 
 ```mermaid
 flowchart LR
