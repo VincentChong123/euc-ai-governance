@@ -13,28 +13,24 @@
       
       
       
-        <link rel="prev" href="../09-end-to-end-tracing/">
-      
-      
-        <link rel="next" href="../../specs/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Promotion and Provenance - EUC Spreadsheet Uplift Docs</title>
+        <title>TOTP (Google Authenticator) MFA Design Spec - EUC Spreadsheet Uplift Docs</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,9 +49,9 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#10-promotion-provenance-sketchbook-vs-system-of-record" class="md-skip">
+        <a href="#totp-google-authenticator-mfa-design-spec" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +90,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="EUC Spreadsheet Uplift Docs" class="md-header__button md-logo" aria-label="EUC Spreadsheet Uplift Docs" data-md-component="logo">
+    <a href="../../../.." title="EUC Spreadsheet Uplift Docs" class="md-header__button md-logo" aria-label="EUC Spreadsheet Uplift Docs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Promotion and Provenance
+              TOTP (Google Authenticator) MFA Design Spec
             
           </span>
         </div>
@@ -213,7 +209,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="../../../.." class="md-tabs__link">
         
   
   
@@ -234,7 +230,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../01_Architecture/08-component-interfaces/" class="md-tabs__link">
+        <a href="../../../../01_Architecture/08-component-interfaces/" class="md-tabs__link">
           
   
   
@@ -254,7 +250,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../Governance/07-security-auditability/" class="md-tabs__link">
+        <a href="../../../../Governance/07-security-auditability/" class="md-tabs__link">
           
   
   
@@ -270,13 +266,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../09-end-to-end-tracing/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../../../Lineage/09-end-to-end-tracing/" class="md-tabs__link">
           
   
   
@@ -296,7 +290,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../specs/" class="md-tabs__link">
+        <a href="../../../" class="md-tabs__link">
           
   
   
@@ -316,7 +310,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../03_Reference/api_config/" class="md-tabs__link">
+        <a href="../../../../03_Reference/api_config/" class="md-tabs__link">
           
   
   
@@ -350,7 +344,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="EUC Spreadsheet Uplift Docs" class="md-nav__button md-logo" aria-label="EUC Spreadsheet Uplift Docs" data-md-component="logo">
+    <a href="../../../.." title="EUC Spreadsheet Uplift Docs" class="md-nav__button md-logo" aria-label="EUC Spreadsheet Uplift Docs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -368,7 +362,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../../.." class="md-nav__link">
         
   
   
@@ -449,7 +443,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/08-component-interfaces/" class="md-nav__link">
+      <a href="../../../../01_Architecture/08-component-interfaces/" class="md-nav__link">
         
   
   
@@ -477,7 +471,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/01-api-gateway/" class="md-nav__link">
+      <a href="../../../../01_Architecture/01-api-gateway/" class="md-nav__link">
         
   
   
@@ -505,7 +499,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/02-ai-service/" class="md-nav__link">
+      <a href="../../../../01_Architecture/02-ai-service/" class="md-nav__link">
         
   
   
@@ -533,7 +527,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/04-google-sheets-ui/" class="md-nav__link">
+      <a href="../../../../01_Architecture/04-google-sheets-ui/" class="md-nav__link">
         
   
   
@@ -561,7 +555,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/05-egress-llm/" class="md-nav__link">
+      <a href="../../../../01_Architecture/05-egress-llm/" class="md-nav__link">
         
   
   
@@ -589,7 +583,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/09-end-to-end-sequence/" class="md-nav__link">
+      <a href="../../../../01_Architecture/09-end-to-end-sequence/" class="md-nav__link">
         
   
   
@@ -678,7 +672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Governance/07-security-auditability/" class="md-nav__link">
+      <a href="../../../../Governance/07-security-auditability/" class="md-nav__link">
         
   
   
@@ -710,31 +704,28 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -752,7 +743,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -770,7 +761,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../09-end-to-end-tracing/" class="md-nav__link">
+      <a href="../../../../Lineage/09-end-to-end-tracing/" class="md-nav__link">
         
   
   
@@ -795,37 +786,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Promotion and Provenance
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../../Lineage/promotion-and-provenance/" class="md-nav__link">
         
   
   
@@ -841,131 +805,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-product-framing-the-premise" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Product framing (the premise)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-why-not-log-every-draft" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Why not log every draft
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-the-lock-mechanic-current-vs-target" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. The lock mechanic — current vs. target
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-the-proposed-promote-action" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. The proposed "Promote" action
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. The proposed &#34;Promote&#34; action">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#append-only-record-shape-one-entry-per-promotion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Append-only record shape (one entry per promotion)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#where-it-is-written" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Where it is written
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-hard-dependency-authenticated-principal" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Hard dependency — authenticated principal
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-net-design" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Net design
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-open-decisions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. Open decisions
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1039,7 +878,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../specs/" class="md-nav__link">
+      <a href="../../../" class="md-nav__link">
         
   
   
@@ -1067,7 +906,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../specs/program-sequence/" class="md-nav__link">
+      <a href="../../../program-sequence/" class="md-nav__link">
         
   
   
@@ -1095,7 +934,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../specs/TODO/" class="md-nav__link">
+      <a href="../../../TODO/" class="md-nav__link">
         
   
   
@@ -1184,7 +1023,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03_Reference/api_config/" class="md-nav__link">
+      <a href="../../../../03_Reference/api_config/" class="md-nav__link">
         
   
   
@@ -1212,7 +1051,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03_Reference/api_errors/" class="md-nav__link">
+      <a href="../../../../03_Reference/api_errors/" class="md-nav__link">
         
   
   
@@ -1240,7 +1079,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03_Reference/api_guardrails/" class="md-nav__link">
+      <a href="../../../../03_Reference/api_guardrails/" class="md-nav__link">
         
   
   
@@ -1268,7 +1107,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03_Reference/api_request_context/" class="md-nav__link">
+      <a href="../../../../03_Reference/api_request_context/" class="md-nav__link">
         
   
   
@@ -1296,7 +1135,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03_Reference/error_code_spec/" class="md-nav__link">
+      <a href="../../../../03_Reference/error_code_spec/" class="md-nav__link">
         
   
   
@@ -1324,7 +1163,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03_Reference/MAS_API/" class="md-nav__link">
+      <a href="../../../../03_Reference/MAS_API/" class="md-nav__link">
         
   
   
@@ -1379,10 +1218,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-product-framing-the-premise" class="md-nav__link">
+  <a href="#why-this-and-why-free" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Product framing (the premise)
+        Why this, and why free
       
     </span>
   </a>
@@ -1390,10 +1229,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-why-not-log-every-draft" class="md-nav__link">
+  <a href="#relationship-to-existing-auth" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Why not log every draft
+        Relationship to existing auth
       
     </span>
   </a>
@@ -1401,10 +1240,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-the-lock-mechanic-current-vs-target" class="md-nav__link">
+  <a href="#trust-model-non-negotiable" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. The lock mechanic — current vs. target
+        Trust model (non-negotiable)
       
     </span>
   </a>
@@ -1412,22 +1251,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-the-proposed-promote-action" class="md-nav__link">
+  <a href="#storage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. The proposed "Promote" action
+        Storage
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. The proposed &#34;Promote&#34; action">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoints (gateway)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Endpoints (gateway)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#append-only-record-shape-one-entry-per-promotion" class="md-nav__link">
+  <a href="#otpenroll" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Append-only record shape (one entry per promotion)
+        /otp/enroll
       
     </span>
   </a>
@@ -1435,10 +1285,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#where-it-is-written" class="md-nav__link">
+  <a href="#otpconfirm" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Where it is written
+        /otp/confirm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#otpverify" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        /otp/verify
       
     </span>
   </a>
@@ -1451,10 +1312,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-hard-dependency-authenticated-principal" class="md-nav__link">
+  <a href="#verification-rules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Hard dependency — authenticated principal
+        Verification rules
       
     </span>
   </a>
@@ -1462,10 +1323,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-net-design" class="md-nav__link">
+  <a href="#sidebar-flow-apps-script" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Net design
+        Sidebar flow (Apps Script)
       
     </span>
   </a>
@@ -1473,10 +1334,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-open-decisions" class="md-nav__link">
+  <a href="#new-error-keys-add-to-the-registry" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. Open decisions
+        New error keys (add to the registry)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-free-vs-new-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is free vs. new work
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-decisions-before-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open decisions (before implementation)
       
     </span>
   </a>
@@ -1500,162 +1383,200 @@
 
 
 
-<h1 id="10-promotion-provenance-sketchbook-vs-system-of-record">10 · Promotion &amp; Provenance — Sketchbook vs. System-of-Record<a class="headerlink" href="#10-promotion-provenance-sketchbook-vs-system-of-record" title="Permanent link">&para;</a></h1>
-<p><strong>Status: design note (not yet implemented).</strong> Records <em>why</em> and <em>how</em> durable
-provenance attaches to AI output — and why it must <strong>not</strong> attach to every draft.</p>
-<blockquote>
-<p>Terminology: <strong>ingress</strong> = <em>inbound</em> (calls into our system); <strong>egress</strong> =
-<em>outbound</em> (calls out to external services).</p>
-</blockquote>
-<hr />
-<h2 id="1-product-framing-the-premise">1. Product framing (the premise)<a class="headerlink" href="#1-product-framing-the-premise" title="Permanent link">&para;</a></h2>
-<p>This system is a <strong>front-office drafting sandbox</strong> — a shared sketch/model
-scratchpad that can call AI — <em>not</em> a system of record. Front-office Excel users
-adopt tools that stay <strong>in the grid and fast</strong>, and route around anything that
-taxes every action with governance. So the design rule is:</p>
-<blockquote>
-<p><strong>Traceability is a <em>mode</em>, not a <em>tax</em>.</strong>
-Free and uncontrolled while drafting → full provenance the moment an output is
-<em>promoted</em> (declared material by a human).</p>
-</blockquote>
-<p>This matches how front-office regulation (EUC / End-User-Computing controls,
-model-risk frameworks) actually works: control at the <strong>point of materiality</strong>,
-not over throwaway scratch.</p>
-<h2 id="2-why-not-log-every-draft">2. Why not log every draft<a class="headerlink" href="#2-why-not-log-every-draft" title="Permanent link">&para;</a></h2>
-<p>Durably storing every AI draft server-side is a <strong>liability</strong>, not diligence:</p>
+<h1 id="totp-google-authenticator-mfa-design-spec">TOTP (Google Authenticator) MFA Design Spec<a class="headerlink" href="#totp-google-authenticator-mfa-design-spec" title="Permanent link">&para;</a></h1>
+<p><strong>Status:</strong> design reference (not yet implemented) · <strong>Applies to:</strong>
+<code>api_gateway</code>, <code>google-sheets-ui</code> · <strong>Depends on:</strong> verified caller identity
+(see <a href="../../../../Governance/07-security-auditability/">../../../Governance/07-security-auditability.md</a>)</p>
+<p>A <strong>free</strong>, offline second factor for high-risk actions. The user scans a QR
+once into <strong>Google Authenticator</strong> (or any RFC 6238 TOTP app); thereafter the app
+produces a 6-digit code every 30s with <strong>no network, no message, no cost</strong>. The
+gateway independently recomputes the code from a stored secret and compares.</p>
+<h2 id="why-this-and-why-free">Why this, and why free<a class="headerlink" href="#why-this-and-why-free" title="Permanent link">&para;</a></h2>
 <ul>
-<li>permanently retains half-baked, speculative figures never meant to be
-  authoritative;</li>
-<li>draft context often carries PII/confidential cells → triggers data-residency /
-  DPA / retention obligations (<a href="../../Governance/07-security-auditability/">07-security-auditability.md</a> §6–7);</li>
-<li>building tamper-evident audit infra for scratch is effort where there's no
-  decision to defend.</li>
+<li>Google Authenticator is a plain <strong>TOTP</strong> app — no Google API, no service call,
+  no SMS. Both sides derive the same code from <code>HMAC(secret, current_30s_window)</code>.</li>
+<li><strong>$0</strong>: no SMS/Twilio, no external calls. Only cost is a small persistent store
+  and dev time.</li>
+<li><strong>Step-up, not per-request.</strong> TOTP gates <em>sensitive</em> actions (approve a
+  Ringisho, release a payment). Continuous identity is the JWT; TOTP is the
+  second factor at the dangerous moment.</li>
 </ul>
-<p>For unlocked drafts, the <strong>local sheet record</strong> (<code>__Prompt_records_v2</code> + cell
-notes, written client-side) is proportionate. See
-<a href="../../Governance/07-security-auditability/">07-security-auditability.md</a> §4 (qualified there).</p>
-<h2 id="3-the-lock-mechanic-current-vs-target">3. The lock mechanic — current vs. target<a class="headerlink" href="#3-the-lock-mechanic-current-vs-target" title="Permanent link">&para;</a></h2>
-<p>The existing sidebar lock (advanced-options tickbox → cell note
-<code>STATUS: LOCKED</code>) <strong>cannot</strong> serve as the promotion trigger as wired, because it
-conflates two concepts and fires automatically:</p>
-<table>
-<thead>
-<tr>
-<th>Concept</th>
-<th>Today</th>
-<th>Target</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Protect from AI overwrite</strong> ("skip in bulk runs")</td>
-<td>✅ what the lock does</td>
-<td>keep unchanged — auto-lock after a run is fine</td>
-</tr>
-<tr>
-<td><strong>Promote as material</strong> (→ append-only provenance)</td>
-<td>❌ conflated; auto-fires on <em>every</em> successful AI run; reversible; emits no server event</td>
-<td>a <strong>separate, explicit, human-initiated</strong> action</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Why the current lock fails the trigger:</strong></p>
-<ol>
-<li>It is applied <em>by the machine</em> the instant an AI run succeeds — not a
-   deliberate human review act.</li>
-<li>Because every successful run auto-locks, hooking a log to <code>LOCKED</code> would
-   durably record <strong>every draft</strong> — re-creating the liability in §2.</li>
-<li>It is a reversible client-side note field (<code>LOCKED ⇄ READY</code>), not a
-   directional server event.</li>
-</ol>
-<h2 id="4-the-proposed-promote-action">4. The proposed "Promote" action<a class="headerlink" href="#4-the-proposed-promote-action" title="Permanent link">&para;</a></h2>
-<p>Add a distinct, deliberate act — separate from the protect-lock tickbox:</p>
-<ul>
-<li><strong>UI:</strong> a <code>✔ Accept &amp; Promote</code> button in the sidebar, pressed by the user
-  <em>after reviewing</em> the AI output (not the advanced-options checkbox).</li>
-<li><strong>Semantics:</strong> promotion is <strong>directional</strong> — a later un-promote is a <em>new</em>
-  logged event, never a silent toggle-back.</li>
-<li><strong>Emits exactly one</strong> append-only server record — per promotion, <strong>not</strong> per
-  AI run.</li>
-</ul>
-<h3 id="append-only-record-shape-one-entry-per-promotion">Append-only record shape (one entry per promotion)<a class="headerlink" href="#append-only-record-shape-one-entry-per-promotion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>promotion_id        · uuid
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>request_id          · ties back to the original AI run (correlation key)
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>authenticated_user  · verified principal (NOT the unsigned meta.user claim)
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>sheet + cell_ref    · what was promoted
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>model_invoked       · &lt;provider&gt;:&lt;model&gt; that produced the value
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>prompt_hash         · integrity ref to the prompt (not necessarily full text)
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>value_hash          · integrity ref to the promoted cell value
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>memo                · optional business justification (existing Audit Memo field)
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>reviewed            · true
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>ts                  · promotion timestamp
+<h2 id="relationship-to-existing-auth">Relationship to existing auth<a class="headerlink" href="#relationship-to-existing-auth" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>JWT (OIDC)  → who you are, every request        → gateway verifies identity
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>TOTP        → second factor, sensitive actions  → gateway verifies the code
 </code></pre></div>
-<h3 id="where-it-is-written">Where it is written<a class="headerlink" href="#where-it-is-written" title="Permanent link">&para;</a></h3>
-<p>A single ingress (inbound) endpoint, e.g. <code>POST /api/promote</code> at the gateway,
-appending to a <strong>durable append-only store</strong> (HMAC-signed JSONL → object store
-with Object-Lock / WORM in prod). The gateway — not the sheet — is the
-server-of-record for promotions; <code>__Prompt_records_v2</code> remains the
-human-readable mirror.</p>
-<pre class="mermaid"><code>sequenceDiagram
-    autonumber
-    actor U as User
-    participant SB as sidebar.html
-    participant GW as api_gateway
-    participant LOG as append-only store&lt;br/&gt;(WORM / signed JSONL)
-
-    Note over U,SB: (drafting produces no durable server write)
-    U-&gt;&gt;SB: Review AI output, click ✔ Accept &amp; Promote
-    SB-&gt;&gt;GW: POST /api/promote  (Authorization: verified identity)&lt;br/&gt;{ request_id, cell_ref, model_invoked, prompt_hash, value_hash, memo }
-    GW-&gt;&gt;GW: verify principal · sign entry
-    GW-&gt;&gt;LOG: append one immutable record
-    LOG--&gt;&gt;GW: ack
-    GW--&gt;&gt;SB: { promotion_id }
-    SB-&gt;&gt;SB: mark cell promoted (+ protect-lock)</code></pre>
-<h2 id="5-hard-dependency-authenticated-principal">5. Hard dependency — authenticated principal<a class="headerlink" href="#5-hard-dependency-authenticated-principal" title="Permanent link">&para;</a></h2>
-<p>A promotion record keyed on the current <strong>unsigned <code>meta.user</code> claim</strong> is
-provenance theater — anyone can forge it. Promotion therefore <strong>depends on
-ingress authentication</strong> (Google-signed OIDC token minted by Apps Script,
-verified at the gateway) — the top gap in
-<a href="../../Governance/07-security-auditability/">07-security-auditability.md</a> §1. Ship promotion
-<em>with</em> that auth, not before it.</p>
-<h2 id="6-net-design">6. Net design<a class="headerlink" href="#6-net-design" title="Permanent link">&para;</a></h2>
+<p>TOTP <strong>complements</strong> the JWT ingress identity; it does not replace it. A request
+that triggers a sensitive action must carry a valid JWT <strong>and</strong> a valid TOTP code.</p>
+<h2 id="trust-model-non-negotiable">Trust model (non-negotiable)<a class="headerlink" href="#trust-model-non-negotiable" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The <strong>secret lives only server-side</strong>, keyed to the JWT-verified email. Same
+  principle as LLM keys — secrets never leave the gateway. Never store it in the
+  Sheet, <code>PropertiesService</code>, or return it after enrollment.</li>
+<li><strong>Verification is server-side.</strong> The Sheet only <em>submits</em> a code guess; the
+  gateway decides. A client asserting "OTP ok" means nothing.</li>
+<li><strong>The QR/secret is shown exactly once</strong>, during enrollment, over the
+  authenticated channel, and is not retrievable afterward (re-enroll to reset).</li>
+</ul>
+<h2 id="storage">Storage<a class="headerlink" href="#storage" title="Permanent link">&para;</a></h2>
+<p>Cloud Run is stateless, so secrets need persistence. <strong>Firestore</strong> (native to the
+GCP project, free tier) is the recommended store:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Collection: otp_secrets
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  Document id: &lt;verified-email&gt;
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  Fields:
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    secret:      string   # base32 TOTP secret (encrypt at rest if available)
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    confirmed:   bool      # enrollment proven by a first valid code
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    created_at:  timestamp
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    failed:      number    # consecutive failed attempts (brute-force guard)
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    locked_until: timestamp | null
+</code></pre></div>
+<h2 id="endpoints-gateway">Endpoints (gateway)<a class="headerlink" href="#endpoints-gateway" title="Permanent link">&para;</a></h2>
+<p>All require a valid JWT; <code>email</code> is taken from the <strong>verified</strong> token claim, never
+from the body.</p>
 <table>
 <thead>
 <tr>
-<th>Activity</th>
-<th>Server write</th>
-<th>Rationale</th>
+<th>Method</th>
+<th>Path</th>
+<th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Drafting (unlocked cells)</td>
-<td>none durable</td>
-<td>sketchbook; local sheet record suffices</td>
+<td><code>POST</code></td>
+<td><code>/otp/enroll</code></td>
+<td>Generate a secret, return an <code>otpauth://</code> URI + QR for scanning</td>
 </tr>
 <tr>
-<td>Every LLM call</td>
-<td>thin gateway <strong>egress log</strong> (request_id, user, model, latency, cost, guardrail/PII hits) — short retention, no full draft content</td>
-<td>cost attribution + data-leaving-to-LLM monitoring; independent of drafts</td>
+<td><code>POST</code></td>
+<td><code>/otp/confirm</code></td>
+<td>Prove the scan worked (<code>{code}</code>) → set <code>confirmed=true</code></td>
 </tr>
 <tr>
-<td><strong>Promote</strong> (human accepts a material output)</td>
-<td><strong>one append-only, signed record</strong></td>
-<td>the only durable provenance; scoped to material outputs; gated on authenticated user</td>
+<td><code>POST</code></td>
+<td><code>/otp/verify</code></td>
+<td>Verify a code before a sensitive action (<code>{code}</code>)</td>
 </tr>
 </tbody>
 </table>
-<p>The <strong>lock stays</strong> for its real job (protect from AI overwrite). <strong>Promotion</strong> is
-the new, explicit governance primitive — the single thing that earns a durable
-record. This keeps the tool light for the 95% of throwaway drafting and
-defensible exactly where the institution requires it.</p>
-<h2 id="7-open-decisions">7. Open decisions<a class="headerlink" href="#7-open-decisions" title="Permanent link">&para;</a></h2>
+<h3 id="otpenroll"><code>/otp/enroll</code><a class="headerlink" href="#otpenroll" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>→ generate base32 secret (otplib authenticator.generateSecret())
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>→ save { secret, confirmed:false } keyed by email
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>→ return { otpauth_uri }   // otpauth://totp/RingishoAI:&lt;email&gt;?secret=…&amp;issuer=RingishoAI
+</code></pre></div>
+Client renders <code>otpauth_uri</code> as a QR; user adds it in Google Authenticator.</p>
+<h3 id="otpconfirm"><code>/otp/confirm</code><a class="headerlink" href="#otpconfirm" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>→ load secret; verify submitted {code} (±1 window)
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>→ match → set confirmed=true       else → __ERROR_OTP_INVALID__
+</code></pre></div>
+<h3 id="otpverify"><code>/otp/verify</code><a class="headerlink" href="#otpverify" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>→ load { secret, confirmed, failed, locked_until }
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>→ not enrolled/confirmed   → __ERROR_OTP_NOT_ENROLLED__ (403)
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>→ locked_until &gt; now       → __ERROR_RATE_LIMIT__ (429)
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>→ verify(code, ±1 window):
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>     match → reset failed=0; allow the action
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>     miss  → failed++; if failed &gt;= 5 set locked_until = now + 15m
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>             → __ERROR_OTP_INVALID__ (401)
+</code></pre></div>
+<h2 id="verification-rules">Verification rules<a class="headerlink" href="#verification-rules" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Full prompt text vs. hash only in the promotion record (retention vs.
-  reconstructability trade-off).</li>
-<li>Retention period + deletion schedule for promotions.</li>
-<li>Whether un-promote requires a reason (recommended for finance).</li>
+<li><strong><code>otplib</code></strong> (Node, MIT, zero external calls) — <code>authenticator.verify()</code>.</li>
+<li><strong>Time window ±1</strong> (30s slack) for clock skew — no wider.</li>
+<li><strong>Attempt lock:</strong> max 5 consecutive failures → 15-min lock. 6 digits =
+  1,000,000 combos; without a lock it is brute-forceable. Reuses
+  <code>__ERROR_RATE_LIMIT__</code>.</li>
+<li><strong>Replay:</strong> optionally reject the same code twice within its window for the
+  most sensitive actions (store last-used counter).</li>
 </ul>
+<h2 id="sidebar-flow-apps-script">Sidebar flow (Apps Script)<a class="headerlink" href="#sidebar-flow-apps-script" title="Permanent link">&para;</a></h2>
+<p>Enrollment (once): call <code>/otp/enroll</code>, render the QR in <code>sidebar.html</code>, user scans.
+Then per sensitive action:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">resp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">UrlFetchApp</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">GATEWAY</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;/otp/verify&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;post&#39;</span><span class="p">,</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Authorization</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Bearer &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">ScriptApp</span><span class="p">.</span><span class="nx">getIdentityToken</span><span class="p">()</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nx">contentType</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nx">payload</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="w"> </span><span class="nx">code</span><span class="o">:</span><span class="w"> </span><span class="nx">userTypedCode</span><span class="w"> </span><span class="p">}),</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="p">});</span>
+</code></pre></div>
+<p>The Sheet never sees or stores the secret — it only forwards a typed code.</p>
+<h2 id="new-error-keys-add-to-the-registry">New error keys (add to the registry)<a class="headerlink" href="#new-error-keys-add-to-the-registry" title="Permanent link">&para;</a></h2>
+<p>Add these to <code>docs/03_Reference/error_code_spec.md</code>, <code>config/errorCodes.mjs</code>, and
+<code>app/errors.py</code> identically (per that spec's change process):</p>
+<table>
+<thead>
+<tr>
+<th>error_key</th>
+<th>http_status</th>
+<th>retryable</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>__ERROR_OTP_REQUIRED__</code></td>
+<td>401</td>
+<td>no</td>
+<td>Sensitive action needs a second factor; none supplied</td>
+</tr>
+<tr>
+<td><code>__ERROR_OTP_INVALID__</code></td>
+<td>401</td>
+<td>no</td>
+<td>Submitted TOTP code is wrong</td>
+</tr>
+<tr>
+<td><code>__ERROR_OTP_EXPIRED__</code></td>
+<td>401</td>
+<td>no</td>
+<td>Code outside the accepted time window</td>
+</tr>
+<tr>
+<td><code>__ERROR_OTP_NOT_ENROLLED__</code></td>
+<td>403</td>
+<td>no</td>
+<td>User has no confirmed TOTP secret</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>401</code> now maps to several keys — the precise cause travels in <code>body.error.error_key</code>
+exactly as the error spec prescribes.</p>
+</blockquote>
+<h2 id="what-is-free-vs-new-work">What is free vs. new work<a class="headerlink" href="#what-is-free-vs-new-work" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Google Authenticator app</td>
+<td>free (user installs)</td>
+</tr>
+<tr>
+<td><code>otplib</code> (code generation/verification)</td>
+<td>free, MIT, no network</td>
+</tr>
+<tr>
+<td>Firestore secret store</td>
+<td>free tier</td>
+</tr>
+<tr>
+<td>3 gateway routes + QR in sidebar + step-up wiring</td>
+<td>dev time</td>
+</tr>
+</tbody>
+</table>
+<h2 id="open-decisions-before-implementation">Open decisions (before implementation)<a class="headerlink" href="#open-decisions-before-implementation" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Which actions require step-up?</strong> (approve/release = yes; read/summarize = no.)</li>
+<li><strong>Session vs. per-action:</strong> verify once and grant a short TOTP-verified window
+   (e.g. 10 min), or require a code on every sensitive action? (Window = better UX,
+   weaker; per-action = stronger, more friction.)</li>
+<li><strong>Reset/recovery flow</strong> when a user loses their phone (admin re-enroll).</li>
+<li><strong>Encrypt secrets at rest</strong> (Cloud KMS) — recommended for a finance context.</li>
+</ol>
 
 
 
@@ -1711,10 +1632,10 @@ defensible exactly where the institution requires it.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

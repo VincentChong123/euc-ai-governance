@@ -13,21 +13,25 @@
       
       
       
+        <link rel="prev" href="../program-sequence/">
+      
+      
+        <link rel="next" href="../../03_Reference/api_config/">
       
       
         
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Specs TODO & Backlog - EUC Spreadsheet Uplift Docs</title>
+        <title>TODO - EUC Spreadsheet Uplift Docs</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -48,6 +52,8 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -108,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Specs TODO &amp; Backlog
+              TODO
             
           </span>
         </div>
@@ -228,7 +234,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../Architecture/component-interfaces/" class="md-tabs__link">
+        <a href="../../01_Architecture/08-component-interfaces/" class="md-tabs__link">
           
   
   
@@ -248,7 +254,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../Governance/security-auditability/" class="md-tabs__link">
+        <a href="../../Governance/07-security-auditability/" class="md-tabs__link">
           
   
   
@@ -268,7 +274,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../Lineage/end-to-end-tracing/" class="md-tabs__link">
+        <a href="../../Lineage/09-end-to-end-tracing/" class="md-tabs__link">
           
   
   
@@ -284,15 +290,37 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../" class="md-tabs__link">
           
   
   
   Specs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../03_Reference/api_config/" class="md-tabs__link">
+          
+  
+  
+  API Reference
 
         </a>
       </li>
@@ -421,7 +449,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Architecture/component-interfaces/" class="md-nav__link">
+      <a href="../../01_Architecture/08-component-interfaces/" class="md-nav__link">
         
   
   
@@ -449,7 +477,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Architecture/api-gateway/" class="md-nav__link">
+      <a href="../../01_Architecture/01-api-gateway/" class="md-nav__link">
         
   
   
@@ -477,7 +505,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Architecture/ai-service/" class="md-nav__link">
+      <a href="../../01_Architecture/02-ai-service/" class="md-nav__link">
         
   
   
@@ -505,7 +533,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Architecture/google-sheets-ui/" class="md-nav__link">
+      <a href="../../01_Architecture/04-google-sheets-ui/" class="md-nav__link">
         
   
   
@@ -533,7 +561,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Architecture/egress-llm/" class="md-nav__link">
+      <a href="../../01_Architecture/05-egress-llm/" class="md-nav__link">
         
   
   
@@ -561,7 +589,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Architecture/end-to-end-sequence/" class="md-nav__link">
+      <a href="../../01_Architecture/09-end-to-end-sequence/" class="md-nav__link">
         
   
   
@@ -650,7 +678,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Governance/security-auditability/" class="md-nav__link">
+      <a href="../../Governance/07-security-auditability/" class="md-nav__link">
         
   
   
@@ -739,7 +767,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Lineage/end-to-end-tracing/" class="md-nav__link">
+      <a href="../../Lineage/09-end-to-end-tracing/" class="md-nav__link">
         
   
   
@@ -799,28 +827,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
   
   
@@ -838,7 +869,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -864,6 +895,301 @@
     
   
     Consumption Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../program-sequence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Program Sequence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TODO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_Reference/api_config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Config API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_Reference/api_errors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Errors API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_Reference/api_guardrails/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guardrails API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_Reference/api_request_context/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Request Context API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_Reference/error_code_spec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Error Code Spec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_Reference/MAS_API/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MAS API
   
 
     
@@ -984,7 +1310,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

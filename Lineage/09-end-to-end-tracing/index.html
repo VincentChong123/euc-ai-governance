@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../../Governance/07-security-auditability/">
       
       
-        <link rel="next" href="../TODO/">
+        <link rel="next" href="../promotion-and-provenance/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Program Sequence - EUC Spreadsheet Uplift Docs</title>
+        <title>End-to-End Tracing - EUC Spreadsheet Uplift Docs</title>
       
     
     
@@ -79,6 +79,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#end-to-end-tracing-with-uptrace" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -109,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Program Sequence
+              End-to-End Tracing
             
           </span>
         </div>
@@ -265,11 +270,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../Lineage/09-end-to-end-tracing/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -285,13 +292,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../specs/" class="md-tabs__link">
           
   
   
@@ -705,28 +710,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -744,7 +752,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -759,10 +767,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../Lineage/09-end-to-end-tracing/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    End-to-End Tracing
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -778,6 +813,114 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traceability-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traceability Coverage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-identifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The identifiers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-span-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The span tree
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uptrace-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uptrace setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finding-a-request-the-correct-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Finding a request (the correct workflow)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-gap-future-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known gap / future work
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -790,7 +933,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Lineage/promotion-and-provenance/" class="md-nav__link">
+      <a href="../promotion-and-provenance/" class="md-nav__link">
         
   
   
@@ -822,31 +965,28 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   
@@ -864,7 +1004,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -882,7 +1022,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../specs/" class="md-nav__link">
         
   
   
@@ -907,17 +1047,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../specs/program-sequence/" class="md-nav__link">
         
   
   
@@ -933,7 +1066,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -946,7 +1078,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../TODO/" class="md-nav__link">
+      <a href="../../specs/TODO/" class="md-nav__link">
         
   
   
@@ -1220,6 +1352,104 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traceability-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traceability Coverage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-identifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The identifiers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-span-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The span tree
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uptrace-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uptrace setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finding-a-request-the-correct-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Finding a request (the correct workflow)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-gap-future-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known gap / future work
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1236,118 +1466,237 @@
 
 
 
-  <h1>Program Sequence</h1>
+<h1 id="end-to-end-tracing-with-uptrace">End-to-End Tracing with Uptrace<a class="headerlink" href="#end-to-end-tracing-with-uptrace" title="Permanent link">&para;</a></h1>
+<p>How a single Google-Sheets request is traced across the stack, how the IDs line
+up, and how to find a request in Uptrace. Read this when a request failed and you
+need to see <em>where</em> — or when a trace "cannot be found".</p>
+<hr />
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><code>request_id</code> is a UUID</strong> (<code>93d0009d-268b-…</code>, with dashes). <strong>An OTel <code>trace_id</code>
+  is 32 hex chars, no dashes.</strong> They are <em>different things</em>.</li>
+<li>In Uptrace, <strong>filter by the <code>request_id</code> attribute</strong> (facet panel / query bar).
+  Do <strong>not</strong> paste a <code>request_id</code> into the trace-ID lookup — it will always say
+  <em>"Trace not found"</em>.</li>
+<li>Only <strong><code>ai_service</code> emits OpenTelemetry spans</strong>. The Node API gateway logs
+  (pino) but emits no spans, so <code>request_id</code> / <code>run_id</code> are the only keys that
+  correlate a gateway log line with an <code>ai_service</code> trace.</li>
+</ul>
+<hr />
+<!-- HARDENED ANCHOR: slug #traceability-coverage is linked from resume.draft.md (Operationalizing Data Lineage). Do NOT rename this header or the resume link 404s. -->
+<h2 id="traceability-coverage">Traceability Coverage<a class="headerlink" href="#traceability-coverage" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart LR
+  Sheets["Google Sheets UI&lt;br/&gt;(Apps Script)"]
+  GW["API Gateway&lt;br/&gt;(Node · pino logs)&lt;br/&gt;NO OTel spans"]
+  AI["AI Service&lt;br/&gt;(FastAPI · Logfire → OTLP)&lt;br/&gt;emits spans"]
+  UP["Uptrace&lt;br/&gt;localhost:14318"]
 
+  Sheets --&gt;|"X-Request-ID"| GW
+  GW --&gt;|"X-Request-ID (forwarded)"| AI
+  AI --&gt;|"LLM egress back through GW&lt;br/&gt;(same request_id)"| GW
+  AI -.-&gt;|"OTLP spans"| UP
+
+  classDef traced fill:#e6ffe6,stroke:#2b8a3e;
+  classDef untraced fill:#fff0f0,stroke:#c92a2a;
+  class AI traced;
+  class GW untraced;</code></pre>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Telemetry</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Google Sheets UI</td>
+<td>none</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>API Gateway</strong></td>
+<td>pino <strong>logs only</strong> (JSON, <code>service: api-gateway</code>). <strong>No OTel spans.</strong></td>
+<td><code>apps/api_gateway</code></td>
+</tr>
+<tr>
+<td><strong>AI Service</strong></td>
+<td><strong>Logfire → OpenTelemetry spans</strong> + Python logging</td>
+<td><code>apps/ai_service</code></td>
+</tr>
+<tr>
+<td>Uptrace</td>
+<td>trace backend (ClickHouse + Postgres)</td>
+<td><code>infrastructure/logfire/</code></td>
+</tr>
+</tbody>
+</table>
 <blockquote>
-<p>suggest in phases how to introduce such batch-support change to my current code</p>
+<p>The gateway does <strong>not</strong> inject a W3C <code>traceparent</code> header, so there is no
+distributed-trace linkage between the two services. The <strong><code>request_id</code></strong> (and
+<code>run_id</code>) is the join key — carried as the <code>X-Request-ID</code> header and recorded
+as a span attribute in <code>ai_service</code>.</p>
 </blockquote>
-<p>Do I have to refactor current code to prior above batch-related changes</p>
-<p>▸ Thought for 3s, 692 tokens
-  Prioritizing Tool Usage
-  You absolutely do not need to refactor or tear down your current code.</p>
-<p>Your existing code ( plugin_hitl_ai.js ) is highly modular and mathematically sound. We don't have to
-  rewrite the core AI engine; we are simply going to build a new "Orchestrator Wrapper" around it.</p>
-<p>Here is the exact 4-Phase implementation plan to introduce this feature safely:</p>
-<p>### Phase 1: The Routing Switch (Additive, No Refactoring)</p>
-<p>Currently, when a user clicks "Run Batch", your script loops through the highlighted cells and checks
-  them for notes.</p>
-<p>• The Change: We simply add a 3-line  IF  statement at the very top of  processHitlAiBatch() .
-  • The Logic: It looks at the highlighted cells. If the cells contain standard text, it runs your normal,
-  existing code. If the cells contain  A1 Notations  (e.g.,  Data!A1 ), it instantly switches into
-  "Orchestrator Mode".
-  • Result: You preserve 100% of your current functionality while unlocking the new path.</p>
-<p>### Phase 2: Formula Extraction &amp; Sequential Execution</p>
-<p>We build the logic for the new "Orchestrator Mode" path.</p>
-<p>• The Change: Instead of reading the cell's note, the script uses  .getFormulas()  and  .getValues() .
-  • The Logic: If the formula evaluates to  Data!A1 , the script dynamically jumps over to  Data!A1  and
-  executes your existing AI code on that specific cell. It also saves the formula to an internal array
-  let executionRecord = []  to keep track of the history.
-  • Result: The system can now conditionally follow a list of cells.</p>
-<p>### Phase 3: Serialization (The Audit Trail)</p>
-<p>Once the batch finishes executing, we need to save the  executionRecord .</p>
-<p>• The Change: We write a tiny helper function:  saveBatchAudit() .
-  • The Logic: It takes the array we built in Phase 2, converts it into a JSON string using  JSON.
-  stringify() , and appends it as a new row in a  __Batch_Records  sheet along with a Timestamp and User
-  ID.
-  • Result: Your Infosec and Audit teams now have a permanent, immutable record of every complex batch run.</p>
-<p>### Phase 4: Deserialization (The Restore Button)</p>
-<p>This is a standalone feature we can build last.</p>
-<p>• The Change: We add a new button to your top menu in  Code.js :  Restore Batch Record .
-  • The Logic: When clicked, it grabs the JSON string from the selected cell, uses  JSON.parse() , creates
-  a new Sheet tab, and prints the sequence row-by-row into the grid so the user can edit it.
-  • Result: The closed-loop UI is fully complete.</p>
-<p>Because of the way we designed your backend, we can implement Phase 1 and 2 right now without breaking
-  anything you currently have. Shall I update  plugin_hitl_ai.js  to add the Routing Switch?</p>
-<p>### Step 1: The Audit Log (Serialization)</p>
-<p>When a batch finishes, the backend takes the entire execution sequence and saves it into a hidden sheet
-  called  __Batch_Records . It stores it as one row:</p>
-<p>• Col A: Timestamp
-  • Col B: User ID
-  • Col C: The massive JSON string  [{"cell": "Data!A1", "formula": null, "prompt": "Summarize..."},
-  {"cell": "Data!C3", "formula": "=IF(Data!A1&gt;10,...)"}]</p>
-<p>### Step 2: The "Restore" Button (Deserialization)</p>
-<p>If an analyst wants to re-run or tweak that workflow tomorrow, we add a new button to your top menu:
-  AImate -&gt; Restore Batch Record .</p>
+<hr />
+<h2 id="the-identifiers">The identifiers<a class="headerlink" href="#the-identifiers" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Shape</th>
+<th>Minted by</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>request_id</code></td>
+<td>UUID <code>xxxxxxxx-xxxx-…</code></td>
+<td>Gateway — <code>middleware/requestId.mjs</code> (<code>req.headers['x-request-id'] \|\| randomUUID()</code>)</td>
+<td>Correlates every gateway log line + the <code>ai_service</code> trace for one Sheets request.</td>
+</tr>
+<tr>
+<td><code>run_id</code></td>
+<td>UUID</td>
+<td><code>ai_service</code> — <code>routes.py</code> (<code>uuid.uuid4()</code>)</td>
+<td>One AI generation run. Present in the response body even on failure.</td>
+</tr>
+<tr>
+<td><code>prompt_id</code></td>
+<td>UUID</td>
+<td><code>ai_service</code> — <code>routes.py</code></td>
+<td>The specific prompt within a run.</td>
+</tr>
+<tr>
+<td><strong>OTel <code>trace_id</code></strong></td>
+<td><strong>32 hex, no dashes</strong></td>
+<td>Logfire/OTel SDK inside <code>ai_service</code></td>
+<td>Uptrace's native trace key. <strong>Unrelated to <code>request_id</code>.</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Propagation path of <code>request_id</code>:</strong></p>
 <ol>
-<li>The user goes to  __Batch_Records , clicks on the JSON cell they want, and hits Restore.</li>
-<li>The Apps Script parses the JSON and automatically generates a brand new, clean tab called
-  Workflow_Revise_V2 .</li>
-<li>It loops through the JSON and writes it perfectly from top-to-bottom:
-      • Column A: The Target Cell ( Data!C3 )
-      • Column B: The specific Prompt that was used
-      • Column C: The exact  =IF()  formula that routed the logic
-      • Column D: The LLM Output that was generated during that run (for reference)</li>
+<li>Gateway assigns it (<code>requestId</code> middleware, <code>app.use(requestId)</code>).</li>
+<li>Gateway forwards it to <code>ai_service</code> as the <code>X-Request-ID</code> header
+   (<code>server.mjs</code>, <code>proxyReq.setHeader('X-Request-ID', req.id)</code>).</li>
+<li><code>ai_service</code> reads it (<code>routes.py</code>: <code>http_request.headers.get("x-request-id")</code>)
+   and <strong>binds it to the async context</strong> (<code>bind_request()</code> in
+   <code>app/request_context.py</code>) so LLM-egress retries / FallbackModel swaps carry the
+   <strong>same</strong> <code>request_id</code> back out through the gateway egress route.</li>
+<li>It is attached as a <strong>span attribute</strong> on <code>AI_Generation_Run</code> and logged on
+   every hop.</li>
 </ol>
-<p>### Step 3: Revise and Re-Execute</p>
-<p>Now, the user is looking at a standard, editable Google Sheet.</p>
-<p>• They can change the  =IF()  formula.
-  • They can tweak the wording of the prompt in Column B.
-  • Once they are happy with the changes, they simply highlight the rows and click "Run AI on Selected
-  Cells" to kick off the new, revised batch!</p>
-<p>This completely eliminates the need for a complex "Workflow Builder UI". The spreadsheet grid is the UI,
-  and JSON acts as the "Save File" that you can load back up at any time.</p>
-<p>Does this closed-loop architecture match your vision?</p>
-<p>────────────────────────────────────────────────────────────</p>
+<hr />
+<h2 id="the-span-tree">The span tree<a class="headerlink" href="#the-span-tree" title="Permanent link">&para;</a></h2>
+<p>Built in <code>apps/ai_service/app/api/routes.py</code>; the pydantic-ai agent
+(<code>agent.instrument = True</code> in <code>app/agents/simple_agent.py</code>) nests model-request
+and tool-call spans automatically.</p>
+<pre class="mermaid"><code>flowchart TD
+  A["AI_Generation_Run&lt;br/&gt;attrs: request_id, run_id, prompt_id, session_id&lt;br/&gt;tags: ai-service, edge:from-api-gateway-to-ai-srv"]
+  A --&gt; B["agent_run&lt;br/&gt;tags: state:call-tools, state:call-llm"]
+  B --&gt; M["model_request (x N)&lt;br/&gt;FallbackModel chain: Gemma → Qwen → gpt-oss"]
+  B --&gt; T["tool call: mas_forex_rates / current_datetime / …"]
+  A --&gt; G["output_guardrail&lt;br/&gt;tags: state:guardrail · attr: passed=true/false"]</code></pre>
+<ul>
+<li>On an exception the <code>AI_Generation_Run</code> span is <strong>still exported</strong> (marked
+  error) — so a failed request normally <em>does</em> have a trace. The message is on
+  the span, from <code>logger.exception(...)</code> in <code>routes.py</code>.</li>
+<li>Response body on failure carries <code>error_key</code> + <code>request_id</code> + <code>run_id</code>. If you
+  see a <code>run_id</code>, <code>ai_service</code> ran — look for its trace. If a 502 has <strong>no</strong>
+  <code>run_id</code>, the request died at the gateway/proxy <em>before</em> reaching <code>ai_service</code>
+  → no trace exists (expected).</li>
+</ul>
+<hr />
+<h2 id="uptrace-setup">Uptrace setup<a class="headerlink" href="#uptrace-setup" title="Permanent link">&para;</a></h2>
+<p>Config lives in <code>infrastructure/logfire/</code>:</p>
+<ul>
+<li><code>docker-compose.yaml</code> — Uptrace + ClickHouse + Postgres.</li>
+<li><code>uptrace.yml</code> — project <code>Ringisho</code>, DSN token <code>project1_secret_token</code>, and
+  <code>pinned_attrs</code> that promote attributes in the facet panel:
+  <code>service.name</code>, <code>logfire.tags</code>, <code>request_id</code>, <code>run_id</code>.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Start the trace backend</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>infrastructure/logfire/docker-compose.yaml<span class="w"> </span>up<span class="w"> </span>-d
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># UI:  http://localhost:14318</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># OTLP: gRPC 14317 · HTTP 14318 (same port as the UI)</span>
+</code></pre></div>
+<p><strong>Point <code>ai_service</code> at it</strong> — these must be in the <code>ai_service</code> process env
+(<code>.env</code> / compose <code>env_file</code>), and <code>send_to_logfire=False</code> stays set in
+<code>apps/ai_service/utils/logger.py</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">OTEL_EXPORTER_OTLP_ENDPOINT</span><span class="o">=</span>http://localhost:14318
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">OTEL_EXPORTER_OTLP_HEADERS</span><span class="o">=</span>uptrace-dsn<span class="o">=</span>http://project1_secret_token@localhost:14318?grpc<span class="o">=</span><span class="m">14317</span>
+</code></pre></div>
 <blockquote>
-<p>suggest in phases how to introduce such batch-support change to my current code</p>
+<p><code>pinned_attrs</code> only <strong>promotes an attribute in the left-hand facet panel</strong> so
+you can click-to-filter. It does <strong>not</strong> make that attribute a trace-lookup
+key. Editing <code>pinned_attrs</code> and restarting Uptrace will <em>not</em> let you look up a
+trace by <code>request_id</code>.</p>
 </blockquote>
-<p>Do I have to refactor current code to prior above batch-related changes</p>
-<p>▸ Thought for 3s, 692 tokens
-  Prioritizing Tool Usage
-  You absolutely do not need to refactor or tear down your current code.</p>
-<p>Your existing code ( plugin_hitl_ai.js ) is highly modular and mathematically sound. We don't have to
-  rewrite the core AI engine; we are simply going to build a new "Orchestrator Wrapper" around it.</p>
-<p>Here is the exact 4-Phase implementation plan to introduce this feature safely:</p>
-<p>### Phase 1: The Routing Switch (Additive, No Refactoring)</p>
-<p>Currently, when a user clicks "Run Batch", your script loops through the highlighted cells and checks
-  them for notes.</p>
-<p>• The Change: We simply add a 3-line  IF  statement at the very top of  processHitlAiBatch() .
-  • The Logic: It looks at the highlighted cells. If the cells contain standard text, it runs your normal,
-  existing code. If the cells contain  A1 Notations  (e.g.,  Data!A1 ), it instantly switches into
-  "Orchestrator Mode".
-  • Result: You preserve 100% of your current functionality while unlocking the new path.</p>
-<p>### Phase 2: Formula Extraction &amp; Sequential Execution</p>
-<p>We build the logic for the new "Orchestrator Mode" path.</p>
-<p>• The Change: Instead of reading the cell's note, the script uses  .getFormulas()  and  .getValues() .
-  • The Logic: If the formula evaluates to  Data!A1 , the script dynamically jumps over to  Data!A1  and
-  executes your existing AI code on that specific cell. It also saves the formula to an internal array
-  let executionRecord = []  to keep track of the history.
-  • Result: The system can now conditionally follow a list of cells.</p>
-<p>### Phase 3: Serialization (The Audit Trail)</p>
-<p>Once the batch finishes executing, we need to save the  executionRecord .</p>
-<p>• The Change: We write a tiny helper function:  saveBatchAudit() .
-  • The Logic: It takes the array we built in Phase 2, converts it into a JSON string using  JSON.
-  stringify() , and appends it as a new row in a  __Batch_Records  sheet along with a Timestamp and User
-  ID.
-  • Result: Your Infosec and Audit teams now have a permanent, immutable record of every complex batch run.</p>
-<p>### Phase 4: Deserialization (The Restore Button)</p>
-<p>This is a standalone feature we can build last.</p>
-<p>• The Change: We add a new button to your top menu in  Code.js :  Restore Batch Record .
-  • The Logic: When clicked, it grabs the JSON string from the selected cell, uses  JSON.parse() , creates
-  a new Sheet tab, and prints the sequence row-by-row into the grid so the user can edit it.
-  • Result: The closed-loop UI is fully complete.</p>
-<p>Because of the way we designed your backend, we can implement Phase 1 and 2 right now without breaking
-  anything you currently have. Shall I update  plugin_hitl_ai.js  to add the Routing Switch?</p>
+<hr />
+<h2 id="finding-a-request-the-correct-workflow">Finding a request (the correct workflow)<a class="headerlink" href="#finding-a-request-the-correct-workflow" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Open <strong>http://localhost:14318</strong>, select the <code>Ringisho</code> project, service
+   <code>ai-service</code>.</li>
+<li>In the query bar (or the left facet panel) filter by attribute:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>request_id = &quot;93d0009d-268b-450f-8181-515d62df0151&quot;
+</code></pre></div>
+<p>or filter by <code>run_id</code> if that is what you have.
+3. Click the matching <strong><code>AI_Generation_Run</code></strong> span to open the full trace tree.
+4. Drill into <code>agent_run</code> → <code>model_request</code> / tool spans, and <code>output_guardrail</code>.
+   For a failure, the errored span carries the exception message.</p>
+<p><strong>Reading a failure:</strong> a <code>__ERROR_UPSTREAM_FAILURE__</code> typically errors inside
+<code>agent_run</code> (e.g. the FallbackModel chain exhausting on the LLM provider — a
+402/quota or repeated 5xx) rather than in <code>output_guardrail</code>. <code>passed=false</code> on
+<code>output_guardrail</code> instead means the model produced output that was blocked
+(refusal / length).</p>
+<hr />
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>"Trace <code>&lt;uuid&gt;</code> not found"</strong></td>
+<td>You pasted a <code>request_id</code> (UUID) into the trace-ID lookup. Trace-ID lookup wants a 32-hex <code>trace_id</code>.</td>
+<td>Filter by the <code>request_id</code> <strong>attribute</strong> instead of using trace lookup.</td>
+</tr>
+<tr>
+<td>Can filter <code>request_id</code>, but <strong>no trace for a specific 502</strong></td>
+<td>The request failed at the gateway/proxy before reaching <code>ai_service</code> (no <code>run_id</code> in the body).</td>
+<td>Check the <strong>gateway pino logs</strong> for that <code>request_id</code>; there is no <code>ai_service</code> trace to find.</td>
+</tr>
+<tr>
+<td><strong>No traces at all</strong> in Uptrace</td>
+<td><code>OTEL_EXPORTER_OTLP_*</code> not set in the <code>ai_service</code> process, or Uptrace not running. Logfire then generates spans that ship nowhere.</td>
+<td>Verify env vars (<code>grep OTEL_EXPORTER_OTLP .env</code>), <code>docker ps</code> for <code>uptrace</code>, and <code>docker logs uptrace --tail 50</code>.</td>
+</tr>
+<tr>
+<td>Traces land under <strong><code>unknown_service</code></strong></td>
+<td><code>service_name</code> / <code>OTEL_SERVICE_NAME</code> unset.</td>
+<td>Default is <code>ai-service</code> (set in <code>utils/logger.py</code>); override with <code>OTEL_SERVICE_NAME</code>.</td>
+</tr>
+<tr>
+<td>Gateway log and trace <strong>won't correlate</strong></td>
+<td>Expected — the gateway emits no OTel and no <code>traceparent</code>.</td>
+<td>Correlate via <code>request_id</code> / <code>run_id</code>, not trace context.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="known-gap-future-work">Known gap / future work<a class="headerlink" href="#known-gap-future-work" title="Permanent link">&para;</a></h2>
+<p>The API gateway is <strong>not</strong> OTel-instrumented, so traces start at <code>ai_service</code>.
+To get a single distributed trace spanning gateway → ai_service, the gateway
+would need an OTel SDK that (a) starts a root span and (b) injects a W3C
+<code>traceparent</code> header that <code>ai_service</code> continues. Until then, <code>request_id</code> is the
+cross-service correlation key by design.</p>
 
 
 

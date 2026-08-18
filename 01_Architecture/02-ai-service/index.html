@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../01-api-gateway/">
       
       
-        <link rel="next" href="../TODO/">
+        <link rel="next" href="../04-google-sheets-ui/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Program Sequence - EUC Spreadsheet Uplift Docs</title>
+        <title>AI Service - EUC Spreadsheet Uplift Docs</title>
       
     
     
@@ -79,6 +79,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#02-ai-service" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -109,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Program Sequence
+              AI Service
             
           </span>
         </div>
@@ -225,11 +230,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../01_Architecture/08-component-interfaces/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../08-component-interfaces/" class="md-tabs__link">
           
   
   
@@ -285,13 +292,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../specs/" class="md-tabs__link">
           
   
   
@@ -387,28 +392,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -426,7 +434,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -444,7 +452,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/08-component-interfaces/" class="md-nav__link">
+      <a href="../08-component-interfaces/" class="md-nav__link">
         
   
   
@@ -472,7 +480,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/01-api-gateway/" class="md-nav__link">
+      <a href="../01-api-gateway/" class="md-nav__link">
         
   
   
@@ -497,10 +505,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../01_Architecture/02-ai-service/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Service
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -516,6 +551,120 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#request-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Request flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#provider-selection-and-model-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Provider selection and model fallback
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Provider selection and model fallback">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#openrouter-fallbackmodel-chain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenRouter FallbackModel chain
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#groq-alternative-faster-tool-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Groq (alternative, faster tool-use)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tool-argument-schema-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tool argument schema rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -528,7 +677,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/04-google-sheets-ui/" class="md-nav__link">
+      <a href="../04-google-sheets-ui/" class="md-nav__link">
         
   
   
@@ -556,7 +705,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/05-egress-llm/" class="md-nav__link">
+      <a href="../05-egress-llm/" class="md-nav__link">
         
   
   
@@ -584,7 +733,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/09-end-to-end-sequence/" class="md-nav__link">
+      <a href="../09-end-to-end-sequence/" class="md-nav__link">
         
   
   
@@ -822,31 +971,28 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   
@@ -864,7 +1010,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -882,7 +1028,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../specs/" class="md-nav__link">
         
   
   
@@ -907,17 +1053,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../specs/program-sequence/" class="md-nav__link">
         
   
   
@@ -933,7 +1072,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -946,7 +1084,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../TODO/" class="md-nav__link">
+      <a href="../../specs/TODO/" class="md-nav__link">
         
   
   
@@ -1220,6 +1358,110 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#request-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Request flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#provider-selection-and-model-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Provider selection and model fallback
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Provider selection and model fallback">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#openrouter-fallbackmodel-chain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenRouter FallbackModel chain
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#groq-alternative-faster-tool-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Groq (alternative, faster tool-use)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tool-argument-schema-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tool argument schema rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1236,118 +1478,126 @@
 
 
 
-  <h1>Program Sequence</h1>
-
-<blockquote>
-<p>suggest in phases how to introduce such batch-support change to my current code</p>
-</blockquote>
-<p>Do I have to refactor current code to prior above batch-related changes</p>
-<p>▸ Thought for 3s, 692 tokens
-  Prioritizing Tool Usage
-  You absolutely do not need to refactor or tear down your current code.</p>
-<p>Your existing code ( plugin_hitl_ai.js ) is highly modular and mathematically sound. We don't have to
-  rewrite the core AI engine; we are simply going to build a new "Orchestrator Wrapper" around it.</p>
-<p>Here is the exact 4-Phase implementation plan to introduce this feature safely:</p>
-<p>### Phase 1: The Routing Switch (Additive, No Refactoring)</p>
-<p>Currently, when a user clicks "Run Batch", your script loops through the highlighted cells and checks
-  them for notes.</p>
-<p>• The Change: We simply add a 3-line  IF  statement at the very top of  processHitlAiBatch() .
-  • The Logic: It looks at the highlighted cells. If the cells contain standard text, it runs your normal,
-  existing code. If the cells contain  A1 Notations  (e.g.,  Data!A1 ), it instantly switches into
-  "Orchestrator Mode".
-  • Result: You preserve 100% of your current functionality while unlocking the new path.</p>
-<p>### Phase 2: Formula Extraction &amp; Sequential Execution</p>
-<p>We build the logic for the new "Orchestrator Mode" path.</p>
-<p>• The Change: Instead of reading the cell's note, the script uses  .getFormulas()  and  .getValues() .
-  • The Logic: If the formula evaluates to  Data!A1 , the script dynamically jumps over to  Data!A1  and
-  executes your existing AI code on that specific cell. It also saves the formula to an internal array
-  let executionRecord = []  to keep track of the history.
-  • Result: The system can now conditionally follow a list of cells.</p>
-<p>### Phase 3: Serialization (The Audit Trail)</p>
-<p>Once the batch finishes executing, we need to save the  executionRecord .</p>
-<p>• The Change: We write a tiny helper function:  saveBatchAudit() .
-  • The Logic: It takes the array we built in Phase 2, converts it into a JSON string using  JSON.
-  stringify() , and appends it as a new row in a  __Batch_Records  sheet along with a Timestamp and User
-  ID.
-  • Result: Your Infosec and Audit teams now have a permanent, immutable record of every complex batch run.</p>
-<p>### Phase 4: Deserialization (The Restore Button)</p>
-<p>This is a standalone feature we can build last.</p>
-<p>• The Change: We add a new button to your top menu in  Code.js :  Restore Batch Record .
-  • The Logic: When clicked, it grabs the JSON string from the selected cell, uses  JSON.parse() , creates
-  a new Sheet tab, and prints the sequence row-by-row into the grid so the user can edit it.
-  • Result: The closed-loop UI is fully complete.</p>
-<p>Because of the way we designed your backend, we can implement Phase 1 and 2 right now without breaking
-  anything you currently have. Shall I update  plugin_hitl_ai.js  to add the Routing Switch?</p>
-<p>### Step 1: The Audit Log (Serialization)</p>
-<p>When a batch finishes, the backend takes the entire execution sequence and saves it into a hidden sheet
-  called  __Batch_Records . It stores it as one row:</p>
-<p>• Col A: Timestamp
-  • Col B: User ID
-  • Col C: The massive JSON string  [{"cell": "Data!A1", "formula": null, "prompt": "Summarize..."},
-  {"cell": "Data!C3", "formula": "=IF(Data!A1&gt;10,...)"}]</p>
-<p>### Step 2: The "Restore" Button (Deserialization)</p>
-<p>If an analyst wants to re-run or tweak that workflow tomorrow, we add a new button to your top menu:
-  AImate -&gt; Restore Batch Record .</p>
-<ol>
-<li>The user goes to  __Batch_Records , clicks on the JSON cell they want, and hits Restore.</li>
-<li>The Apps Script parses the JSON and automatically generates a brand new, clean tab called
-  Workflow_Revise_V2 .</li>
-<li>It loops through the JSON and writes it perfectly from top-to-bottom:
-      • Column A: The Target Cell ( Data!C3 )
-      • Column B: The specific Prompt that was used
-      • Column C: The exact  =IF()  formula that routed the logic
-      • Column D: The LLM Output that was generated during that run (for reference)</li>
-</ol>
-<p>### Step 3: Revise and Re-Execute</p>
-<p>Now, the user is looking at a standard, editable Google Sheet.</p>
-<p>• They can change the  =IF()  formula.
-  • They can tweak the wording of the prompt in Column B.
-  • Once they are happy with the changes, they simply highlight the rows and click "Run AI on Selected
-  Cells" to kick off the new, revised batch!</p>
-<p>This completely eliminates the need for a complex "Workflow Builder UI". The spreadsheet grid is the UI,
-  and JSON acts as the "Save File" that you can load back up at any time.</p>
-<p>Does this closed-loop architecture match your vision?</p>
-<p>────────────────────────────────────────────────────────────</p>
-<blockquote>
-<p>suggest in phases how to introduce such batch-support change to my current code</p>
-</blockquote>
-<p>Do I have to refactor current code to prior above batch-related changes</p>
-<p>▸ Thought for 3s, 692 tokens
-  Prioritizing Tool Usage
-  You absolutely do not need to refactor or tear down your current code.</p>
-<p>Your existing code ( plugin_hitl_ai.js ) is highly modular and mathematically sound. We don't have to
-  rewrite the core AI engine; we are simply going to build a new "Orchestrator Wrapper" around it.</p>
-<p>Here is the exact 4-Phase implementation plan to introduce this feature safely:</p>
-<p>### Phase 1: The Routing Switch (Additive, No Refactoring)</p>
-<p>Currently, when a user clicks "Run Batch", your script loops through the highlighted cells and checks
-  them for notes.</p>
-<p>• The Change: We simply add a 3-line  IF  statement at the very top of  processHitlAiBatch() .
-  • The Logic: It looks at the highlighted cells. If the cells contain standard text, it runs your normal,
-  existing code. If the cells contain  A1 Notations  (e.g.,  Data!A1 ), it instantly switches into
-  "Orchestrator Mode".
-  • Result: You preserve 100% of your current functionality while unlocking the new path.</p>
-<p>### Phase 2: Formula Extraction &amp; Sequential Execution</p>
-<p>We build the logic for the new "Orchestrator Mode" path.</p>
-<p>• The Change: Instead of reading the cell's note, the script uses  .getFormulas()  and  .getValues() .
-  • The Logic: If the formula evaluates to  Data!A1 , the script dynamically jumps over to  Data!A1  and
-  executes your existing AI code on that specific cell. It also saves the formula to an internal array
-  let executionRecord = []  to keep track of the history.
-  • Result: The system can now conditionally follow a list of cells.</p>
-<p>### Phase 3: Serialization (The Audit Trail)</p>
-<p>Once the batch finishes executing, we need to save the  executionRecord .</p>
-<p>• The Change: We write a tiny helper function:  saveBatchAudit() .
-  • The Logic: It takes the array we built in Phase 2, converts it into a JSON string using  JSON.
-  stringify() , and appends it as a new row in a  __Batch_Records  sheet along with a Timestamp and User
-  ID.
-  • Result: Your Infosec and Audit teams now have a permanent, immutable record of every complex batch run.</p>
-<p>### Phase 4: Deserialization (The Restore Button)</p>
-<p>This is a standalone feature we can build last.</p>
-<p>• The Change: We add a new button to your top menu in  Code.js :  Restore Batch Record .
-  • The Logic: When clicked, it grabs the JSON string from the selected cell, uses  JSON.parse() , creates
-  a new Sheet tab, and prints the sequence row-by-row into the grid so the user can edit it.
-  • Result: The closed-loop UI is fully complete.</p>
-<p>Because of the way we designed your backend, we can implement Phase 1 and 2 right now without breaking
-  anything you currently have. Shall I update  plugin_hitl_ai.js  to add the Routing Switch?</p>
+<h1 id="02-ai-service">02 · AI Service<a class="headerlink" href="#02-ai-service" title="Permanent link">&para;</a></h1>
+<p><strong>Path:</strong> <code>apps/ai_service</code> · <strong>Stack:</strong> Python 3.14 / FastAPI / uvicorn / pydantic-ai / uv</p>
+<p>Business-logic service for LLM generation with real-time tool access.
+<strong>Key-less by design</strong> — it never holds a provider key; it speaks OpenAI format
+to the gateway egress (outbound) route, which injects the real key.</p>
+<h2 id="request-flow">Request flow<a class="headerlink" href="#request-flow" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>gateway /api/ai/sheet-chat → POST /v1/sheet-chat (routes.py)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  → generate_summary() (agents/simple_agent.py)
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    → pydantic-ai Agent (FallbackModel or single OpenAIChatModel)
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>      ↕ tool calls (weather, hdb_resale_prices, mas_forex_rates)
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>      → gateway /egress/&lt;provider&gt; → LLM
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  ← { result, meta: { model_invoked, run_id, latency_ms, … } }
+</code></pre></div>
+<h2 id="key-files">Key files<a class="headerlink" href="#key-files" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>main.py</code></td>
+<td>FastAPI app, dynamic route prefix, Logfire instrumentation</td>
+</tr>
+<tr>
+<td><code>app/config.py</code></td>
+<td>Settings + <strong><code>resolve_llm()</code></strong> + <code>OPENROUTER_FALLBACK_MODELS</code> — single source of truth for provider/model/base_url. Reads repo-root <code>.env</code> via absolute path.</td>
+</tr>
+<tr>
+<td><code>app/api/routes.py</code></td>
+<td><code>/sheet-chat</code> endpoint, response envelope + <code>model_invoked</code></td>
+</tr>
+<tr>
+<td><code>app/agents/simple_agent.py</code></td>
+<td>pydantic-ai agent + <code>FallbackModel</code> chain; <code>register_all()</code> wires tools; <code>generate_summary()</code></td>
+</tr>
+<tr>
+<td><code>app/agents/tools/__init__.py</code></td>
+<td>Tool registry — <code>register_all(agent)</code>. Add new tools here only; <code>simple_agent.py</code> never changes for new tools.</td>
+</tr>
+<tr>
+<td><code>app/agents/tools/datetime_now.py</code></td>
+<td>Current date/time (<code>fetch_current_datetime</code>). Local, no network, no key. Resolves prompt-named cities/IANA zones; default via <code>settings.default_timezone</code>.</td>
+</tr>
+<tr>
+<td><code>app/agents/tools/weather.py</code></td>
+<td>NEA 2-hour forecast (<code>fetch_weather</code>). No key.</td>
+</tr>
+<tr>
+<td><code>app/agents/tools/hdb_resale.py</code></td>
+<td>data.gov.sg HDB resale prices (<code>fetch_hdb_resale_prices</code>). No key.</td>
+</tr>
+<tr>
+<td><code>app/agents/tools/mas_forex.py</code></td>
+<td>MAS SGD exchange rates (<code>fetch_mas_forex_rates</code>). Requires <code>MAS_FOREX_EOD_API_KEY</code>; skipped if unset.</td>
+</tr>
+<tr>
+<td><code>system_instruction.md</code></td>
+<td>LLM system prompt — instructs model when to call each tool.</td>
+</tr>
+<tr>
+<td><code>app/models/schemas.py</code></td>
+<td>Request/response pydantic models</td>
+</tr>
+<tr>
+<td><code>app/errors.py</code></td>
+<td>Error registry — validated against <code>specs/error_codes.yaml</code> (see <a href="../../03_Reference/error_code_spec/">../03_Reference/error_code_spec.md</a>)</td>
+</tr>
+<tr>
+<td><code>app/guardrails.py</code></td>
+<td>Output <strong>quality</strong> checks only: refusal detection + length cap. PII enforcement is centralised at the gateway — this file does not scan for PII.</td>
+</tr>
+<tr>
+<td><code>utils/secret_manager.py</code></td>
+<td>GCP Secret Manager helper (unused at runtime now)</td>
+</tr>
+<tr>
+<td><code>tests/</code></td>
+<td>Mocked CI-safe suite + opt-in live integration (<code>RUN_INTEGRATION=1</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="provider-selection-and-model-fallback">Provider selection and model fallback<a class="headerlink" href="#provider-selection-and-model-fallback" title="Permanent link">&para;</a></h2>
+<p><code>config.py</code> resolves <code>LLM_PROVIDER</code> → egress mount + default model + base URL via
+<code>_PROVIDER_DEFAULTS</code>. Switching providers is an <strong>env change only</strong> — no code edit.</p>
+<ul>
+<li><code>LLM_PROVIDER</code> — <code>openrouter</code> (primary) | <code>groq</code> | <code>vertex</code></li>
+<li><code>LLM_GATEWAY_URL</code> — gateway base (docker: <code>http://api-gateway:3000</code>)</li>
+<li><code>LLM_MODEL</code> — optional single-model override; <strong>if unset on openrouter</strong>, the agent uses a <code>FallbackModel</code> chain</li>
+</ul>
+<h3 id="openrouter-fallbackmodel-chain">OpenRouter FallbackModel chain<a class="headerlink" href="#openrouter-fallbackmodel-chain" title="Permanent link">&para;</a></h3>
+<p>When <code>LLM_PROVIDER=openrouter</code> and <code>LLM_MODEL</code> is not set, <code>simple_agent.py</code>
+builds a <code>FallbackModel</code> that rotates through models in order on HTTP error (429, 5xx):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>google/gemma-4-31b-it:free  →  qwen/qwen3-coder-480b-a35b:free  →  openai/gpt-oss-20b:free
+</code></pre></div>
+<p>All three support OpenAI function-calling and are free on OpenRouter.
+The chain is defined in <code>config.py · OPENROUTER_FALLBACK_MODELS</code> — edit there to change order or add models.</p>
+<h3 id="groq-alternative-faster-tool-use">Groq (alternative, faster tool-use)<a class="headerlink" href="#groq-alternative-faster-tool-use" title="Permanent link">&para;</a></h3>
+<p><code>LLM_PROVIDER=groq</code> uses <code>llama3-groq-70b-8192-tool-use-preview</code> by default —
+a model fine-tuned for function calling. No fallback chain; single model.</p>
+<h3 id="tool-argument-schema-rules">Tool argument schema rules<a class="headerlink" href="#tool-argument-schema-rules" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Use <code>str</code> not <code>list[str]</code> for multi-value args — pass as <code>"USD,EUR"</code>, split inside the function.
+  Some models serialise list args as JSON strings; primitive types are universally reliable.</li>
+<li>MAS forex <code>currencies</code> accepts <code>Union[list[str], str]</code> with coercion for backward compatibility.</li>
+</ul>
+<p>See <a href="../05-egress-llm/">05-egress-llm.md</a>.</p>
+<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>tests/test_routes.py<span class="w"> </span>-q<span class="w">          </span><span class="c1"># mocked, CI-safe — routes + envelope</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>tests/test_tools.py<span class="w"> </span>-q<span class="w">           </span><span class="c1"># mocked, CI-safe — tool fetch functions</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nv">RUN_INTEGRATION</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>tests/test_tools.py<span class="w"> </span>-q<span class="w">          </span><span class="c1"># live API calls (NEA, HDB, MAS)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nv">RUN_INTEGRATION</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>tests/test_integration.py<span class="w"> </span>-q<span class="w">    </span><span class="c1"># live end-to-end (needs gateway)</span>
+</code></pre></div>
+<p>Tool tests mock <code>httpx.AsyncClient</code> — no network, no keys required for unit runs.
+Live tool tests hit real public APIs; MAS forex additionally requires <code>MAS_FOREX_EOD_API_KEY</code> in env.</p>
+<h2 id="run">Run<a class="headerlink" href="#run" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>apps/ai_service<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>uv<span class="w"> </span>run<span class="w"> </span>uvicorn<span class="w"> </span>main:app<span class="w"> </span>--host<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>--port<span class="w"> </span><span class="m">8080</span>
+</code></pre></div>
 
 
 

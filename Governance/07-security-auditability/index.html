@@ -1,0 +1,2926 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for EUC Spreadsheet Uplift">
+      
+      
+        <meta name="author" content="Vincent Chong">
+      
+      
+      
+        <link rel="prev" href="../../01_Architecture/09-end-to-end-sequence/">
+      
+      
+        <link rel="next" href="../../Lineage/09-end-to-end-tracing/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Security & Auditability - EUC Spreadsheet Uplift Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#07-security-guardrails-traceability-auditability-cross-cutting" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="EUC Spreadsheet Uplift Docs" class="md-header__button md-logo" aria-label="EUC Spreadsheet Uplift Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            EUC Spreadsheet Uplift Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Security & Auditability
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../01_Architecture/08-component-interfaces/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Governance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Lineage/09-end-to-end-tracing/" class="md-tabs__link">
+          
+  
+  
+  Lineage
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../specs/" class="md-tabs__link">
+          
+  
+  
+  Specs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../03_Reference/api_config/" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="EUC Spreadsheet Uplift Docs" class="md-nav__button md-logo" aria-label="EUC Spreadsheet Uplift Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    EUC Spreadsheet Uplift Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01_Architecture/08-component-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Component Interfaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01_Architecture/01-api-gateway/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Gateway
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01_Architecture/02-ai-service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Service
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01_Architecture/04-google-sheets-ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google Sheets UI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01_Architecture/05-egress-llm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Egress LLM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01_Architecture/09-end-to-end-sequence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    End-to-End Sequence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Governance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Governance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security & Auditability
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security & Auditability
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Security
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trust-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trust boundaries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secret-encapsulation-in-place" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secret encapsulation (in place)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transport-surface-hardening-in-place" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transport &amp; surface hardening (in place)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-gaps-deliberately-deferred-track-before-prod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known gaps (deliberately deferred — track before prod)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-guardrails-ai-safety-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Guardrails (AI safety &amp; control)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Guardrails (AI safety &amp; control)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#in-place" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In place
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mvp-guardrail-architecture-implemented" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MVP guardrail architecture (implemented)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MVP guardrail architecture (implemented)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#four-enforced-crossings-all-at-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Four enforced crossings (all at gateway)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redaction-policy-crossings-are-asymmetric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Redaction policy — crossings are asymmetric
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dates-are-not-redacted-risk-based-decision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dates are not redacted (risk-based decision)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai_service-responsibility-output-quality-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ai_service responsibility (output quality only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sidebar-client-side-scan-ux-layer-not-enforcement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sidebar client-side scan (UX layer, not enforcement)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hitl-keep-for-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HITL — keep for MVP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deferred-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deferred post-MVP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deferred post-MVP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hitl-as-an-agentic-guardrail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HITL as an agentic guardrail
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-recommended-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other recommended controls
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-traceability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Traceability
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-auditability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Auditability
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Auditability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#in-place_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In place
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-gaps-needed-for-a-bank-grade-audit-trail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known gaps (needed for a bank-grade audit trail)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recommended-audit-record-one-entry-per-delegation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended audit record (one entry per delegation)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-priority-order-if-hardening-for-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Priority order (if hardening for production)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-data-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Data classification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-third-party-vendor-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Third-party / vendor risk
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-incident-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Incident response
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Incident response">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#severity-tiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Severity tiers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runbook-stub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Runbook (stub)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-business-continuity-bcp-dr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Business continuity (BCP / DR)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Business continuity (BCP / DR)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#degraded-mode-behaviour-in-place" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Degraded-mode behaviour (in place)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gaps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-model-governance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Model governance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Model governance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#in-place_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In place
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gaps-recommended-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gaps / recommended controls
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-access-control-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Access control matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lineage
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lineage
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lineage/09-end-to-end-tracing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    End-to-End Tracing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lineage/promotion-and-provenance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Promotion and Provenance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Specs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consumption Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specs/program-sequence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Program Sequence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specs/TODO/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TODO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_Reference/api_config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Config API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_Reference/api_errors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Errors API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_Reference/api_guardrails/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guardrails API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_Reference/api_request_context/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Request Context API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_Reference/error_code_spec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Error Code Spec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_Reference/MAS_API/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MAS API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Security
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trust-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trust boundaries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secret-encapsulation-in-place" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secret encapsulation (in place)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transport-surface-hardening-in-place" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transport &amp; surface hardening (in place)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-gaps-deliberately-deferred-track-before-prod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known gaps (deliberately deferred — track before prod)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-guardrails-ai-safety-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Guardrails (AI safety &amp; control)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Guardrails (AI safety &amp; control)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#in-place" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In place
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mvp-guardrail-architecture-implemented" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MVP guardrail architecture (implemented)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MVP guardrail architecture (implemented)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#four-enforced-crossings-all-at-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Four enforced crossings (all at gateway)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redaction-policy-crossings-are-asymmetric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Redaction policy — crossings are asymmetric
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dates-are-not-redacted-risk-based-decision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dates are not redacted (risk-based decision)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai_service-responsibility-output-quality-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ai_service responsibility (output quality only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sidebar-client-side-scan-ux-layer-not-enforcement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sidebar client-side scan (UX layer, not enforcement)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hitl-keep-for-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HITL — keep for MVP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deferred-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deferred post-MVP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deferred post-MVP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hitl-as-an-agentic-guardrail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HITL as an agentic guardrail
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-recommended-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other recommended controls
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-traceability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Traceability
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-auditability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Auditability
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Auditability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#in-place_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In place
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-gaps-needed-for-a-bank-grade-audit-trail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known gaps (needed for a bank-grade audit trail)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recommended-audit-record-one-entry-per-delegation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended audit record (one entry per delegation)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-priority-order-if-hardening-for-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Priority order (if hardening for production)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-data-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Data classification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-third-party-vendor-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Third-party / vendor risk
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-incident-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Incident response
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Incident response">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#severity-tiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Severity tiers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runbook-stub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Runbook (stub)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-business-continuity-bcp-dr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Business continuity (BCP / DR)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Business continuity (BCP / DR)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#degraded-mode-behaviour-in-place" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Degraded-mode behaviour (in place)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gaps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-model-governance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Model governance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Model governance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#in-place_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In place
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gaps-recommended-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gaps / recommended controls
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-access-control-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Access control matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="07-security-guardrails-traceability-auditability-cross-cutting">07 · Security, Guardrails, Traceability &amp; Auditability (cross-cutting)<a class="headerlink" href="#07-security-guardrails-traceability-auditability-cross-cutting" title="Permanent link">&para;</a></h1>
+<p>How this system stays defensible for a <strong>financial</strong> context: what protects it,
+what constrains the AI, and how every action can be reconstructed after the fact.</p>
+<p>This page separates <strong>what is in place today</strong> from <strong>known gaps</strong> so nobody
+mistakes an aspiration for a control.</p>
+<hr />
+<h2 id="1-security">1. Security<a class="headerlink" href="#1-security" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Terminology: <strong>ingress</strong> = <em>inbound</em> (calls coming into our system);
+<strong>egress</strong> = <em>outbound</em> (calls our system makes to external services).</p>
+</blockquote>
+<h3 id="trust-boundaries">Trust boundaries<a class="headerlink" href="#trust-boundaries" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>User ──(Google ACL)──▶ Sheet ──(HTTPS)──▶ api_gateway ──▶ ai_service / document_service
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                                              │
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                                              └──(provider key / OAuth)──▶ LLM provider
+</code></pre></div>
+<ul>
+<li><strong>Sheet ACL</strong> controls <em>who can open the spreadsheet</em>. It does <strong>not</strong>
+  authenticate calls to the gateway URL — see Gaps.</li>
+<li><strong>api_gateway</strong> is the only component exposed publicly and the only one holding
+  provider credentials.</li>
+<li>Backend services (<code>ai_service</code>, <code>document_service</code>) are <strong>key-less</strong> and should
+  only be reachable inside the private network / Cloud Run internal ingress.</li>
+</ul>
+<h3 id="secret-encapsulation-in-place">Secret encapsulation (in place)<a class="headerlink" href="#secret-encapsulation-in-place" title="Permanent link">&para;</a></h3>
+<ul>
+<li>LLM provider keys live <strong>only</strong> in the gateway env — dev via docker <code>env_file</code>,
+  prod via Cloud Run secret→env, Vertex via the service account (no stored key).</li>
+<li>Downstream services speak plain OpenAI format to <code>/egress/&lt;provider&gt;</code> and never
+  see a credential — see <a href="../../01_Architecture/05-egress-llm/">05-egress-llm.md</a>.</li>
+<li><code>.env</code> is gitignored; loggers <strong>redact</strong> <code>authorization</code>, <code>*key*</code>, <code>*secret*</code>,
+  <code>*password*</code>. Never log a secret value; reference by prefix/length only.</li>
+<li>Any credential that appears in a log, transcript, or shared channel must be
+  <strong>rotated</strong>.</li>
+</ul>
+<h3 id="transport-surface-hardening-in-place">Transport &amp; surface hardening (in place)<a class="headerlink" href="#transport-surface-hardening-in-place" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Upstream timeouts bound every hop (<code>UPSTREAM_TIMEOUT_MS</code>, <code>LLM_EGRESS_TIMEOUT_MS</code>).</li>
+<li>Request body size capped (<code>JSON_BODY_LIMIT</code>, default 1mb) to blunt payload abuse.</li>
+<li>Port guard + graceful shutdown prevent half-started / shadowed instances.</li>
+</ul>
+<h3 id="known-gaps-deliberately-deferred-track-before-prod">Known gaps (deliberately deferred — track before prod)<a class="headerlink" href="#known-gaps-deliberately-deferred-track-before-prod" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>No ingress authentication.</strong> The gateway URL is not protected by the Sheet ACL.
+  This is the <strong>top remaining production risk</strong>. Candidates: signed Apps Script
+  identity token, a shared gateway secret header, or Google IAP / Cloud Run IAM.</li>
+<li><strong>No rate limiting.</strong> <code>__ERROR_RATE_LIMIT__</code> is reserved in the registry but no
+  limiter is wired (needs e.g. <code>express-rate-limit</code>).</li>
+<li><strong>No per-user authorization</strong> — the system cannot yet attribute a request to a
+  named principal (blocks true per-user audit; see §3).</li>
+</ul>
+<hr />
+<h2 id="2-guardrails-ai-safety-control">2. Guardrails (AI safety &amp; control)<a class="headerlink" href="#2-guardrails-ai-safety-control" title="Permanent link">&para;</a></h2>
+<p>Guardrails constrain <em>what the AI is allowed to do and produce</em> — distinct from
+security, which constrains <em>who can reach the system</em>.</p>
+<h3 id="in-place">In place<a class="headerlink" href="#in-place" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>No autonomous side effects from the model.</strong> The LLM returns content; writing
+  back to the sheet and generating PDFs are performed by application code, not by
+  the model acting unattended.</li>
+<li><strong>Human-in-the-loop:</strong> the sidebar's "Locked / Run AI when saved" flags let a
+  user gate execution and review output before it is committed.</li>
+<li><strong>Bounded model access:</strong> services reach LLMs only through the gateway egress —
+  no direct outbound calls, no arbitrary endpoints.</li>
+<li><strong>No automatic provider failover</strong> — a deliberate low-surprise choice; the
+  active provider is an explicit <code>LLM_PROVIDER</code> env flip.</li>
+<li><strong>Structured contract envelope</strong> (<code>meta</code> + <code>payload</code>) is validated at the
+  gateway, so malformed or oversized delegations are rejected before reaching the
+  model.</li>
+</ul>
+<h3 id="mvp-guardrail-architecture-implemented">MVP guardrail architecture (implemented)<a class="headerlink" href="#mvp-guardrail-architecture-implemented" title="Permanent link">&para;</a></h3>
+<p><strong>Design principle:</strong> the gateway is the organisation boundary — all PII enforcement is
+centralised there. The sidebar's client-side scan is a UX convenience (early warning),
+not the security control. PII cannot bypass the gateway regardless of client behaviour.</p>
+<p>Rules are parameterized in <strong><code>specs/guardrail.yaml</code></strong> — add or tune patterns without
+touching code. The gateway loads and compiles them once at startup.</p>
+<pre class="mermaid"><code>flowchart TD
+    GS["Google Sheets\nsidebar (UX scan only)"]
+
+    subgraph GW["api_gateway — organisation boundary"]
+        direction TB
+        GI["① inbound: guardrailMiddleware\ninjection → 422\nPII → redact\nguardrails.mjs"]
+        CA["contract adapter"]
+        EP["③ egress outbound: egressPiiGuardrail\nPII in messages[] → redact\negressPiiGuardrail.mjs"]
+        CR["④ response: scanText()\nPII in LLM result → redact\nserver.mjs contract adapter"]
+        GI --&gt; CA --&gt; EP
+        CR --&gt; CA
+    end
+
+    subgraph AI["ai_service (orchestration only)"]
+        AG["pydantic-ai agent"]
+        QC["output quality check\nrefusal + length\napp/guardrails.py"]
+        AG --&gt; QC
+    end
+
+    LLM["LLM Provider"]
+
+    GS --&gt;|prompt + context| GI
+    CA --&gt;|② clean request| AI
+    QC --&gt;|result| CR
+    EP --&gt;|③ redacted prompt| LLM
+    LLM --&gt;|response| EP
+    EP --&gt;|④ raw result| CR
+    CR --&gt;|clean result| GS
+
+    GI --&gt;|injection blocked| E1["__ERROR_VALIDATION__ 422"]
+    QC --&gt;|refusal / too long| E2["__ERROR_UPSTREAM_FAILURE__ 502"]</code></pre>
+<h4 id="four-enforced-crossings-all-at-gateway">Four enforced crossings (all at gateway)<a class="headerlink" href="#four-enforced-crossings-all-at-gateway" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Crossing</th>
+<th>Where</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>①</td>
+<td>Sheets → gateway (inbound)</td>
+<td><code>middleware/guardrails.mjs</code></td>
+<td>injection → 422 reject; PII → redact + log</td>
+</tr>
+<tr>
+<td>②</td>
+<td>Gateway → ai_service</td>
+<td>same middleware (same request body)</td>
+<td>PII already redacted by ①</td>
+</tr>
+<tr>
+<td>③</td>
+<td>Gateway egress → LLM (outbound)</td>
+<td><code>middleware/egressPiiGuardrail.mjs</code></td>
+<td>scans <code>messages[].content</code>; redacts before prompt leaves org</td>
+</tr>
+<tr>
+<td>④</td>
+<td>LLM → gateway → Sheets (return)</td>
+<td><code>server.mjs</code> contract adapter via <code>scanText()</code></td>
+<td>scans <code>result</code> from ai_service; redacts before Sheets sees it. Runs only rules where <code>output ≠ false</code> — see <em>Redaction policy</em> below</td>
+</tr>
+</tbody>
+</table>
+<p><strong>To add a new PII pattern</strong> — append to <code>pii_patterns</code> in <code>specs/guardrail.yaml</code>
+and restart the gateway. All four crossings update automatically. No code change required.</p>
+<h4 id="redaction-policy-crossings-are-asymmetric">Redaction policy — crossings are asymmetric<a class="headerlink" href="#redaction-policy-crossings-are-asymmetric" title="Permanent link">&para;</a></h4>
+<p>The four crossings do <strong>not</strong> run the same rule set. Direction matters:</p>
+<ul>
+<li><strong>Inbound / outbound-to-LLM (① ② ③)</strong> carry <em>user-supplied</em> content (prompt +
+  context). Scan the <strong>full</strong> rule set, each rule scoped by its <code>fields</code>.</li>
+<li><strong>Return (④, <code>scanText</code>)</strong> carries the <em>model's generated answer</em> — which for
+  this assistant is mostly financial data (rates, dates, amounts). It runs
+  <strong>only</strong> rules where <code>output</code> is not <code>false</code>.</li>
+</ul>
+<p><strong>Why the asymmetry is safe:</strong> PII is redacted inbound <em>before the model ever
+sees it</em>, so the model cannot echo back what it never received. Re-scanning
+ambiguous numeric patterns on the return path therefore adds negligible
+protection while corrupting legitimate answers — e.g. an exchange rate <code>1.2905</code>
+matched as a phone number, or <code>USD SGD</code> matched as an all-caps name. The <code>output</code>
+flag lets a rule opt out of crossing ④ only.</p>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>On return path (④)?</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sg_nric</code>, <code>sg_passport</code>, <code>payment_card</code>, <code>email</code></td>
+<td><strong>yes</strong></td>
+<td>Hard identifiers — defense-in-depth if the model ever surfaces one</td>
+</tr>
+<tr>
+<td><code>phone_number</code></td>
+<td><strong>yes</strong> (after tightening)</td>
+<td>Now requires SG 8/9-prefix or a leading <code>+</code>; no longer matches rates/dates</td>
+</tr>
+<tr>
+<td><code>sg_postal_code</code>, <code>sg_bank_account</code>, <code>full_name_allcaps</code></td>
+<td><strong>no</strong> (<code>output: false</code>)</td>
+<td>Over-match plain numbers / currency-code pairs in answers</td>
+</tr>
+</tbody>
+</table>
+<h4 id="dates-are-not-redacted-risk-based-decision">Dates are not redacted (risk-based decision)<a class="headerlink" href="#dates-are-not-redacted-risk-based-decision" title="Permanent link">&para;</a></h4>
+<p>The <code>date_of_birth</code> rule was <strong>removed</strong>. Rationale, in data-protection terms:</p>
+<ul>
+<li>A standalone date is a <strong>quasi-identifier</strong>, not an identifier. Under PDPA /
+  GDPR it identifies no one on its own — only in combination with a name/NRIC and
+  a linking dataset (the classic DOB + gender + postal-code re-identification
+  requires all three plus external data).</li>
+<li>The <strong>identifying half is already redacted</strong> by <code>sg_nric</code> and
+  <code>full_name_allcaps</code>. Once the name is gone, an adjacent date is orphaned.</li>
+<li>Regex sees <em>form</em>, not <em>meaning</em>: <code>15/03/1990</code> (a birthday) and <code>2024-11-29</code>
+  (a transaction date the assistant must reason about) are indistinguishable by
+  token. Redacting all dates broke every legitimate date query for near-zero
+  privacy gain. MAS Notice 655 restricts the <strong>NRIC</strong> specifically; DOB carries
+  no comparable restriction.</li>
+<li><strong>Intent analysis is the wrong tool.</strong> Classifying "is this a birthday?" with
+  an LLM would require sending the raw date to a model to decide whether to
+  protect it — protection <em>after</em> the boundary crossing, plus latency, cost, and
+  an unauditable guardrail. Disambiguation here is a <em>context</em> problem, not an
+  <em>intent</em> problem.</li>
+</ul>
+<p><strong>If a DPO assessment later requires date redaction</strong>, prefer a deterministic
+variant over intent analysis:
+- <strong>Cue-gated</strong> — redact a date only when a birth-context keyword (<code>DOB</code>, <code>born</code>,
+  <code>date of birth</code>, <code>birthday</code>) sits within a short window of it.
+- <strong>Linkage-aware</strong> — redact a date only when the same payload also trips a
+  name/NRIC rule (i.e. the date is actually bound to an identity).</p>
+<h4 id="ai_service-responsibility-output-quality-only">ai_service responsibility (output quality only)<a class="headerlink" href="#ai_service-responsibility-output-quality-only" title="Permanent link">&para;</a></h4>
+<p><code>app/guardrails.py</code> handles output <em>quality</em> signals the gateway cannot assess:</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Refusal detection</strong> — model says <code>"I am unable to"</code>, <code>"As an AI"</code>, etc.</td>
+<td><code>__ERROR_UPSTREAM_FAILURE__</code> (502) — do not write to Sheet</td>
+</tr>
+<tr>
+<td><strong>Output length cap</strong></td>
+<td><code>__ERROR_UPSTREAM_FAILURE__</code> (502)</td>
+</tr>
+</tbody>
+</table>
+<p>PII is no longer checked here — that is crossing ④ at the gateway.</p>
+<h4 id="sidebar-client-side-scan-ux-layer-not-enforcement">Sidebar client-side scan (UX layer, not enforcement)<a class="headerlink" href="#sidebar-client-side-scan-ux-layer-not-enforcement" title="Permanent link">&para;</a></h4>
+<p>The sidebar fetches patterns from <code>GET /guardrail/patterns</code> on load and scans the
+prompt before submit. If PII is detected, the user sees a warning and can choose
+auto-redact or manual edit. This is a friction-reducer, not a security control —
+the gateway enforces regardless of what the sidebar does.</p>
+<h4 id="hitl-keep-for-mvp">HITL — keep for MVP<a class="headerlink" href="#hitl-keep-for-mvp" title="Permanent link">&para;</a></h4>
+<p>The sidebar's "Locked / Run AI when saved" flag is the catch-all for any output
+the automated layers do not catch. Do not remove or bypass.</p>
+<h3 id="deferred-post-mvp">Deferred post-MVP<a class="headerlink" href="#deferred-post-mvp" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Deferred</th>
+<th>Why safe to defer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Microsoft Presidio / Cloud DLP</td>
+<td>Regex covers structural PII. Semantic PII (names in free text) low-risk while HITL is active</td>
+</tr>
+<tr>
+<td>Numeric range sanity check</td>
+<td>Requires known expected ranges per prompt type — needs product definition</td>
+</tr>
+<tr>
+<td>Deny-list / topic filter</td>
+<td>Low risk while system instruction scopes the domain</td>
+</tr>
+<tr>
+<td>Per-user rate limiting</td>
+<td>Add together with ingress auth (§1)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="hitl-as-an-agentic-guardrail">HITL as an agentic guardrail<a class="headerlink" href="#hitl-as-an-agentic-guardrail" title="Permanent link">&para;</a></h4>
+<p>For <strong>agentic AI</strong> (where the model can trigger real actions — approvals, filings,
+data writes), the HITL pattern is itself the primary guardrail:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>LLM output → human reviews → approves → action executes
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>                           → rejects → logged, no effect
+</code></pre></div>
+<p>The sidebar's "Locked / Run AI when saved" flag already implements this for the
+current generation. As agency grows (tool-calling, multi-step), the HITL gate
+must be <strong>explicitly preserved</strong> — agentic loops that bypass human review are the
+highest-risk failure mode in finance AI.</p>
+<table>
+<thead>
+<tr>
+<th>Agentic risk</th>
+<th>Guardrail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agent takes an irreversible action (file, trade, send)</td>
+<td>Require explicit human approve step before irreversible ops</td>
+</tr>
+<tr>
+<td>Agent calls an unintended tool</td>
+<td>Tool-use allowlist: explicit reviewed set, per-tool argument validation</td>
+</tr>
+<tr>
+<td>Agent loops / escalates cost silently</td>
+<td>Max-steps budget + cost cap enforced at gateway egress</td>
+</tr>
+<tr>
+<td>Prompt injection via retrieved context</td>
+<td>Separate system prompt from retrieved content; never interpolate raw cell data into the system role</td>
+</tr>
+</tbody>
+</table>
+<h4 id="other-recommended-controls">Other recommended controls<a class="headerlink" href="#other-recommended-controls" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Step-up MFA (TOTP / Google Authenticator):</strong> free second factor on high-risk
+  actions (approve/release), on top of the JWT identity — design in
+  <a href="../../specs/backlog/auth/totp_mfa_spec/">specs/totp_mfa_spec.md</a>.</li>
+<li><strong>Data-residency / no-training:</strong> for prod, use provider tiers that exclude
+  prompts from training (avoid <code>:free</code> OpenRouter routes for bank data) — prefer
+  the Vertex enterprise path. See <a href="../../01_Architecture/05-egress-llm/">05-egress-llm.md</a>.</li>
+</ul>
+<hr />
+<h2 id="3-traceability">3. Traceability<a class="headerlink" href="#3-traceability" title="Permanent link">&para;</a></h2>
+<p>Every request should be reconstructable end-to-end from a single correlation id.</p>
+<ul>
+<li><strong><code>X-Request-ID</code></strong> is assigned at the gateway (or preserved if the client sends
+  one), returned to the client, and <strong>forwarded to every upstream — including the
+  LLM egress hop</strong>. <code>ai_service</code> re-stamps it on every outbound provider call
+  (<code>app/request_context.py</code> + <code>agents/simple_agent.py</code>) so the gateway <em>preserves</em>
+  the id rather than minting a fresh one per retry. Always propagate it; always
+  log it. (<code>middleware/requestId.mjs</code>.)</li>
+<li><strong>Nested correlation ids</strong> — three tiers, kept separate on purpose (full table +
+  propagation walkthrough in <a href="../../01_Architecture/09-end-to-end-sequence/">09-end-to-end-sequence.md</a>
+  §"Traceability thread"):</li>
+<li><code>request_id</code> — the whole transaction; stable across every hop <strong>and</strong> retry.</li>
+<li><code>run_id</code> — one agent run inside <code>ai_service</code> (returned in <code>meta</code>).</li>
+<li><code>attempt</code> — a 2-digit per-request counter on each physical LLM egress POST,
+    logged as <code>x-request-attempt</code>, so retries/fallbacks are distinguishable while
+    <code>request_id</code> stays a single exact-match key.</li>
+<li><strong>Structured JSON logs</strong> on every hop (pino / Logfire+logging) — one line per
+  event, machine-parseable, secrets redacted.</li>
+<li><strong>Egress latency + provider</strong> are logged on the way out (<code>[Egress] -&gt;</code>) and back
+  (<code>[Egress] &lt;-</code>) with <code>request_id</code> + <code>attempt</code>, so each LLM call — including the
+  429/fallback retries — is tied to its request and timed.</li>
+<li><strong><code>model_invoked</code></strong> (<code>&lt;provider&gt;:&lt;model&gt;</code>) is returned in the AI response <code>meta</code>,
+  recording <em>which</em> provider/model produced a given result.</li>
+<li><strong>Errors carry a precise <code>error_key</code></strong> in the body even when the HTTP status is
+  one-to-many — see <a href="../../03_Reference/error_code_spec/">../03_Reference/error_code_spec.md</a>.</li>
+</ul>
+<p>Practical rule: given a <code>request_id</code>, you can grep gateway + service logs and
+recover the full path (ingress → service → egress → provider) — every retry
+included, ordered by <code>attempt</code> — and the outcome.</p>
+<hr />
+<h2 id="4-auditability">4. Auditability<a class="headerlink" href="#4-auditability" title="Permanent link">&para;</a></h2>
+<p>Auditability = a durable, reviewable record of <em>who asked for what, what the AI
+did, and what was committed</em> — the standard a bank's controls/records team expects.</p>
+<h3 id="in-place_1">In place<a class="headerlink" href="#in-place_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Full-prompt records + <code>request_id</code></strong> are stored by the Sheets UI for
+  traceability (see <a href="../../01_Architecture/04-google-sheets-ui/">04-google-sheets-ui.md</a>).</li>
+<li><strong>Audit memo</strong> field in the sidebar lets the user attach a business
+  justification to a delegation.</li>
+<li><strong>Human-in-the-loop flags</strong> create a review checkpoint before commit.</li>
+<li><code>model_invoked</code> + <code>request_id</code> link a written-back result to the exact model run.</li>
+</ul>
+<h3 id="known-gaps-needed-for-a-bank-grade-audit-trail">Known gaps (needed for a bank-grade audit trail)<a class="headerlink" href="#known-gaps-needed-for-a-bank-grade-audit-trail" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>No authenticated principal.</strong> Without ingress auth (§1) actions cannot be
+  attributed to a named user — the single biggest audit gap.</li>
+<li><strong>No tamper-evident, append-only audit log.</strong> Logs today are operational
+  (JSON to stdout), not a retained, immutable record. A finance deployment
+  typically needs a durable store (append-only bucket / WORM / signed entries)
+  with a defined retention period.</li>
+<li><strong>No change/version trail</strong> for prompts and model/config versions tied to each
+  decision.</li>
+</ul>
+<h3 id="recommended-audit-record-one-entry-per-delegation">Recommended audit record (one entry per delegation)<a class="headerlink" href="#recommended-audit-record-one-entry-per-delegation" title="Permanent link">&para;</a></h3>
+<p><code>request_id</code> · timestamp · <strong>authenticated user</strong> · sheet + range · prompt hash ·
+audit memo · <code>model_invoked</code> · outcome (<code>error_key</code> or success) · human-review flag.</p>
+<hr />
+<h2 id="5-priority-order-if-hardening-for-production">5. Priority order (if hardening for production)<a class="headerlink" href="#5-priority-order-if-hardening-for-production" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Ingress authentication</strong> — unblocks attribution, which unblocks real audit.</li>
+<li>✅ <strong>Input guardrails</strong> — injection rejection + PII redaction at gateway ingress (<code>middleware/guardrails.mjs</code>); rules in <code>specs/guardrail.yaml</code>.</li>
+<li>✅ <strong>Output guardrails</strong> — refusal detection + length cap at ai_service (<code>app/guardrails.py</code>); rules in <code>specs/guardrail.yaml</code>.</li>
+<li><strong>Durable, append-only audit log</strong> — HMAC-signed JSONL → MinIO (dev) / GCS
+   Object Lock (prod); Sheet <code>__Prompt_records_v2</code> is the human-readable mirror,
+   not the system of record.</li>
+<li><strong>Rate limiting</strong> (<code>__ERROR_RATE_LIMIT__</code>).</li>
+<li><strong>No-training / data-residency</strong> provider tier for prod traffic.</li>
+</ol>
+<blockquote>
+<p>Guardrails (2, 3) determine whether you are <strong>allowed to go live</strong>;
+the audit log (4) determines whether you are <strong>allowed to stay live</strong>.
+For agentic systems taking real actions, guardrails are the existential gate.</p>
+<p>These are cross-cutting; when you implement one, update this page <strong>and</strong> the
+affected component page (e.g. <a href="../../01_Architecture/01-api-gateway/">01-api-gateway.md</a>).</p>
+</blockquote>
+<hr />
+<h2 id="6-data-classification">6. Data classification<a class="headerlink" href="#6-data-classification" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Status: stub — fill before compliance review.</strong></p>
+</blockquote>
+<p>Define which data fields are PII / confidential / public so every team member
+knows what controls apply at each boundary.</p>
+<table>
+<thead>
+<tr>
+<th>Classification</th>
+<th>Examples in this system</th>
+<th>Controls required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Public</strong></td>
+<td>System error codes, model name</td>
+<td>None</td>
+</tr>
+<tr>
+<td><strong>Internal</strong></td>
+<td><code>request_id</code>, latency, <code>model_invoked</code></td>
+<td>Log, retain normally</td>
+</tr>
+<tr>
+<td><strong>Confidential</strong></td>
+<td>Prompt text, sheet cell content, audit memo</td>
+<td>Redact from external logs; no-training provider tier in prod</td>
+</tr>
+<tr>
+<td><strong>Restricted / PII</strong></td>
+<td>Names, NRICs, account numbers, card numbers (if present in cells)</td>
+<td>Must not leave trust boundary to external LLM without DLP screening; durable encrypted retention</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Action items:</strong>
+- Confirm with the data owner which sheet ranges may contain PII.
+- Wire PII/PCI screening (Presidio or Cloud DLP) at gateway egress before any
+  restricted data can reach an external LLM provider (see §2 guardrails).
+- Define retention period and deletion schedule for audit records containing
+  confidential data.</p>
+<hr />
+<h2 id="7-third-party-vendor-risk">7. Third-party / vendor risk<a class="headerlink" href="#7-third-party-vendor-risk" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Status: stub — complete before onboarding to a regulated environment.</strong></p>
+</blockquote>
+<p>Every external dependency that touches customer data or processes prompts is a
+sub-processor and requires a vendor risk assessment.</p>
+<table>
+<thead>
+<tr>
+<th>Vendor</th>
+<th>Role</th>
+<th>Concern</th>
+<th>Mitigation path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OpenRouter</strong></td>
+<td>LLM proxy (default <code>LLM_PROVIDER</code>)</td>
+<td>Free-tier routes used for training; data residency unclear</td>
+<td>Switch to enterprise/no-training routes; obtain DPA</td>
+</tr>
+<tr>
+<td><strong>Groq</strong></td>
+<td>LLM provider alternative</td>
+<td>Similar data-use terms</td>
+<td>Same as OpenRouter; confirm no-training opt-out</td>
+</tr>
+<tr>
+<td><strong>Google Vertex AI</strong></td>
+<td>LLM provider (enterprise path)</td>
+<td>GCP data residency, enterprise SLA</td>
+<td>Preferred for prod; service-account auth already designed</td>
+</tr>
+<tr>
+<td><strong>Google Cloud Run</strong></td>
+<td>Compute / hosting</td>
+<td>Data residency, SLA</td>
+<td>GCP region selection; enterprise support tier</td>
+</tr>
+<tr>
+<td><strong>Logfire / Pydantic</strong></td>
+<td>Observability / tracing</td>
+<td>Prompt snippets may appear in traces</td>
+<td>Configure to redact; or run self-hosted Logfire</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Action items:</strong>
+- Obtain a Data Processing Agreement (DPA) from each vendor that processes
+  prompt content.
+- Confirm no-training opt-out is in effect before sending non-public data.
+- Add Vertex as the mandatory <code>LLM_PROVIDER</code> for regulated workloads
+  (see <a href="../../01_Architecture/05-egress-llm/">05-egress-llm.md</a>).
+- Review sub-processor list quarterly.</p>
+<hr />
+<h2 id="8-incident-response">8. Incident response<a class="headerlink" href="#8-incident-response" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Status: stub — define before go-live.</strong></p>
+</blockquote>
+<p>What to do when something goes wrong.</p>
+<h3 id="severity-tiers">Severity tiers<a class="headerlink" href="#severity-tiers" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Example triggers</th>
+<th>Target response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>P1 — Critical</strong></td>
+<td>LLM returns harmful / incorrect financial output written to a customer record; credential leak</td>
+<td>Immediate (&lt; 1 h): disable gateway, rotate credential, notify DPO</td>
+</tr>
+<tr>
+<td><strong>P2 — High</strong></td>
+<td>Gateway unreachable; repeated upstream timeouts; guardrail bypass detected</td>
+<td>Same business day</td>
+</tr>
+<tr>
+<td><strong>P3 — Medium</strong></td>
+<td>Elevated error rate; unexpected model switch</td>
+<td>Within 48 h</td>
+</tr>
+</tbody>
+</table>
+<h3 id="runbook-stub">Runbook (stub)<a class="headerlink" href="#runbook-stub" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Detect</strong> — alert on sustained error rate or anomalous latency (Logfire / Cloud Run metrics).</li>
+<li><strong>Contain</strong> — disable the affected service (set <code>IS_AI_SERVICE_ACTIVE=false</code> / <code>IS_DOC_SERVICE_ACTIVE=false</code>); the gateway returns <code>__ERROR_SERVICE_UNAVAILABLE__</code> without crashing.</li>
+<li><strong>Credential compromise</strong> — rotate the affected key immediately; the impacted <code>LLM_PROVIDER</code> key is in Cloud Run secrets (prod) / <code>.env</code> (dev). Reference <a href="../../01_Architecture/05-egress-llm/">05-egress-llm.md</a> for which env var to rotate.</li>
+<li><strong>Assess</strong> — pull <code>request_id</code> range from logs; reconstruct the affected requests using the audit trail (§4).</li>
+<li><strong>Notify</strong> — DPO and affected users if PII was involved; follow jurisdiction-specific breach notification timelines.</li>
+<li><strong>Post-mortem</strong> — update guardrails and this page with lessons learned.</li>
+</ol>
+<hr />
+<h2 id="9-business-continuity-bcp-dr">9. Business continuity (BCP / DR)<a class="headerlink" href="#9-business-continuity-bcp-dr" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Status: stub — define SLAs and test before go-live.</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Target</th>
+<th>Current status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RTO</strong> (recovery time objective)</td>
+<td>TBD</td>
+<td>Not formally defined</td>
+</tr>
+<tr>
+<td><strong>RPO</strong> (recovery point objective)</td>
+<td>TBD</td>
+<td>Not formally defined</td>
+</tr>
+<tr>
+<td><strong>Availability target</strong></td>
+<td>TBD</td>
+<td>Not formally defined</td>
+</tr>
+</tbody>
+</table>
+<h3 id="degraded-mode-behaviour-in-place">Degraded-mode behaviour (in place)<a class="headerlink" href="#degraded-mode-behaviour-in-place" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Per-service <code>IS_*_ACTIVE</code> flags let the gateway disable a backend without
+  downtime — requests to a disabled service return <code>__ERROR_SERVICE_UNAVAILABLE__</code>
+  immediately rather than timing out.</li>
+<li>Services are independently deployable (Cloud Run); one service going down does
+  not restart others.</li>
+</ul>
+<h3 id="gaps">Gaps<a class="headerlink" href="#gaps" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>No multi-region / failover deployment.</strong> Single Cloud Run region; a region
+  outage takes down all services.</li>
+<li><strong>No LLM provider failover.</strong> Provider switch requires a manual <code>LLM_PROVIDER</code>
+  env change and redeploy (intentional — see §2 guardrails — but means no
+  automatic continuity if the active provider is down).</li>
+<li><strong>No backup / restore procedure</strong> for Sheet prompt records.</li>
+</ul>
+<p><strong>Action items:</strong>
+- Define RTO/RPO with the business owner.
+- Decide whether LLM provider failover is acceptable (trade-off: continuity vs.
+  surprise model switch mid-workflow).
+- Test the <code>IS_*_ACTIVE=false</code> degraded path in staging.</p>
+<hr />
+<h2 id="10-model-governance">10. Model governance<a class="headerlink" href="#10-model-governance" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Status: stub — required for regulated AI use.</strong></p>
+</blockquote>
+<p>Controls ensuring that model and prompt changes are reviewed, tested, and
+traceable before affecting users.</p>
+<h3 id="in-place_2">In place<a class="headerlink" href="#in-place_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>model_invoked</code> (<code>&lt;provider&gt;:&lt;model&gt;</code>) is returned in every AI response <code>meta</code>
+  and logged — so each result is tied to the exact model that produced it.</li>
+<li>Provider and model are env-driven (<code>LLM_PROVIDER</code>, <code>LLM_MODEL</code>) — changes
+  require a deployment, not a code push, providing a natural change gate.</li>
+<li>System instruction is externalized to <code>apps/ai_service/system_instruction.md</code> —
+  prompt changes are visible in git history.</li>
+</ul>
+<h3 id="gaps-recommended-controls">Gaps / recommended controls<a class="headerlink" href="#gaps-recommended-controls" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prompt change approval process (who reviews, who approves)</td>
+<td>❌ not defined</td>
+</tr>
+<tr>
+<td>Model version pinning (avoid silent upstream updates from provider)</td>
+<td>❌ not enforced — provider may update a model alias</td>
+</tr>
+<tr>
+<td>Regression test suite for prompt/model changes</td>
+<td>❌ only unit tests exist; no golden-output regression set</td>
+</tr>
+<tr>
+<td>Rollback plan for a bad model/prompt change</td>
+<td>❌ not documented</td>
+</tr>
+<tr>
+<td>Model card / risk assessment per model used</td>
+<td>❌ not documented</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Action items:</strong>
+- Pin explicit model versions in <code>LLM_MODEL</code> (e.g. <code>gpt-4o-2024-08-06</code> not <code>gpt-4o</code>)
+  so provider-side updates don't silently change behaviour.
+- Define a lightweight change process: PR review of <code>system_instruction.md</code> →
+  staging test → approval → deploy.
+- Build a small golden-output test set (10–20 representative prompts with
+  expected structure) and run it on every model/prompt change.</p>
+<hr />
+<h2 id="11-access-control-matrix">11. Access control matrix<a class="headerlink" href="#11-access-control-matrix" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Status: stub — define with the operations team.</strong></p>
+</blockquote>
+<p>Who can do what across environments.</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Dev</th>
+<th>Staging</th>
+<th>Prod</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>View logs</td>
+<td>Developer</td>
+<td>Developer</td>
+<td>Ops / Compliance (read-only)</td>
+</tr>
+<tr>
+<td>Change <code>.env</code> / env vars</td>
+<td>Developer</td>
+<td>Tech Lead</td>
+<td>Change-board approved</td>
+</tr>
+<tr>
+<td>Deploy a service</td>
+<td>Developer</td>
+<td>Tech Lead</td>
+<td>Change-board approved</td>
+</tr>
+<tr>
+<td>Rotate LLM provider key</td>
+<td>Developer</td>
+<td>Tech Lead</td>
+<td>Security team</td>
+</tr>
+<tr>
+<td>Approve a prompt / model change</td>
+<td>Developer</td>
+<td>Tech Lead + 1 reviewer</td>
+<td>Tech Lead + Compliance sign-off</td>
+</tr>
+<tr>
+<td>Access audit log store</td>
+<td>Developer</td>
+<td>Developer</td>
+<td>Compliance / Audit team only</td>
+</tr>
+<tr>
+<td>Disable a service (<code>IS_*_ACTIVE</code>)</td>
+<td>Developer</td>
+<td>Ops</td>
+<td>Ops (P1 runbook)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Action items:</strong>
+- Assign named roles to the columns above.
+- Enforce Cloud Run IAM so only the designated principal can deploy.
+- Ensure audit log GCS bucket has a separate IAM principal from the application
+  service account (least privilege).</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

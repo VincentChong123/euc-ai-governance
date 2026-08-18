@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../09-end-to-end-tracing/">
+        <link rel="prev" href="../05-egress-llm/">
       
       
-        <link rel="next" href="../../specs/">
+        <link rel="next" href="../../Governance/07-security-auditability/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Promotion and Provenance - EUC Spreadsheet Uplift Docs</title>
+        <title>End-to-End Sequence - EUC Spreadsheet Uplift Docs</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#10-promotion-provenance-sketchbook-vs-system-of-record" class="md-skip">
+        <a href="#09-end-to-end-sequence-prompt-to-visible-response" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Promotion and Provenance
+              End-to-End Sequence
             
           </span>
         </div>
@@ -230,11 +230,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../01_Architecture/08-component-interfaces/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../08-component-interfaces/" class="md-tabs__link">
           
   
   
@@ -270,13 +272,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../09-end-to-end-tracing/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../Lineage/09-end-to-end-tracing/" class="md-tabs__link">
           
   
   
@@ -392,28 +392,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -431,7 +434,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -449,7 +452,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/08-component-interfaces/" class="md-nav__link">
+      <a href="../08-component-interfaces/" class="md-nav__link">
         
   
   
@@ -477,7 +480,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/01-api-gateway/" class="md-nav__link">
+      <a href="../01-api-gateway/" class="md-nav__link">
         
   
   
@@ -505,7 +508,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/02-ai-service/" class="md-nav__link">
+      <a href="../02-ai-service/" class="md-nav__link">
         
   
   
@@ -533,7 +536,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/04-google-sheets-ui/" class="md-nav__link">
+      <a href="../04-google-sheets-ui/" class="md-nav__link">
         
   
   
@@ -561,7 +564,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/05-egress-llm/" class="md-nav__link">
+      <a href="../05-egress-llm/" class="md-nav__link">
         
   
   
@@ -586,10 +589,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../01_Architecture/09-end-to-end-sequence/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    End-to-End Sequence
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -605,6 +635,137 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sequence-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sequence diagram
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-narrative-grouped-by-phase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step narrative (grouped by phase)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traceability-thread" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traceability thread
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Traceability thread">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#three-tier-correlation-hierarchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three-tier correlation hierarchy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#end-to-end-request_id-propagation-including-the-egress-hop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        End-to-end request_id propagation (including the egress hop)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-this-diagram-deliberately-omits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What this diagram deliberately omits
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-propagation-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error propagation path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error propagation path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#error-payload-at-each-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error payload at each boundary
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-gap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known gap
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -710,31 +871,28 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -752,7 +910,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -770,7 +928,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../09-end-to-end-tracing/" class="md-nav__link">
+      <a href="../../Lineage/09-end-to-end-tracing/" class="md-nav__link">
         
   
   
@@ -795,37 +953,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Promotion and Provenance
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../Lineage/promotion-and-provenance/" class="md-nav__link">
         
   
   
@@ -841,131 +972,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-product-framing-the-premise" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Product framing (the premise)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-why-not-log-every-draft" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Why not log every draft
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-the-lock-mechanic-current-vs-target" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. The lock mechanic — current vs. target
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-the-proposed-promote-action" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. The proposed "Promote" action
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. The proposed &#34;Promote&#34; action">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#append-only-record-shape-one-entry-per-promotion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Append-only record shape (one entry per promotion)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#where-it-is-written" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Where it is written
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-hard-dependency-authenticated-principal" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Hard dependency — authenticated principal
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-net-design" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Net design
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-open-decisions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. Open decisions
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1379,10 +1385,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-product-framing-the-premise" class="md-nav__link">
+  <a href="#sequence-diagram" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Product framing (the premise)
+        Sequence diagram
       
     </span>
   </a>
@@ -1390,10 +1396,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-why-not-log-every-draft" class="md-nav__link">
+  <a href="#step-narrative-grouped-by-phase" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Why not log every draft
+        Step narrative (grouped by phase)
       
     </span>
   </a>
@@ -1401,33 +1407,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-the-lock-mechanic-current-vs-target" class="md-nav__link">
+  <a href="#traceability-thread" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. The lock mechanic — current vs. target
+        Traceability thread
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-the-proposed-promote-action" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. The proposed "Promote" action
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. The proposed &#34;Promote&#34; action">
+    <nav class="md-nav" aria-label="Traceability thread">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#append-only-record-shape-one-entry-per-promotion" class="md-nav__link">
+  <a href="#three-tier-correlation-hierarchy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Append-only record shape (one entry per promotion)
+        Three-tier correlation hierarchy
       
     </span>
   </a>
@@ -1435,10 +1430,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#where-it-is-written" class="md-nav__link">
+  <a href="#end-to-end-request_id-propagation-including-the-egress-hop" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Where it is written
+        End-to-end request_id propagation (including the egress hop)
       
     </span>
   </a>
@@ -1451,10 +1446,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-hard-dependency-authenticated-principal" class="md-nav__link">
+  <a href="#what-this-diagram-deliberately-omits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Hard dependency — authenticated principal
+        What this diagram deliberately omits
       
     </span>
   </a>
@@ -1462,24 +1457,41 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-net-design" class="md-nav__link">
+  <a href="#error-propagation-path" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Net design
+        Error propagation path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error propagation path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#error-payload-at-each-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error payload at each boundary
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#7-open-decisions" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#known-gap" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. Open decisions
+        Known gap
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1500,162 +1512,265 @@
 
 
 
-<h1 id="10-promotion-provenance-sketchbook-vs-system-of-record">10 · Promotion &amp; Provenance — Sketchbook vs. System-of-Record<a class="headerlink" href="#10-promotion-provenance-sketchbook-vs-system-of-record" title="Permanent link">&para;</a></h1>
-<p><strong>Status: design note (not yet implemented).</strong> Records <em>why</em> and <em>how</em> durable
-provenance attaches to AI output — and why it must <strong>not</strong> attach to every draft.</p>
+<h1 id="09-end-to-end-sequence-prompt-to-visible-response">09 · End-to-End Sequence — Prompt to Visible Response<a class="headerlink" href="#09-end-to-end-sequence-prompt-to-visible-response" title="Permanent link">&para;</a></h1>
+<p>Full lifecycle of one delegation: <strong>user types a prompt in the sidebar → result
+appears in the cell</strong>. Traces the <em>currently implemented</em> synchronous path and
+names the exact functions at each step.</p>
 <blockquote>
-<p>Terminology: <strong>ingress</strong> = <em>inbound</em> (calls into our system); <strong>egress</strong> =
-<em>outbound</em> (calls out to external services).</p>
+<p>Companion to the block diagram in
+<a href="../08-component-interfaces/">08-component-interfaces.md</a>.</p>
 </blockquote>
 <hr />
-<h2 id="1-product-framing-the-premise">1. Product framing (the premise)<a class="headerlink" href="#1-product-framing-the-premise" title="Permanent link">&para;</a></h2>
-<p>This system is a <strong>front-office drafting sandbox</strong> — a shared sketch/model
-scratchpad that can call AI — <em>not</em> a system of record. Front-office Excel users
-adopt tools that stay <strong>in the grid and fast</strong>, and route around anything that
-taxes every action with governance. So the design rule is:</p>
-<blockquote>
-<p><strong>Traceability is a <em>mode</em>, not a <em>tax</em>.</strong>
-Free and uncontrolled while drafting → full provenance the moment an output is
-<em>promoted</em> (declared material by a human).</p>
-</blockquote>
-<p>This matches how front-office regulation (EUC / End-User-Computing controls,
-model-risk frameworks) actually works: control at the <strong>point of materiality</strong>,
-not over throwaway scratch.</p>
-<h2 id="2-why-not-log-every-draft">2. Why not log every draft<a class="headerlink" href="#2-why-not-log-every-draft" title="Permanent link">&para;</a></h2>
-<p>Durably storing every AI draft server-side is a <strong>liability</strong>, not diligence:</p>
-<ul>
-<li>permanently retains half-baked, speculative figures never meant to be
-  authoritative;</li>
-<li>draft context often carries PII/confidential cells → triggers data-residency /
-  DPA / retention obligations (<a href="../../Governance/07-security-auditability/">07-security-auditability.md</a> §6–7);</li>
-<li>building tamper-evident audit infra for scratch is effort where there's no
-  decision to defend.</li>
-</ul>
-<p>For unlocked drafts, the <strong>local sheet record</strong> (<code>__Prompt_records_v2</code> + cell
-notes, written client-side) is proportionate. See
-<a href="../../Governance/07-security-auditability/">07-security-auditability.md</a> §4 (qualified there).</p>
-<h2 id="3-the-lock-mechanic-current-vs-target">3. The lock mechanic — current vs. target<a class="headerlink" href="#3-the-lock-mechanic-current-vs-target" title="Permanent link">&para;</a></h2>
-<p>The existing sidebar lock (advanced-options tickbox → cell note
-<code>STATUS: LOCKED</code>) <strong>cannot</strong> serve as the promotion trigger as wired, because it
-conflates two concepts and fires automatically:</p>
-<table>
-<thead>
-<tr>
-<th>Concept</th>
-<th>Today</th>
-<th>Target</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Protect from AI overwrite</strong> ("skip in bulk runs")</td>
-<td>✅ what the lock does</td>
-<td>keep unchanged — auto-lock after a run is fine</td>
-</tr>
-<tr>
-<td><strong>Promote as material</strong> (→ append-only provenance)</td>
-<td>❌ conflated; auto-fires on <em>every</em> successful AI run; reversible; emits no server event</td>
-<td>a <strong>separate, explicit, human-initiated</strong> action</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Why the current lock fails the trigger:</strong></p>
-<ol>
-<li>It is applied <em>by the machine</em> the instant an AI run succeeds — not a
-   deliberate human review act.</li>
-<li>Because every successful run auto-locks, hooking a log to <code>LOCKED</code> would
-   durably record <strong>every draft</strong> — re-creating the liability in §2.</li>
-<li>It is a reversible client-side note field (<code>LOCKED ⇄ READY</code>), not a
-   directional server event.</li>
-</ol>
-<h2 id="4-the-proposed-promote-action">4. The proposed "Promote" action<a class="headerlink" href="#4-the-proposed-promote-action" title="Permanent link">&para;</a></h2>
-<p>Add a distinct, deliberate act — separate from the protect-lock tickbox:</p>
-<ul>
-<li><strong>UI:</strong> a <code>✔ Accept &amp; Promote</code> button in the sidebar, pressed by the user
-  <em>after reviewing</em> the AI output (not the advanced-options checkbox).</li>
-<li><strong>Semantics:</strong> promotion is <strong>directional</strong> — a later un-promote is a <em>new</em>
-  logged event, never a silent toggle-back.</li>
-<li><strong>Emits exactly one</strong> append-only server record — per promotion, <strong>not</strong> per
-  AI run.</li>
-</ul>
-<h3 id="append-only-record-shape-one-entry-per-promotion">Append-only record shape (one entry per promotion)<a class="headerlink" href="#append-only-record-shape-one-entry-per-promotion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>promotion_id        · uuid
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>request_id          · ties back to the original AI run (correlation key)
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>authenticated_user  · verified principal (NOT the unsigned meta.user claim)
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>sheet + cell_ref    · what was promoted
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>model_invoked       · &lt;provider&gt;:&lt;model&gt; that produced the value
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>prompt_hash         · integrity ref to the prompt (not necessarily full text)
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>value_hash          · integrity ref to the promoted cell value
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>memo                · optional business justification (existing Audit Memo field)
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>reviewed            · true
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>ts                  · promotion timestamp
-</code></pre></div>
-<h3 id="where-it-is-written">Where it is written<a class="headerlink" href="#where-it-is-written" title="Permanent link">&para;</a></h3>
-<p>A single ingress (inbound) endpoint, e.g. <code>POST /api/promote</code> at the gateway,
-appending to a <strong>durable append-only store</strong> (HMAC-signed JSONL → object store
-with Object-Lock / WORM in prod). The gateway — not the sheet — is the
-server-of-record for promotions; <code>__Prompt_records_v2</code> remains the
-human-readable mirror.</p>
+<h2 id="sequence-diagram">Sequence diagram<a class="headerlink" href="#sequence-diagram" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>sequenceDiagram
     autonumber
     actor U as User
     participant SB as sidebar.html
+    participant AS as Apps Script&lt;br/&gt;(plugin_hitl_ai · Code.js)
+    participant REC as __Prompt_records_v2
     participant GW as api_gateway
-    participant LOG as append-only store&lt;br/&gt;(WORM / signed JSONL)
+    participant AI as ai_service
+    participant LLM as LLM Provider
 
-    Note over U,SB: (drafting produces no durable server write)
-    U-&gt;&gt;SB: Review AI output, click ✔ Accept &amp; Promote
-    SB-&gt;&gt;GW: POST /api/promote  (Authorization: verified identity)&lt;br/&gt;{ request_id, cell_ref, model_invoked, prompt_hash, value_hash, memo }
-    GW-&gt;&gt;GW: verify principal · sign entry
-    GW-&gt;&gt;LOG: append one immutable record
-    LOG--&gt;&gt;GW: ack
-    GW--&gt;&gt;SB: { promotion_id }
-    SB-&gt;&gt;SB: mark cell promoted (+ protect-lock)</code></pre>
-<h2 id="5-hard-dependency-authenticated-principal">5. Hard dependency — authenticated principal<a class="headerlink" href="#5-hard-dependency-authenticated-principal" title="Permanent link">&para;</a></h2>
-<p>A promotion record keyed on the current <strong>unsigned <code>meta.user</code> claim</strong> is
-provenance theater — anyone can forge it. Promotion therefore <strong>depends on
-ingress authentication</strong> (Google-signed OIDC token minted by Apps Script,
-verified at the gateway) — the top gap in
-<a href="../../Governance/07-security-auditability/">07-security-auditability.md</a> §1. Ship promotion
-<em>with</em> that auth, not before it.</p>
-<h2 id="6-net-design">6. Net design<a class="headerlink" href="#6-net-design" title="Permanent link">&para;</a></h2>
+    U-&gt;&gt;SB: Type prompt + pin context, click 🚀 Submit
+    SB-&gt;&gt;SB: handleSaveAction() · clearThinkingLog()&lt;br/&gt;show "Saving…" + spinning "Calling AI…"
+    SB-&gt;&gt;AS: google.script.run.saveAndExecuteSingleCell(data)
+
+    Note over AS: saveNoteToActiveCell() writes draft note&lt;br/&gt;then processHitlAiBatch(sheet, cell, "Single")
+    AS-&gt;&gt;AS: parseNoteByVersion() · resolvePointerRange()&lt;br/&gt;extractAndFormatRangeData() → context string
+    AS-&gt;&gt;AS: read auth email (UserProperties)&lt;br/&gt;PrivacyEngine.mask(prompt, context)
+
+    AS-&gt;&gt;GW: POST /api/ai/v1/sheet-chat&lt;br/&gt;x-request-id · { meta, payload }
+    Note over GW: requestId → guardrail (injection 422 / PII redact)&lt;br/&gt;→ contract adapter validates envelope
+    GW-&gt;&gt;AI: POST /v1/sheet-chat&lt;br/&gt;SheetPromptRequest { prompt, context, user }
+
+    Note over AI: routes.py opens Logfire span&lt;br/&gt;generate_summary() → agent.run()
+    AI-&gt;&gt;GW: OpenAI chat-completions (key-less)&lt;br/&gt;via egress base_url
+    Note over GW: egress proxy injects provider key
+    GW-&gt;&gt;LLM: provider call + credential
+    LLM--&gt;&gt;GW: OpenAI-format completion
+    GW--&gt;&gt;AI: completion
+    AI-&gt;&gt;AI: check_output() guardrail&lt;br/&gt;(refusal / length) — else __ERROR_UPSTREAM_FAILURE__
+    AI--&gt;&gt;GW: { result, meta:{ request_id, run_id,&lt;br/&gt;latency_ms, model_invoked, agent_name } }
+    GW--&gt;&gt;AS: re-wrapped contract response
+
+    Note over AS: PrivacyEngine re-hydrate PII tokens
+    AS-&gt;&gt;AS: currentCell.setValue(result)&lt;br/&gt;set note → LOCKED + full_prompt_record ref
+    AS-&gt;&gt;REC: logToPromptRecords() append audit row&lt;br/&gt;(+ thinking_steps → column T)
+    AS--&gt;&gt;SB: { success, steps[] }
+    SB-&gt;&gt;SB: renderThinkingSteps() → thinking panel&lt;br/&gt;setStatus("AI Run Complete!")
+    U-&gt;&gt;U: Sees result in cell + status &amp; thinking panel</code></pre>
+<hr />
+<h2 id="step-narrative-grouped-by-phase">Step narrative (grouped by phase)<a class="headerlink" href="#step-narrative-grouped-by-phase" title="Permanent link">&para;</a></h2>
+<p><strong>1 · Capture (client)</strong>
+User enters prompt + pins context ranges, clicks Submit. <code>handleSaveAction()</code>
+resets the thinking panel and shows immediate optimistic status.</p>
+<p><strong>2 · Resolve + protect (Apps Script)</strong>
+<code>processHitlAiBatch</code> parses the cell note, resolves pointer/named ranges into
+concrete data (<code>extractAndFormatRangeData</code>), reads the authenticated email from
+<code>UserProperties</code>, and <strong>masks PII locally</strong> (<code>PrivacyEngine.mask</code>) before
+anything leaves Google.</p>
+<p><strong>3 · Ingress (inbound) + guardrails (gateway)</strong>
+<code>callCorporateAiEngineV2</code> POSTs the <code>{ meta, payload }</code> envelope with
+<code>x-request-id</code>. The gateway assigns/propagates the request id, runs input
+guardrails (injection → 422, PII → redact), validates the contract, and forwards.</p>
+<p><strong>4 · Generate (ai_service, key-less)</strong>
+<code>routes.py</code> wraps the run in a Logfire span; <code>generate_summary</code> calls the
+pydantic-ai agent, which speaks <strong>OpenAI format back through the gateway egress</strong>
+(where the provider key is injected). Output guardrails (<code>check_output</code>) run
+before returning.</p>
+<p><strong>5 · Return + re-wrap (gateway)</strong>
+<code>ai_service</code> returns <code>{ result, meta }</code>; the gateway re-wraps it into the
+contract response and hands it back to Apps Script.</p>
+<p><strong>6 · Commit + audit (client)</strong>
+Apps Script <strong>re-hydrates</strong> the masked PII, writes the result into the cell,
+locks the note with a <code>full_prompt_record</code> reference, and appends the audit row
+to <code>__Prompt_records_v2</code> (including <code>thinking_steps</code> in column T). The <code>steps[]</code>
+are returned to the sidebar, which renders them in the thinking panel.</p>
+<hr />
+<h2 id="traceability-thread">Traceability thread<a class="headerlink" href="#traceability-thread" title="Permanent link">&para;</a></h2>
+<p>A single <strong><code>x-request-id</code></strong> ties the whole chain: assigned/echoed at the gateway,
+forwarded to <code>ai_service</code>, returned in <code>meta</code>, and persisted in the audit row —
+so any delegation is reconstructable end-to-end
+(<a href="../../Governance/07-security-auditability/">07-security-auditability.md</a> §3).</p>
+<h3 id="three-tier-correlation-hierarchy">Three-tier correlation hierarchy<a class="headerlink" href="#three-tier-correlation-hierarchy" title="Permanent link">&para;</a></h3>
+<p>The system carries <strong>three nested identifiers</strong>, each with a distinct scope and
+lifetime. They are <em>not</em> interchangeable — keeping them separate is what lets a
+single <code>grep request_id=&lt;uuid&gt;</code> reconstruct the whole transaction while still
+telling apart individual agent runs and physical LLM attempts.</p>
 <table>
 <thead>
 <tr>
-<th>Activity</th>
-<th>Server write</th>
-<th>Rationale</th>
+<th>Id</th>
+<th>Scope</th>
+<th>Born</th>
+<th>Stable across…</th>
+<th>Answers</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Drafting (unlocked cells)</td>
-<td>none durable</td>
-<td>sketchbook; local sheet record suffices</td>
+<td><strong><code>request_id</code></strong></td>
+<td>the whole transaction (Sheet → gateway → ai_service → <em>all</em> egress attempts)</td>
+<td>Sheets UI / gateway <code>requestId.mjs</code></td>
+<td>every hop <strong>and</strong> every retry</td>
+<td>"which Sheet submit is this?"</td>
 </tr>
 <tr>
-<td>Every LLM call</td>
-<td>thin gateway <strong>egress log</strong> (request_id, user, model, latency, cost, guardrail/PII hits) — short retention, no full draft content</td>
-<td>cost attribution + data-leaving-to-LLM monitoring; independent of drafts</td>
+<td><strong><code>run_id</code></strong></td>
+<td>one agent execution inside <code>ai_service</code></td>
+<td><code>routes.py</code> (<code>uuid4</code>)</td>
+<td>one agent run</td>
+<td>"which agent invocation produced this?"</td>
 </tr>
 <tr>
-<td><strong>Promote</strong> (human accepts a material output)</td>
-<td><strong>one append-only, signed record</strong></td>
-<td>the only durable provenance; scoped to material outputs; gated on authenticated user</td>
+<td><strong><code>attempt</code></strong></td>
+<td>one physical LLM egress POST</td>
+<td><code>ai_service</code> per-request counter</td>
+<td>— (increments each call)</td>
+<td>"which retry/fallback call is this?"</td>
 </tr>
 </tbody>
 </table>
-<p>The <strong>lock stays</strong> for its real job (protect from AI overwrite). <strong>Promotion</strong> is
-the new, explicit governance primitive — the single thing that earns a durable
-record. This keeps the tool light for the 95% of throwaway drafting and
-defensible exactly where the institution requires it.</p>
-<h2 id="7-open-decisions">7. Open decisions<a class="headerlink" href="#7-open-decisions" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart TD
+    R["request_id 03e09421…&lt;br/&gt;(transaction — stable, exact-match key)"]
+    RUN["run_id bc1ae51c…&lt;br/&gt;(one agent run in ai_service)"]
+    A6["attempt 06 → 429"]
+    A7["attempt 07 → 429"]
+    A8["attempt 08 → 400"]
+    A9["attempt 09 → 200 ✅ (fed the Contract 200)"]
+    R --&gt; RUN
+    RUN --&gt; A6 --&gt; A7 --&gt; A8 --&gt; A9</code></pre>
+<p>Analogy to distributed tracing: <code>request_id</code> ≈ trace, <code>run_id</code> ≈ span,
+<code>attempt</code> ≈ retry counter.</p>
+<h3 id="end-to-end-request_id-propagation-including-the-egress-hop">End-to-end <code>request_id</code> propagation (including the egress hop)<a class="headerlink" href="#end-to-end-request_id-propagation-including-the-egress-hop" title="Permanent link">&para;</a></h3>
+<p><code>request_id</code> is <strong>minted once and preserved, never regenerated</strong>:</p>
+<ol>
+<li><strong>Sheets UI → gateway</strong> — the UI may send <code>x-request-id</code>; if absent the gateway
+   mints a <code>uuid</code> (<code>middleware/requestId.mjs</code>). Either way <code>req.id</code> is now the id.</li>
+<li><strong>Gateway → ai_service</strong> — forwarded verbatim as the <code>x-request-id</code> header.</li>
+<li><strong>ai_service</strong> — read at <code>routes.py</code> and bound to the async request context
+   (<code>app/request_context.py</code>, a <code>ContextVar</code>) so it survives into library code
+   whose signatures we don't control (pydantic-ai → httpx).</li>
+<li><strong>ai_service → gateway egress → LLM provider</strong> — an httpx <code>event_hook</code>
+   (<code>agents/simple_agent.py</code>) stamps the <strong>same</strong> <code>x-request-id</code> on <em>every</em>
+   outbound LLM call, so the gateway's <code>requestId.mjs</code> <strong>preserves</strong> it instead of
+   minting a fresh uuid. The hook also emits <code>x-request-attempt</code> (a 2-digit
+   per-request counter) so each of the N retry/fallback calls is distinguishable
+   while <code>request_id</code> stays a single stable value.</li>
+</ol>
+<blockquote>
+<p><strong>Why the <code>ContextVar</code>, not a function argument?</strong> The pydantic-ai agent,
+provider and httpx client are module-level singletons shared by all concurrent
+requests, but the id is per-request. A <code>ContextVar</code> is async-task-local, so each
+in-flight Sheet submit sees its own <code>request_id</code> + <code>attempt</code> counter without
+threading them through every intermediate call. The value bound is <em>literally</em>
+the inbound <code>x-request-id</code> — so the whole chain stays a single source of truth.</p>
+<p><strong>Historical gap (fixed):</strong> before this, <code>ai_service</code>'s egress calls carried no
+<code>x-request-id</code>, so the gateway minted a <em>fresh</em> uuid per LLM attempt — the egress
+logs could only be tied back to the originating request by timestamp/pid, which
+breaks under concurrency. The propagation above closes that gap.</p>
+</blockquote>
+<p><strong>Naming convention:</strong> the id is spelled <strong><code>request_id</code></strong> (snake_case) everywhere
+it is a wire/contract field or a log-field key — across both the Node gateway and
+the Python service — so one query string matches every hop. The Express property
+<code>req.id</code> and the middleware <em>function</em> <code>requestId</code> keep their JS-idiomatic names
+(they are the mechanism, not the value). Same treatment applies to <code>run_id</code>.</p>
+<h2 id="what-this-diagram-deliberately-omits">What this diagram deliberately omits<a class="headerlink" href="#what-this-diagram-deliberately-omits" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Full prompt text vs. hash only in the promotion record (retention vs.
-  reconstructability trade-off).</li>
-<li>Retention period + deletion schedule for promotions.</li>
-<li>Whether un-promote requires a reason (recommended for finance).</li>
+<li>The <strong>future SSE/agentic path</strong> (live <code>thinking</code> events, OIDC-verified ingress)
+  — augments, not replaces, this sync flow; see
+  <a href="../08-component-interfaces/">08-component-interfaces.md</a>.</li>
 </ul>
+<hr />
+<h2 id="error-propagation-path">Error propagation path<a class="headerlink" href="#error-propagation-path" title="Permanent link">&para;</a></h2>
+<p>Any hop may short-circuit with an <code>error_key</code>. The diagram below traces the
+<strong>filename → function → payload</strong> at each boundary for the guardrail-blocked
+case (<code>__ERROR_UPSTREAM_FAILURE__</code> + <code>guardrail</code> reason). Other error origins
+(timeout, invalid JSON, injection block) follow the same gateway→Sheets leg.</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    participant LLM as LLM Provider
+    participant AI_G as ai_service&lt;br/&gt;app/guardrails.py
+    participant AI_R as ai_service&lt;br/&gt;app/api/routes.py
+    participant GW as api_gateway&lt;br/&gt;server.mjs
+    participant AS as Apps Script&lt;br/&gt;Code.js
+    participant PI as Apps Script&lt;br/&gt;plugin_hitl_ai.js
+    participant SB as sidebar.html
+
+    LLM--&gt;&gt;AI_G: completion text
+    AI_G-&gt;&gt;AI_G: check_output(text)&lt;br/&gt;refusal pattern matched&lt;br/&gt;→ "refusal_detected:I am unable to"
+
+    AI_R-&gt;&gt;AI_R: guard_failure = check_output(final_text)&lt;br/&gt;key = ErrorKey.UPSTREAM_FAILURE
+    AI_R--&gt;&gt;GW: HTTP 502&lt;br/&gt;{ error_key: "__ERROR_UPSTREAM_FAILURE__",&lt;br/&gt;  run_id, guardrail: "refusal_detected:…" }
+
+    Note over GW: anonymous handler — app.post(aiContract.publicPath)&lt;br/&gt;upstreamResponse.ok = false&lt;br/&gt;reads upstreamJson.error_key + .guardrail
+    GW-&gt;&gt;GW: respondWithContractError()&lt;br/&gt;logs { errorKey, guardrailReason }
+    GW--&gt;&gt;AS: HTTP 502&lt;br/&gt;{ ok: false, error: { code: "__ERROR_UPSTREAM_FAILURE__",&lt;br/&gt;  message: "AI guardrail blocked: refusal_detected:…",&lt;br/&gt;  details: { guardrail: "refusal_detected:…" } } }
+
+    AS-&gt;&gt;AS: callCorporateAiEngineV2()&lt;br/&gt;response.getResponseCode() ≠ 200&lt;br/&gt;reads errorJson.error.message / .code / .details.guardrail
+    AS--&gt;&gt;PI: { text: "⚠️ Content blocked: refusal_detected:…",&lt;br/&gt;  meta: { error_code, guardrail } }
+
+    PI-&gt;&gt;PI: processHitlAiBatch()&lt;br/&gt;currentCell.setValue(response.text)&lt;br/&gt;→ writes "⚠️ Content blocked:…" into cell
+
+    PI--&gt;&gt;SB: saveAndExecuteSingleCell()&lt;br/&gt;→ { success: true, steps: […] }
+
+    Note over SB: withSuccessHandler(fn)&lt;br/&gt;res.error is absent — sidebar shows "AI Run Complete!"&lt;br/&gt;⚠️ status does not reflect cell-level error</code></pre>
+<h3 id="error-payload-at-each-boundary">Error payload at each boundary<a class="headerlink" href="#error-payload-at-each-boundary" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Boundary</th>
+<th>File · Function</th>
+<th>Key fields</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ai_service internal</td>
+<td><code>guardrails.py · check_output()</code></td>
+<td>returns <code>"refusal_detected:&lt;matched&gt;"</code> string</td>
+</tr>
+<tr>
+<td>ai_service → gateway</td>
+<td><code>routes.py · post_sheet_chat()</code></td>
+<td><code>{ error_key, run_id, guardrail }</code> · HTTP 502</td>
+</tr>
+<tr>
+<td>gateway internal</td>
+<td><code>server.mjs · respondWithContractError()</code></td>
+<td>logs <code>errorKey</code>, <code>guardrailReason</code></td>
+</tr>
+<tr>
+<td>gateway → Apps Script</td>
+<td><code>server.mjs · app.post(aiContract.publicPath)</code></td>
+<td><code>{ ok, error: { code, message, details.guardrail } }</code> · HTTP 502</td>
+</tr>
+<tr>
+<td>Apps Script parse</td>
+<td><code>Code.js · callCorporateAiEngineV2()</code></td>
+<td><code>{ text: "⚠️ Content blocked:…", meta.error_code, meta.guardrail }</code></td>
+</tr>
+<tr>
+<td>Apps Script → cell</td>
+<td><code>plugin_hitl_ai.js · processHitlAiBatch()</code></td>
+<td><code>currentCell.setValue(response.text)</code></td>
+</tr>
+<tr>
+<td>Apps Script → sidebar</td>
+<td><code>sidebar_backend.js · saveAndExecuteSingleCell()</code></td>
+<td><code>{ success: true, steps }</code> — error not surfaced to sidebar status</td>
+</tr>
+</tbody>
+</table>
+<h3 id="known-gap">Known gap<a class="headerlink" href="#known-gap" title="Permanent link">&para;</a></h3>
+<p><code>sidebar.html · withSuccessHandler()</code> always receives <code>{ success: true }</code> from
+<code>saveAndExecuteSingleCell</code> — the sidebar status reads <strong>"AI Run Complete!"</strong> even
+when the cell contains an error string. To fix: <code>processHitlAiBatch</code> should
+detect <code>response.meta.error_code</code> and propagate it in the return value so the
+sidebar can show the correct status.</p>
+<p>See <a href="../../03_Reference/error_code_spec/"><code>../03_Reference/error_code_spec.md</code></a>
+for the full <code>error_key</code> registry.</p>
 
 
 

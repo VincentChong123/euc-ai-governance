@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../04-google-sheets-ui/">
       
       
-        <link rel="next" href="../TODO/">
+        <link rel="next" href="../09-end-to-end-sequence/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Program Sequence - EUC Spreadsheet Uplift Docs</title>
+        <title>Egress LLM - EUC Spreadsheet Uplift Docs</title>
       
     
     
@@ -79,6 +79,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#05-llm-egress-gateway-cross-cutting" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -109,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Program Sequence
+              Egress LLM
             
           </span>
         </div>
@@ -225,11 +230,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../01_Architecture/08-component-interfaces/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../08-component-interfaces/" class="md-tabs__link">
           
   
   
@@ -285,13 +292,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../specs/" class="md-tabs__link">
           
   
   
@@ -387,28 +392,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -426,7 +434,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -444,7 +452,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/08-component-interfaces/" class="md-nav__link">
+      <a href="../08-component-interfaces/" class="md-nav__link">
         
   
   
@@ -472,7 +480,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/01-api-gateway/" class="md-nav__link">
+      <a href="../01-api-gateway/" class="md-nav__link">
         
   
   
@@ -500,7 +508,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/02-ai-service/" class="md-nav__link">
+      <a href="../02-ai-service/" class="md-nav__link">
         
   
   
@@ -528,7 +536,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/04-google-sheets-ui/" class="md-nav__link">
+      <a href="../04-google-sheets-ui/" class="md-nav__link">
         
   
   
@@ -553,10 +561,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../01_Architecture/05-egress-llm/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Egress LLM
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -572,6 +607,81 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#principle-secret-encapsulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Principle: secret encapsulation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Providers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#provider-switching-no-code-change" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Provider switching (no code change)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vertex-auth-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vertex auth detail
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-a-provider" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding a provider
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -584,7 +694,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_Architecture/09-end-to-end-sequence/" class="md-nav__link">
+      <a href="../09-end-to-end-sequence/" class="md-nav__link">
         
   
   
@@ -822,31 +932,28 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   
@@ -864,7 +971,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -882,7 +989,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../specs/" class="md-nav__link">
         
   
   
@@ -907,17 +1014,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../specs/program-sequence/" class="md-nav__link">
         
   
   
@@ -933,7 +1033,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -946,7 +1045,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../TODO/" class="md-nav__link">
+      <a href="../../specs/TODO/" class="md-nav__link">
         
   
   
@@ -1220,6 +1319,71 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#principle-secret-encapsulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Principle: secret encapsulation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Providers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#provider-switching-no-code-change" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Provider switching (no code change)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vertex-auth-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vertex auth detail
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-a-provider" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding a provider
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1236,118 +1400,80 @@
 
 
 
-  <h1>Program Sequence</h1>
-
+<h1 id="05-llm-egress-gateway-cross-cutting">05 · LLM Egress Gateway (cross-cutting)<a class="headerlink" href="#05-llm-egress-gateway-cross-cutting" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>suggest in phases how to introduce such batch-support change to my current code</p>
+<p><strong>Egress</strong> = <em>outbound</em> traffic — calls leaving our system to an external
+service (here, the LLM providers). Its opposite is <strong>ingress</strong> = <em>inbound</em>
+traffic coming into the system.</p>
 </blockquote>
-<p>Do I have to refactor current code to prior above batch-related changes</p>
-<p>▸ Thought for 3s, 692 tokens
-  Prioritizing Tool Usage
-  You absolutely do not need to refactor or tear down your current code.</p>
-<p>Your existing code ( plugin_hitl_ai.js ) is highly modular and mathematically sound. We don't have to
-  rewrite the core AI engine; we are simply going to build a new "Orchestrator Wrapper" around it.</p>
-<p>Here is the exact 4-Phase implementation plan to introduce this feature safely:</p>
-<p>### Phase 1: The Routing Switch (Additive, No Refactoring)</p>
-<p>Currently, when a user clicks "Run Batch", your script loops through the highlighted cells and checks
-  them for notes.</p>
-<p>• The Change: We simply add a 3-line  IF  statement at the very top of  processHitlAiBatch() .
-  • The Logic: It looks at the highlighted cells. If the cells contain standard text, it runs your normal,
-  existing code. If the cells contain  A1 Notations  (e.g.,  Data!A1 ), it instantly switches into
-  "Orchestrator Mode".
-  • Result: You preserve 100% of your current functionality while unlocking the new path.</p>
-<p>### Phase 2: Formula Extraction &amp; Sequential Execution</p>
-<p>We build the logic for the new "Orchestrator Mode" path.</p>
-<p>• The Change: Instead of reading the cell's note, the script uses  .getFormulas()  and  .getValues() .
-  • The Logic: If the formula evaluates to  Data!A1 , the script dynamically jumps over to  Data!A1  and
-  executes your existing AI code on that specific cell. It also saves the formula to an internal array
-  let executionRecord = []  to keep track of the history.
-  • Result: The system can now conditionally follow a list of cells.</p>
-<p>### Phase 3: Serialization (The Audit Trail)</p>
-<p>Once the batch finishes executing, we need to save the  executionRecord .</p>
-<p>• The Change: We write a tiny helper function:  saveBatchAudit() .
-  • The Logic: It takes the array we built in Phase 2, converts it into a JSON string using  JSON.
-  stringify() , and appends it as a new row in a  __Batch_Records  sheet along with a Timestamp and User
-  ID.
-  • Result: Your Infosec and Audit teams now have a permanent, immutable record of every complex batch run.</p>
-<p>### Phase 4: Deserialization (The Restore Button)</p>
-<p>This is a standalone feature we can build last.</p>
-<p>• The Change: We add a new button to your top menu in  Code.js :  Restore Batch Record .
-  • The Logic: When clicked, it grabs the JSON string from the selected cell, uses  JSON.parse() , creates
-  a new Sheet tab, and prints the sequence row-by-row into the grid so the user can edit it.
-  • Result: The closed-loop UI is fully complete.</p>
-<p>Because of the way we designed your backend, we can implement Phase 1 and 2 right now without breaking
-  anything you currently have. Shall I update  plugin_hitl_ai.js  to add the Routing Switch?</p>
-<p>### Step 1: The Audit Log (Serialization)</p>
-<p>When a batch finishes, the backend takes the entire execution sequence and saves it into a hidden sheet
-  called  __Batch_Records . It stores it as one row:</p>
-<p>• Col A: Timestamp
-  • Col B: User ID
-  • Col C: The massive JSON string  [{"cell": "Data!A1", "formula": null, "prompt": "Summarize..."},
-  {"cell": "Data!C3", "formula": "=IF(Data!A1&gt;10,...)"}]</p>
-<p>### Step 2: The "Restore" Button (Deserialization)</p>
-<p>If an analyst wants to re-run or tweak that workflow tomorrow, we add a new button to your top menu:
-  AImate -&gt; Restore Batch Record .</p>
+<p>How internal services reach external LLM providers <strong>without holding any key</strong>.
+The gateway is the only component that sees provider credentials.</p>
+<h2 id="principle-secret-encapsulation">Principle: secret encapsulation<a class="headerlink" href="#principle-secret-encapsulation" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Backend services (e.g. <code>ai_service</code>) speak plain <strong>OpenAI chat-completions</strong>
+  format to a gateway route <code>/egress/&lt;provider&gt;/v1/...</code>.</li>
+<li>The gateway injects the provider credential and forwards to the real provider.</li>
+<li>Keys live <strong>only</strong> in the gateway env (dev: docker <code>env_file</code>; prod: Cloud Run
+  secret→env, or the service account for Vertex).</li>
+</ul>
+<h2 id="providers">Providers<a class="headerlink" href="#providers" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Mount</th>
+<th>Auth</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenRouter (primary)</td>
+<td><code>/egress/openrouter</code></td>
+<td><code>Authorization: Bearer</code> (static)</td>
+<td><code>OPENROUTER_API_KEY</code></td>
+</tr>
+<tr>
+<td>Groq (secondary)</td>
+<td><code>/egress/groq</code></td>
+<td><code>Authorization: Bearer</code> (static)</td>
+<td><code>GROQ_API_KEY</code></td>
+</tr>
+<tr>
+<td>Vertex AI (enterprise)</td>
+<td><code>/egress/vertex</code></td>
+<td>GCP OAuth (dynamic, no stored key)</td>
+<td>Cloud Run service account</td>
+</tr>
+</tbody>
+</table>
+<p>Defined in <code>apps/api_gateway/routes/egress/providers.mjs</code>; built by the shared
+<code>factory.mjs</code>.</p>
+<h2 id="provider-switching-no-code-change">Provider switching (no code change)<a class="headerlink" href="#provider-switching-no-code-change" title="Permanent link">&para;</a></h2>
+<p>The active provider is chosen by <code>ai_service</code> via <strong><code>LLM_PROVIDER</code></strong>. All egress
+routes are always mounted; switching is an env flip:</p>
+<ul>
+<li><code>LLM_PROVIDER=openrouter</code> (default) → <code>/egress/openrouter</code></li>
+<li><code>LLM_PROVIDER=groq</code> → bypasses OpenRouter</li>
+<li><code>LLM_PROVIDER=vertex</code> → enterprise path (Cloud Run only)</li>
+</ul>
+<p><strong>OpenRouter uses a <code>FallbackModel</code> chain in <code>ai_service</code></strong> (not in the gateway) —
+pydantic-ai rotates to the next model on 429/5xx before the request ever reaches
+the gateway egress a second time. See <a href="../02-ai-service/">02-ai-service.md</a> for the chain definition.</p>
+<p>For Groq and Vertex there is <strong>no automatic runtime failover</strong> — deliberate low-bug
+choice. Failover would require buffering + replay in the gateway.</p>
+<h2 id="vertex-auth-detail">Vertex auth detail<a class="headerlink" href="#vertex-auth-detail" title="Permanent link">&para;</a></h2>
+<p>Vertex uses short-lived OAuth tokens, not a static key. <code>gcpToken.mjs</code> mints them
+from the Cloud Run <strong>metadata server</strong> (cached, auto-refreshed, zero stored
+secret). Off Cloud Run the token is unavailable and the route returns a graceful
+<code>502</code> (<code>__ERROR_AUTH_UNAVAILABLE__</code>). The factory returns a <code>[tokenMiddleware,
+proxy]</code> pair for token-based providers.</p>
+<h2 id="adding-a-provider">Adding a provider<a class="headerlink" href="#adding-a-provider" title="Permanent link">&para;</a></h2>
 <ol>
-<li>The user goes to  __Batch_Records , clicks on the JSON cell they want, and hits Restore.</li>
-<li>The Apps Script parses the JSON and automatically generates a brand new, clean tab called
-  Workflow_Revise_V2 .</li>
-<li>It loops through the JSON and writes it perfectly from top-to-bottom:
-      • Column A: The Target Cell ( Data!C3 )
-      • Column B: The specific Prompt that was used
-      • Column C: The exact  =IF()  formula that routed the logic
-      • Column D: The LLM Output that was generated during that run (for reference)</li>
+<li>Add an entry to <code>providers.mjs</code> (static key → <code>apiKey</code>; OAuth → <code>getAuthToken</code>).</li>
+<li>Add it to <code>_PROVIDER_DEFAULTS</code> in <code>apps/ai_service/app/config.py</code> (mount + model).</li>
+<li>Update this page.</li>
 </ol>
-<p>### Step 3: Revise and Re-Execute</p>
-<p>Now, the user is looking at a standard, editable Google Sheet.</p>
-<p>• They can change the  =IF()  formula.
-  • They can tweak the wording of the prompt in Column B.
-  • Once they are happy with the changes, they simply highlight the rows and click "Run AI on Selected
-  Cells" to kick off the new, revised batch!</p>
-<p>This completely eliminates the need for a complex "Workflow Builder UI". The spreadsheet grid is the UI,
-  and JSON acts as the "Save File" that you can load back up at any time.</p>
-<p>Does this closed-loop architecture match your vision?</p>
-<p>────────────────────────────────────────────────────────────</p>
-<blockquote>
-<p>suggest in phases how to introduce such batch-support change to my current code</p>
-</blockquote>
-<p>Do I have to refactor current code to prior above batch-related changes</p>
-<p>▸ Thought for 3s, 692 tokens
-  Prioritizing Tool Usage
-  You absolutely do not need to refactor or tear down your current code.</p>
-<p>Your existing code ( plugin_hitl_ai.js ) is highly modular and mathematically sound. We don't have to
-  rewrite the core AI engine; we are simply going to build a new "Orchestrator Wrapper" around it.</p>
-<p>Here is the exact 4-Phase implementation plan to introduce this feature safely:</p>
-<p>### Phase 1: The Routing Switch (Additive, No Refactoring)</p>
-<p>Currently, when a user clicks "Run Batch", your script loops through the highlighted cells and checks
-  them for notes.</p>
-<p>• The Change: We simply add a 3-line  IF  statement at the very top of  processHitlAiBatch() .
-  • The Logic: It looks at the highlighted cells. If the cells contain standard text, it runs your normal,
-  existing code. If the cells contain  A1 Notations  (e.g.,  Data!A1 ), it instantly switches into
-  "Orchestrator Mode".
-  • Result: You preserve 100% of your current functionality while unlocking the new path.</p>
-<p>### Phase 2: Formula Extraction &amp; Sequential Execution</p>
-<p>We build the logic for the new "Orchestrator Mode" path.</p>
-<p>• The Change: Instead of reading the cell's note, the script uses  .getFormulas()  and  .getValues() .
-  • The Logic: If the formula evaluates to  Data!A1 , the script dynamically jumps over to  Data!A1  and
-  executes your existing AI code on that specific cell. It also saves the formula to an internal array
-  let executionRecord = []  to keep track of the history.
-  • Result: The system can now conditionally follow a list of cells.</p>
-<p>### Phase 3: Serialization (The Audit Trail)</p>
-<p>Once the batch finishes executing, we need to save the  executionRecord .</p>
-<p>• The Change: We write a tiny helper function:  saveBatchAudit() .
-  • The Logic: It takes the array we built in Phase 2, converts it into a JSON string using  JSON.
-  stringify() , and appends it as a new row in a  __Batch_Records  sheet along with a Timestamp and User
-  ID.
-  • Result: Your Infosec and Audit teams now have a permanent, immutable record of every complex batch run.</p>
-<p>### Phase 4: Deserialization (The Restore Button)</p>
-<p>This is a standalone feature we can build last.</p>
-<p>• The Change: We add a new button to your top menu in  Code.js :  Restore Batch Record .
-  • The Logic: When clicked, it grabs the JSON string from the selected cell, uses  JSON.parse() , creates
-  a new Sheet tab, and prints the sequence row-by-row into the grid so the user can edit it.
-  • Result: The closed-loop UI is fully complete.</p>
-<p>Because of the way we designed your backend, we can implement Phase 1 and 2 right now without breaking
-  anything you currently have. Shall I update  plugin_hitl_ai.js  to add the Routing Switch?</p>
 
 
 

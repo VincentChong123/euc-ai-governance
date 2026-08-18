@@ -1,0 +1,5 @@
+Rule_ID,Category,Data_Classification,Allowed_Data_State,Action,Triggering_Sample,Expected_PII_Processed,Regulatory_Framework_Mapping,Compliance_Justification
+PRV-001,EMAIL,Confidential (PII),Masked At-Rest,Vault Token,"abc@gmail.com, xyz@gmail.com","[EMAIL_1], [EMAIL_2]","ISO 27559 (De-identification), PDPC GenAI",Tokenization ensures LLM can differentiate entities without exposing actual email addresses to third-party network.
+PRV-002,CREDIT_CARD,Restricted (SPII),Ephemeral (RAM-Only),Partial Format,1234-5678-9123-7890,1234-****-****-7890_[CC_1],"ISO 27701 (PIMS), MAS FEAT",Format-preserving masking allows AI to perform risk checks on the last 4 digits while keeping full PAN strictly in RAM.
+PRV-003,SSN,Restricted (SPII),Ephemeral (RAM-Only),Hard Stop,123-45-6789,[ERROR: SUBMISSION BLOCKED],"ISO 27701 (PIMS), PDPC GenAI",Strict PII is never allowed to leave the EUC. UI intercepts and blocks transmission to protect user identity.
+PRV-004,INTERNAL_ID,Internal Use Only,Cleartext At-Rest,Allow,EMP-8492,EMP-8492,"ISO 42001 (AI Management), MAS FEAT",Approved bank-wide identifiers are safe for AI context analysis and establish system accountability.
