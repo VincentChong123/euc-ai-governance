@@ -8,14 +8,45 @@ to the gateway egress (outbound) route, which injects the real key.
 
 ## Request flow
 
+```mermaid
+sequenceDiagram
+    participant GW as API Gateway<br/>/api/ai/sheet-chat
+    participant R as routes.py<br/>POST /v1/sheet-chat
+    participant SA as simple_agent.py<br/>generate_summary()
+    participant PAI as pydantic-ai Agent<br/>FallbackModel / OpenAIChatModel
+    participant T as tools<br/>weather · hdb_resale · mas_forex
+    participant EGW as Gateway Egress<br/>/egress/<provider>
+    participant LLM as LLM Provider
+
+    GW->>R: POST /v1/sheet-chat {prompt, context, user}
+    R->>SA: await generate_summary(prompt, context)
+    SA->>PAI: agent.run(full_prompt)
+    PAI->>EGW: POST (OpenAI format, key-less)
+    EGW->>LLM: inject provider key + forward
+    LLM-->>PAI: tool-call response
+    PAI->>T: dispatch tool function
+    T-->>PAI: tool result
+    PAI->>EGW: POST with tool result
+    EGW->>LLM: forward
+    LLM-->>PAI: final text
+    PAI-->>SA: result.output
+    SA-->>R: plain-text summary
+    R-->>GW: {result, meta: {model_invoked, run_id, latency_ms, ...}}
 ```
-gateway /api/ai/sheet-chat → POST /v1/sheet-chat (routes.py)
-  → generate_summary() (agents/simple_agent.py)
-    → pydantic-ai Agent (FallbackModel or single OpenAIChatModel)
-      ↕ tool calls (weather, hdb_resale_prices, mas_forex_rates)
-      → gateway /egress/<provider> → LLM
-  ← { result, meta: { model_invoked, run_id, latency_ms, … } }
-```
+
+## Component responsibilities
+
+| Layer | File | LLM aware | Tool aware |
+|---|---|---|---|
+| Entrypoint | `main.py` | No | No |
+| Route handler | `app/api/routes.py` | No | No |
+| Agent | `app/agents/simple_agent.py` | Yes | Yes — calls `register_all(agent)` |
+| Tool registry | `app/agents/tools/__init__.py` | No | Yes — wires all tools; edit here only |
+| Tools | `tools/*.py` | No | — |
+
+**Tool invocation path.** Tools are not called by Python application code. At module load, `simple_agent.py` calls `register_all(agent)` (line 77), which delegates to `tools/__init__.py` to attach each tool to the pydantic-ai `Agent`. At inference time, `agent.run()` sends the prompt to the LLM; the model emits a tool-call response; pydantic-ai dispatches the matching registered function and feeds the result back to the model.
+
+**Adding a new tool.** Create `tools/<name>.py` with a `register(agent)` function, then add one call in `tools/__init__.py → register_all()`. `simple_agent.py` and `routes.py` require no changes.
 
 ## Key files
 

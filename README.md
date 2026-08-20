@@ -12,6 +12,22 @@ Enterprise **EUC spreadsheets** often handle critical operations but lack versio
 
 This architecture explores **control at the point of materiality**. By moving the risk surface (PII, AI egress, provenance) behind a governed gateway, we achieve immediate, progressive governance without sacrificing the familiar user interface. It acts as a transitional bridge, allowing eventual EUC remediation once the backend fully supports Business As Usual (BAU).
 
+### Why not just use Microsoft 365 Copilot?
+
+While enterprise tools like Microsoft 365 Copilot bring powerful AI capabilities to spreadsheets (such as
+context-awareness based on range selection), this PoC is built to address the **governance and auditability
+gaps** that concern 2LoD (Risk Management) functions.
+
+| Feature Focus | Commercial AI (e.g., Copilot) | This PoC |
+| :--- | :--- | :--- |
+| **Primary Goal** | User productivity & capability | Governance, containment & auditability |
+| **Execution Lineage** | Standard document version history | Chained execution ID per AI action |
+| **Audit Trail** | Opaque (AI writes directly) | Structured record: Input → Model → Output |
+| **Egress Filtering** | Vendor-managed | Custom gateway to redact PII/identifiers |
+
+This architecture demonstrates how to uplift an organic, shadow-IT spreadsheet process into a governed EUC
+(End-User Computing) tool, bridging the gap between BAU operations and robust IT risk controls.
+
 ### Before vs. After
 
 | Feature | ❌ Ungoverned EUC | ✅ Governed Architecture |
@@ -25,7 +41,6 @@ This architecture explores **control at the point of materiality**. By moving th
 
 ## System Architecture
 
---8<-- [start:arch_diagram]
 ```mermaid
 flowchart LR
     subgraph EUC["EUC (End-User Computing)"]
@@ -55,7 +70,6 @@ flowchart LR
     style Governance fill:#e6f3ff,stroke:#0066cc,stroke-width:2px
     style External fill:#fff0e6,stroke:#ff9900,stroke-dasharray: 5 5
 ```
---8<-- [end:arch_diagram]
 
 📖 [Details](docs/index.md)
 

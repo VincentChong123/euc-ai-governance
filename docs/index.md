@@ -1,12 +1,13 @@
-# Governed AI Microservice
+# Governed AI-assisted spreadsheet
 
 **Portfolio · Data Governance**
 
 This project applies critical data governance principles—**schema**, **lineage**, and **controls**—to AI-generated outputs. By treating AI output as a standard data element, it ensures appropriate oversight and traceability.
 
+
 ## Architecture Overview
 
---8<-- "README.md:arch_diagram"
+Refer https://github.com/VincentChong123/euc-spreadsheet-uplift#system-architecture
 
 ## Core Governance Pillars
 
